@@ -37,21 +37,16 @@ public class test {
 		//Build the first menu.
 		menu = new JMenu("A Menu");
 		menu.setMnemonic(KeyEvent.VK_A);
-		menu.getAccessibleContext().setAccessibleDescription(
-		        "The only menu in this program that has menu items");
+		menu.getAccessibleContext().setAccessibleDescription("The only menu in this program that has menu items");
 		menuBar.add(menu);
 
 		//a group of JMenuItems
-		menuItem = new JMenuItem("A text-only menu item",
-		                         KeyEvent.VK_T);
-		menuItem.setAccelerator(KeyStroke.getKeyStroke(
-		        KeyEvent.VK_1, ActionEvent.ALT_MASK));
-		menuItem.getAccessibleContext().setAccessibleDescription(
-		        "This doesn't really do anything");
+		menuItem = new JMenuItem("A text-only menu item",KeyEvent.VK_T);
+		menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_1, ActionEvent.ALT_MASK));
+		menuItem.getAccessibleContext().setAccessibleDescription("This doesn't really do anything");
 		menu.add(menuItem);
 
-		menuItem = new JMenuItem("Both text and icon",
-		                         new ImageIcon("images/middle.gif"));
+		menuItem = new JMenuItem("Both text and icon",new ImageIcon("images/middle.gif"));
 		menuItem.setMnemonic(KeyEvent.VK_B);
 		menu.add(menuItem);
 
@@ -89,8 +84,7 @@ public class test {
 		submenu.setMnemonic(KeyEvent.VK_S);
 
 		menuItem = new JMenuItem("An item in the submenu");
-		menuItem.setAccelerator(KeyStroke.getKeyStroke(
-		        KeyEvent.VK_2, ActionEvent.ALT_MASK));
+		menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_2, ActionEvent.ALT_MASK));
 		submenu.add(menuItem);
 
 		menuItem = new JMenuItem("Another item");
@@ -100,8 +94,7 @@ public class test {
 		//Build second menu in the menu bar.
 		menu = new JMenu("Another Menu");
 		menu.setMnemonic(KeyEvent.VK_N);
-		menu.getAccessibleContext().setAccessibleDescription(
-		        "This menu does nothing");
+		menu.getAccessibleContext().setAccessibleDescription("This menu does nothing");
 		menuBar.add(menu);
 
 		frame.setJMenuBar(menuBar);
@@ -109,9 +102,7 @@ public class test {
         //Display the window.
         frame.pack();
         frame.setVisible(true);
-
-
-    }
+	}
     public static void main(String[] args) {
         //Schedule a job for the event-dispatching thread:
         //creating and showing this application's GUI.
