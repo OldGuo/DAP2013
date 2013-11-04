@@ -1,5 +1,7 @@
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -24,7 +26,7 @@ public class test {
 		tabbedPane.addTab("Tab1",panel1);
 		tabbedPane.addTab("Tab2",panel2);
 		tabbedPane.addTab("Tab3",panel3);
-
+		getWorkshops();
         JLabel emptyLabel = new JLabel("label");
         emptyLabel.setPreferredSize(new Dimension(500, 500));
         frame.getContentPane().add(emptyLabel, BorderLayout.CENTER);
@@ -38,6 +40,21 @@ public class test {
         frame.pack();
         frame.setVisible(true);
     }
+	public static void getWorkshops(){
+		ArrayList<String>conferenceInfo = new ArrayList<String>();
+
+		Scanner input = OpenFile.open("WORKSHOPS.txt");
+		while(input.hasNext()){
+			String temp = "";
+			if(input.next().equals("[")){
+				while(!input.next().equals("]")){
+					temp += input.next();
+				}
+			}
+			conferenceInfo.add(temp);
+		}
+		System.out.println(conferenceInfo);
+	}
     public static void main(String[] args) {
         //Schedule a job for the event-dispatching thread:
         //creating and showing this application's GUI.
