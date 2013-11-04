@@ -43,17 +43,20 @@ public class test {
 	public static void getWorkshops(){
 		ArrayList<String>conferenceInfo = new ArrayList<String>();
 
-		Scanner input = OpenFile.open("WORKSHOPS.txt");
+		Scanner input = OpenFile.open("C:\\Users\\Young\\git\\FBLADAP2013\\DAP2013\\WORKSHOPS.txt");
 		while(input.hasNext()){
 			String temp = "";
-			if(input.next().equals("[")){
-				while(!input.next().equals("]")){
+			System.out.println(input.next());
+				//System.out.println("yes");
+				/*while(!input.next().equals("]")){
+					System.out.println(input.next());
 					temp += input.next();
-				}
-			}
-			conferenceInfo.add(temp);
+				}*/
+			//}
+			//System.out.println(temp);
+			//conferenceInfo.add(temp);
 		}
-		System.out.println(conferenceInfo);
+		//System.out.println(conferenceInfo);
 	}
     public static void main(String[] args) {
         //Schedule a job for the event-dispatching thread:

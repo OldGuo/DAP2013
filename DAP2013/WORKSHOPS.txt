@@ -1,16 +1,3 @@
-unique number for each workshop (can be auto number)
-conference code (mathces CONFERENCES.txt)
-workshop name
-workshop description
-workshop date
-workshop start time
-
-[DC] (11/7-8) 1-41 = Grapevine
-
-MN (11/14-15) 42- = Cleveland
-
-LA (11/21-22) = ...
-
 [101],[DC],[Conflict Management],[Byron Ricks, American Management Association],[Conflict is not necessarily a bad thing.  As long as it is resolved  effectively, it can lead to personal and professional growth. Find out how in this most informative and interactive workshop. (FBLA Students—Communication)],[11/7/14],[1]
 [102],[DC],[Connecting with Business Professionals and Community Leaders],[David Jones, Professional Division National President],[Learn and share ideas on how you can engage real-world busi- ness professionals and community leaders to mentor you, work with your chapter, provide job and internship opportunities, or even help you compete at the national conference.  (FBLA Students and Advisers—FBLA-PBL Programs)],[11/7/14],[1]
 [103],[DC],[Career Competitiveness],[Seth Barnett, Government Relations Manager  Promotional Products Association International],[Learn how social media, education, competition, and the econ- omy are changing your career path and what you can do to gain the competitive advantage. (FBLA Students—Career Exploration)],[11/7/14],[1]
