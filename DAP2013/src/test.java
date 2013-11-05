@@ -41,22 +41,32 @@ public class test {
         frame.setVisible(true);
     }
 	public static void getWorkshops(){
-		ArrayList<String>conferenceInfo = new ArrayList<String>();
-
+		ArrayList<String>conferenceInfo;
 		Scanner input = OpenFile.open("C:\\Users\\Young\\git\\FBLADAP2013\\DAP2013\\WORKSHOPS.txt");
-		while(input.hasNext()){
+
+		while(input.hasNextLine()){
+			conferenceInfo = new ArrayList<String>(6);
+			String line = input.nextLine();
+			int count = 0;
 			String temp = "";
-			System.out.println(input.next());
-				//System.out.println("yes");
-				/*while(!input.next().equals("]")){
-					System.out.println(input.next());
-					temp += input.next();
-				}*/
-			//}
-			//System.out.println(temp);
-			//conferenceInfo.add(temp);
+			int i = 0;
+			while(i+1<line.length()){
+				temp = "";
+				if(line.charAt(i) == '[')
+				{
+					int j = i;
+					while(line.charAt(j+1) != ']'){
+						temp += line.charAt(j+1);
+						j++;
+					}
+					conferenceInfo.add(count, temp);
+					count++;
+				}
+				i++;
+			}
+			Workshop w = new Workshop(conferenceInfo);
+			System.out.println(w.getId() + "," + w.getCode() + "," + w.getTitle() + "," + w.getDescrip() + "," + w.getDate() + "," + w.getTime());
 		}
-		//System.out.println(conferenceInfo);
 	}
     public static void main(String[] args) {
         //Schedule a job for the event-dispatching thread:
