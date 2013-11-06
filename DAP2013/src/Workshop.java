@@ -1,5 +1,14 @@
+/*
+ * Workshop class
+ * 	Contains 6 fields to aid participants in pre-registering for workshops:
+ * 		ID: Unique Identification number classifying the workshop
+ * 		CODE: The conference code of the workshop
+ * 		TITLE: The workshop title
+ * 		DESCRIPTION: Brief description of the workshop
+ * 		DATE: Date specifying which one of two days the workshop is held
+ * 		TIME: The time of day of the workshop
+ */
 import java.util.ArrayList;
-
 
 public class Workshop {
 
@@ -36,4 +45,8 @@ public class Workshop {
 	public String getTime(){
 		return TIME;
 	}
+	/*@Override
+	public String toString(){
+		return ID + " " + CODE + " " + TITLE + " " + DESCRIPTION + " " + DATE + " " + DATE + " " + TIME + "\n";
+	}*/
 }

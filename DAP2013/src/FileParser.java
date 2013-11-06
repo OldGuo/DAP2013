@@ -3,14 +3,14 @@ import java.util.Scanner;
 
 
 public class FileParser {
-	private ArrayList<String>info;
-
+	private final ArrayList<Workshop>workshops;
+	String[][]information;
 	public FileParser(){
-		info = new ArrayList<String>();
+		workshops = new ArrayList<Workshop>();
 	}
 	public void getWorkhops(){
 		Scanner input = OpenFile.open("C:\\Users\\Young\\git\\FBLADAP2013\\DAP2013\\WORKSHOPS.txt");
-
+		ArrayList<String>info = new ArrayList<String>();
 		while(input.hasNextLine()){
 			info = new ArrayList<String>();
 			String line = input.nextLine();
@@ -31,8 +31,8 @@ public class FileParser {
 				}
 				i++;
 			}
-			Workshop w = new Workshop(info);
-			System.out.println(w.getId() + "," + w.getCode() + "," + w.getTitle() + "," + w.getDescrip() + "," + w.getDate() + "," + w.getTime());
+			workshops.add(new Workshop(info));
 		}
+		System.out.println(workshops);
 	}
 }
