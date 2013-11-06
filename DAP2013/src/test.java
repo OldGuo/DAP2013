@@ -1,6 +1,9 @@
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -8,7 +11,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-public class test {
+public class test implements ActionListener {
 	private static void createAndShowGUI() {
         //Create and set up the window.
         JFrame frame = new JFrame("DAP2013");
@@ -23,9 +26,21 @@ public class test {
         emptyLabel.setPreferredSize(new Dimension(500, 500));
         frame.getContentPane().add(emptyLabel, BorderLayout.CENTER);
         panel1.add(emptyLabel);
+
         JPanel panel2 = new JPanel();
-		JTextField name = new JTextField(20);
-		panel2.add(name);
+        JButton b = new JButton("SEND");
+        b.setActionCommand("SEND");
+        //b.setActionListener(this);
+		JTextField code = new JTextField(20);
+		JTextField first = new JTextField(20);
+		JTextField last = new JTextField(20);
+		JTextField chapter = new JTextField(20);
+		panel2.add(code);
+		panel2.add(first);
+		panel2.add(last);
+		panel2.add(chapter);
+		panel2.add(b);
+
         JPanel panel3 = new JPanel();
 
 		tabbedPane.addTab("Label",panel1);
@@ -62,5 +77,11 @@ public class test {
                 createAndShowGUI();
             }
         });
+    }
+    @Override
+	public void actionPerformed(ActionEvent e){
+    	if(e.getActionCommand().equals("SEND")){
+    		System.out.println("sent");
+    	}
     }
 }
