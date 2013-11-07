@@ -29,12 +29,20 @@ public class test implements ActionListener {
 
         JPanel panel2 = new JPanel();
         JButton b = new JButton("SEND");
-        b.setActionCommand("SEND");
-        //b.setActionListener(this);
-		JTextField code = new JTextField(20);
-		JTextField first = new JTextField(20);
-		JTextField last = new JTextField(20);
-		JTextField chapter = new JTextField(20);
+        b.setToolTipText("click to send your information");
+
+		final JTextField code = new JTextField(40);
+		code.setToolTipText("Member [M], Advisor [A], or Guest [G]");
+		final JTextField first = new JTextField(40);
+		final JTextField last = new JTextField(40);
+		final JTextField chapter = new JTextField(40);
+        b.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				System.out.println(code.getText() + " " + first.getText() + " " + last.getText() + " " + chapter.getText());
+			}
+        });
+
 		panel2.add(code);
 		panel2.add(first);
 		panel2.add(last);
@@ -51,7 +59,7 @@ public class test implements ActionListener {
         NavigationBar nav = new NavigationBar();
 		frame.setJMenuBar(nav.getMenu());
 		frame.add(tabbedPane);
-		FileParser f = new FileParser();
+		ReadFromFile f = new ReadFromFile();
 
 		f.getWorkhops();
 		//Display the window.
@@ -78,10 +86,10 @@ public class test implements ActionListener {
             }
         });
     }
-    @Override
-	public void actionPerformed(ActionEvent e){
-    	if(e.getActionCommand().equals("SEND")){
-    		System.out.println("sent");
-    	}
-    }
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
 }

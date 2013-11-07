@@ -2,10 +2,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 
-public class FileParser {
+public class ReadFromFile {
 	private final ArrayList<Workshop>workshops;
 	String[][]information;
-	public FileParser(){
+	public ReadFromFile(){
 		workshops = new ArrayList<Workshop>();
 	}
 	public void getWorkhops(){
@@ -33,6 +33,5 @@ public class FileParser {
 			}
 			workshops.add(new Workshop(info));
 		}
-		System.out.println(workshops);
 	}
 }
