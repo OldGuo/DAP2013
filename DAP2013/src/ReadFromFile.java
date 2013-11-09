@@ -7,9 +7,10 @@ public class ReadFromFile {
 	public ReadFromFile(){
 		workshops = new ArrayList<Workshop>();
 	}
-	public void getWorkhops(){
+	public void getWorkshops(){
 		System.out.println("workshops");
-		Scanner input = OpenFile.open("C:\\Users\\Young\\git\\FBLADAP2013\\DAP2013\\TYPE.txt");
+		//Scanner input = OpenFile.open("C:\\Users\\Young\\git\\FBLADAP2013\\DAP2013\\TYPE.txt");
+		Scanner input = OpenFile.open("C:\\Users\\Young\\Documents\\GitHub\\DAP2013\\DAP2013\\WORKSHOPS.txt");
 		ArrayList<String>info = new ArrayList<String>();
 		while(input.hasNextLine()){
 			info = new ArrayList<String>();
@@ -32,7 +33,7 @@ public class ReadFromFile {
 				i++;
 			}
 			workshops.add(new Workshop(info));
-			System.out.println(workshops);
 		}
+		System.out.println(workshops);
 	}
 }

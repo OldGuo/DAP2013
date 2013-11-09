@@ -15,7 +15,7 @@ public class test implements ActionListener {
         //Create and set up the window.
         JFrame frame = new JFrame("DAP2013");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setPreferredSize(new Dimension(500,500));
+        frame.setPreferredSize(new Dimension(1000,600));
 
         JTabbedPane layout = new JTabbedPane(SwingConstants.TOP);
         JTabbedPane tabbedPane = new JTabbedPane();
@@ -40,7 +40,8 @@ public class test implements ActionListener {
 		frame.setJMenuBar(nav.getMenu());
 		frame.add(tabbedPane);
 		
-		
+		ReadFromFile r = new ReadFromFile();
+		r.getWorkshops();
 
 		frame.pack();
         frame.setVisible(true);

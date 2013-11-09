@@ -1,6 +1,8 @@
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Collections;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -10,16 +12,23 @@ import javax.swing.JTextField;
 
 
 public class RegistrationPanel extends JPanel implements ActionListener{
-	private final JComboBox type;
-	private final JComboBox location;
+	private JComboBox type;
+	private JComboBox location;
+	private JButton send;
+	private JTextField first,last,chapter;
+	private ArrayList<String> information;
+	
 	public RegistrationPanel(){
 		this.setLayout(new GridLayout(8,2));
-		JButton b = new JButton("SEND");
-	    b.setToolTipText("click to send your information");
-
-	    final JTextField first = new JTextField();
-	    final JTextField last = new JTextField();
-	    final JTextField chapter = new JTextField();
+		information = new ArrayList<String>();
+		
+		send = new JButton("SEND");
+	    send.setToolTipText("click to send your information");
+	    send.addActionListener(this);
+	    
+	    first = new JTextField();
+	    last = new JTextField();
+	    chapter = new JTextField();
 
 		String [] types = {"Member","Advisor","Guest"};
 		String [] locations = {"DC","MN","LA"};
@@ -37,16 +46,16 @@ public class RegistrationPanel extends JPanel implements ActionListener{
 		this.add(last);
 		this.add(new JLabel("chapter"));
 		this.add(chapter);
-		this.add(b);
+		this.add(send);
 	}
 	@Override
 	public void actionPerformed(ActionEvent e){
-		if(e.getSource() == location){
-			String place = (String)location.getSelectedItem();
-			System.out.println(place);
-		}else if(e.getSource() == type){
-			String PERSONTYPE = (String)type.getSelectedItem();
-			System.out.println(PERSONTYPE);
+		if(e.getSource() == send){
+			information = new ArrayList<String>();
+			Collections.addAll(information,(String)location.getSelectedItem(),(String)type.getSelectedItem(),first.getText(),last.getText(),chapter.getText());
+			
+			PrintToFile print = new PrintToFile("PARTICIPANT",information);
+			print.printInfo();
 		}
 	}
 }
