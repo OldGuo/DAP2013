@@ -2,15 +2,14 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 
-public class FileParser {
+public class ReadFromFile {
 	private final ArrayList<Workshop>workshops;
 	String[][]information;
-	public FileParser(){
+	public ReadFromFile(){
 		workshops = new ArrayList<Workshop>();
 	}
 	public void getWorkhops(){
-		Scanner input = OpenFile.open("C:\\Users\\Young\\Documents\\GitHub\\DAP2013\\DAP2013\\WORKSHOPS.txt");
-		
+		Scanner input = OpenFile.open("C:\\Users\\Young\\git\\FBLADAP2013\\DAP2013\\WORKSHOPS.txt");
 		ArrayList<String>info = new ArrayList<String>();
 		while(input.hasNextLine()){
 			info = new ArrayList<String>();
@@ -34,6 +33,5 @@ public class FileParser {
 			}
 			workshops.add(new Workshop(info));
 		}
-		System.out.println(workshops);
 	}
 }

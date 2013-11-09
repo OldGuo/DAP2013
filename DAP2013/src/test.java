@@ -4,12 +4,10 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
-import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 public class test implements ActionListener {
@@ -28,20 +26,8 @@ public class test implements ActionListener {
         frame.getContentPane().add(emptyLabel, BorderLayout.CENTER);
         panel1.add(emptyLabel);
 
-        JPanel panel2 = new JPanel();
-        JButton b = new JButton("SEND");
-        b.setActionCommand("SEND");
-        //b.setActionListener(this);
-		JTextField code = new JTextField(20);
-		JTextField first = new JTextField(20);
-		JTextField last = new JTextField(20);
-		JTextField chapter = new JTextField(20);
-		panel2.add(code);
-		panel2.add(first);
-		panel2.add(last);
-		panel2.add(chapter);
-		panel2.add(b);
-		panel2.setLayout(new FlowLayout());
+
+        JPanel panel2 = new RegistrationPanel();
 
         JPanel panel3 = new JPanel();
 
@@ -53,7 +39,7 @@ public class test implements ActionListener {
         NavigationBar nav = new NavigationBar();
 		frame.setJMenuBar(nav.getMenu());
 		frame.add(tabbedPane);
-		FileParser f = new FileParser();
+		ReadFromFile f = new ReadFromFile();
 
 		f.getWorkhops();
 		//Display the window.
@@ -80,10 +66,10 @@ public class test implements ActionListener {
             }
         });
     }
-    @Override
-	public void actionPerformed(ActionEvent e){
-    	if(e.getActionCommand().equals("SEND")){
-    		System.out.println("sent");
-    	}
-    }
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
 }
