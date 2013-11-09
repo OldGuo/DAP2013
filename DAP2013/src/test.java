@@ -20,12 +20,7 @@ public class test implements ActionListener {
         JTabbedPane layout = new JTabbedPane(SwingConstants.TOP);
         JTabbedPane tabbedPane = new JTabbedPane();
 
-        JPanel panel1 = new JPanel();
-        JLabel emptyLabel = new JLabel("label");
-        emptyLabel.setPreferredSize(new Dimension(500, 500));
-        frame.getContentPane().add(emptyLabel, BorderLayout.CENTER);
-        panel1.add(emptyLabel);
-
+        JPanel panel1 = new WorkshopPanel();
 
         JPanel panel2 = new RegistrationPanel();
 
