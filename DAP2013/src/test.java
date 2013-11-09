@@ -1,5 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -40,6 +41,7 @@ public class test implements ActionListener {
 		panel2.add(last);
 		panel2.add(chapter);
 		panel2.add(b);
+		panel2.setLayout(new FlowLayout());
 
         JPanel panel3 = new JPanel();
 
