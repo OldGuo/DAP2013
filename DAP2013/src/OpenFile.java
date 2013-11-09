@@ -8,7 +8,6 @@ public class OpenFile{
 		File myFile = new File(fileString);
 		try{
 			fromFile = new Scanner(myFile);
-
 		}catch(FileNotFoundException e){
 			System.out.println("Sorry, can't open your file");
 			System.exit(1);

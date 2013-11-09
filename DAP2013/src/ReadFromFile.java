@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-
 public class ReadFromFile {
 	private final ArrayList<Workshop>workshops;
 	String[][]information;
@@ -9,7 +8,8 @@ public class ReadFromFile {
 		workshops = new ArrayList<Workshop>();
 	}
 	public void getWorkhops(){
-		Scanner input = OpenFile.open("C:\\Users\\Young\\git\\FBLADAP2013\\DAP2013\\WORKSHOPS.txt");
+		System.out.println("workshops");
+		Scanner input = OpenFile.open("C:\\Users\\Young\\git\\FBLADAP2013\\DAP2013\\TYPE.txt");
 		ArrayList<String>info = new ArrayList<String>();
 		while(input.hasNextLine()){
 			info = new ArrayList<String>();
@@ -32,6 +32,7 @@ public class ReadFromFile {
 				i++;
 			}
 			workshops.add(new Workshop(info));
+			System.out.println(workshops);
 		}
 	}
 }

@@ -39,23 +39,12 @@ public class test implements ActionListener {
         NavigationBar nav = new NavigationBar();
 		frame.setJMenuBar(nav.getMenu());
 		frame.add(tabbedPane);
-		ReadFromFile f = new ReadFromFile();
+		
+		
 
-		f.getWorkhops();
-		//Display the window.
-
-        /*String [] columnNames = {"Title","Description","Date","Time"};
-
-		JTable table = new JTable(5,5);
-		table.setFillsViewportHeight(true);
-		JScrollPane scrollPane = new JScrollPane(table);
-		frame.add(scrollPane);*/
-
-		//textfield testing
 		frame.pack();
         frame.setVisible(true);
     }
-
     public static void main(String[] args) {
         //Schedule a job for the event-dispatching thread:
         //creating and showing this application's GUI.
@@ -66,7 +55,6 @@ public class test implements ActionListener {
             }
         });
     }
-
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
