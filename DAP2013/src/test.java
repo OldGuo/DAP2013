@@ -3,12 +3,10 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
-import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 public class test implements ActionListener {
@@ -27,27 +25,7 @@ public class test implements ActionListener {
         frame.getContentPane().add(emptyLabel, BorderLayout.CENTER);
         panel1.add(emptyLabel);
 
-        JPanel panel2 = new JPanel();
-        JButton b = new JButton("SEND");
-        b.setToolTipText("click to send your information");
-
-		final JTextField code = new JTextField(40);
-		code.setToolTipText("Member [M], Advisor [A], or Guest [G]");
-		final JTextField first = new JTextField(40);
-		final JTextField last = new JTextField(40);
-		final JTextField chapter = new JTextField(40);
-        b.addActionListener(new ActionListener(){
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				System.out.println(code.getText() + " " + first.getText() + " " + last.getText() + " " + chapter.getText());
-			}
-        });
-
-		panel2.add(code);
-		panel2.add(first);
-		panel2.add(last);
-		panel2.add(chapter);
-		panel2.add(b);
+        JPanel panel2 = new RegistrationPanel();
 
         JPanel panel3 = new JPanel();
 
