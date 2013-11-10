@@ -8,8 +8,8 @@ public class ReadFromFile {
 		workshops = new ArrayList<Workshop>();
 	}
 	public void getWorkshops(){
-		//Scanner input = OpenFile.open("C:\\Users\\Young\\git\\FBLADAP2013\\DAP2013\\TYPE.txt");
-		Scanner input = OpenFile.open("C:\\Users\\Young\\Documents\\GitHub\\DAP2013\\DAP2013\\WORKSHOPS.txt");
+		Scanner input = OpenFile.open("C:\\Users\\Young\\git\\FBLADAP2013\\DAP2013\\WORKSHOPS.txt");
+		//Scanner input = OpenFile.open("C:\\Users\\Young\\Documents\\GitHub\\DAP2013\\DAP2013\\WORKSHOPS.txt");
 		ArrayList<String>info = new ArrayList<String>();
 		while(input.hasNextLine()){
 			info = new ArrayList<String>();
