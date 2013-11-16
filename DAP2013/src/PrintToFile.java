@@ -23,8 +23,8 @@ public class PrintToFile {
 	}
 	public void setWriter(String t){
 		if(t.equals("PARTICIPANT")){
-			//printFile = new File("C:\\Users\\Young\\Documents\\GitHub\\DAP2013\\DAP2013\\PARTICIPANTS.txt");
-			printFile = new File("C:\\Users\\Young\\git\\FBLADAP2013\\DAP2013\\PARTICIPANTS.txt");
+			printFile = new File("C:\\Users\\Young\\Documents\\GitHub\\DAP2013\\DAP2013\\PARTICIPANTS.txt"); //laptop
+			//printFile = new File("C:\\Users\\Young\\git\\FBLADAP2013\\DAP2013\\PARTICIPANTS.txt"); //desktop
 			try {
 				fileWriter = new FileWriter(printFile,true);
 			} catch (IOException e) {
@@ -34,8 +34,10 @@ public class PrintToFile {
 		}
 		bufferedWriter = new BufferedWriter(fileWriter);
 	}
-	public void printInfo(){
+	public void registerParticipant(){
+		int count = ReadFromFile.getParticipants().size()+1;
 		try {
+			bufferedWriter.write("["+count+"],");
 			String s = "";
 			for(int i = 0; i < information.size();i++){
 				s += "["+information.get(i)+"]";

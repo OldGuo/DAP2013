@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
 
@@ -27,7 +28,7 @@ public class test implements ActionListener {
         JPanel panel3 = new JPanel();
 
 		tabbedPane.addTab("Label",panel1);
-		tabbedPane.addTab("Text Field",panel2);
+		tabbedPane.addTab("Register",panel2);
 		tabbedPane.addTab("Tab3",panel3);
 
 
@@ -35,9 +36,6 @@ public class test implements ActionListener {
 		frame.setJMenuBar(nav.getMenu());
 		frame.add(tabbedPane);
 		
-		ReadFromFile r = new ReadFromFile();
-		r.getWorkshops();
-
 		frame.pack();
         frame.setVisible(true);
     }

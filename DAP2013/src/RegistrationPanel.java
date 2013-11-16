@@ -54,8 +54,11 @@ public class RegistrationPanel extends JPanel implements ActionListener{
 			information = new ArrayList<String>();
 			Collections.addAll(information,(String)location.getSelectedItem(),(String)type.getSelectedItem(),first.getText(),last.getText(),chapter.getText());
 			
+			first.setText("");
+			last.setText("");
+			chapter.setText("");
 			PrintToFile print = new PrintToFile("PARTICIPANT",information);
-			print.printInfo();
+			print.registerParticipant();
 		}
 	}
 }
