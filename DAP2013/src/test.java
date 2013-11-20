@@ -1,24 +1,22 @@
-import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
-import javax.swing.SwingConstants;
 
 public class test implements ActionListener {
 	private static void createAndShowGUI() {
         //Create and set up the window.
         JFrame frame = new JFrame("DAP2013");
+        frame.setResizable(false);
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setPreferredSize(new Dimension(1000,600));
 
-        JTabbedPane layout = new JTabbedPane(SwingConstants.TOP);
         JTabbedPane tabbedPane = new JTabbedPane();
 
         JPanel panel1 = new WorkshopPanel();
@@ -27,15 +25,15 @@ public class test implements ActionListener {
 
         JPanel panel3 = new JPanel();
 
-		tabbedPane.addTab("Label",panel1);
-		tabbedPane.addTab("Register",panel2);
+		tabbedPane.addTab("Workshops",panel1);
+		tabbedPane.addTab("Register Members",panel2);
 		tabbedPane.addTab("Tab3",panel3);
 
 
         NavigationBar nav = new NavigationBar();
 		frame.setJMenuBar(nav.getMenu());
 		frame.add(tabbedPane);
-		
+
 		frame.pack();
         frame.setVisible(true);
     }
