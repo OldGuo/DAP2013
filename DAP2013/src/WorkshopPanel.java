@@ -79,8 +79,8 @@ public class WorkshopPanel extends JPanel{
 					t.setWrapStyleWord(true);
 					t.setEditable(false);
 					JOptionPane optionPane = new JOptionPane(t);
-					JDialog dialog = optionPane.createDialog(dialogFrame,"Description");
-					dialog.setSize(new Dimension(300,250));
+					JDialog dialog = optionPane.createDialog(dialogFrame,workshops.get(table.rowAtPoint(p)).getTitle());
+					dialog.setSize(new Dimension(500,250));
 					dialog.setVisible(true);
 				}
 			}
