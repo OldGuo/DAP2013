@@ -18,15 +18,15 @@ public class test implements ActionListener {
 
         JTabbedPane tabbedPane = new JTabbedPane();
 
-        JPanel panel1 = new WorkshopPanel();
+        JPanel workshopPanel = new WorkshopPanel();
 
-        JPanel panel2 = new RegistrationPanel();
+        JPanel registrationPanel = new RegistrationPanel();
 
-        JPanel panel3 = new JPanel();
+        JPanel participantPanel = new ParticipantPanel();
 
-		tabbedPane.addTab("Workshops",panel1);
-		tabbedPane.addTab("Register Members",panel2);
-		tabbedPane.addTab("Register for Workshops",panel3);
+		tabbedPane.addTab("Register for Workshops",workshopPanel);
+		tabbedPane.addTab("Register Members",registrationPanel);
+		tabbedPane.addTab("Participants",participantPanel);
 
 
         NavigationBar nav = new NavigationBar();

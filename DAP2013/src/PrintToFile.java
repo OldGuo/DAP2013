@@ -25,12 +25,16 @@ public class PrintToFile {
 		if(t.equals("PARTICIPANT")){
 			printFile = new File("C:\\Users\\Young\\Documents\\GitHub\\DAP2013\\DAP2013\\PARTICIPANTS.txt"); //laptop
 			//printFile = new File("C:\\Users\\Young\\git\\FBLADAP2013\\DAP2013\\PARTICIPANTS.txt"); //desktop
-			try {
-				fileWriter = new FileWriter(printFile,true);
-			} catch (IOException e) {
-				System.out.println("sorry, can't open your file");
-				e.printStackTrace();
-			}
+		}
+		if(t.equals("WKSHP_REGISTRATIONS")){
+			printFile = new File("C:\\Users\\Young\\Documents\\GitHub\\DAP2013\\DAP2013\\WKSHP_REGISTRATIONS.txt"); //laptop
+			//printFile = new File("C:\\Users\\Young\\git\\FBLADAP2013\\DAP2013\\WKSHP_REGISTRATIONS.txt"); //desktop
+		}
+		try {
+			fileWriter = new FileWriter(printFile,true);
+		} catch (IOException e) {
+			System.out.println("sorry, can't open your file");
+			e.printStackTrace();
 		}
 		bufferedWriter = new BufferedWriter(fileWriter);
 	}

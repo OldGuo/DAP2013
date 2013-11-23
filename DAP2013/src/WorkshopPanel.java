@@ -7,8 +7,10 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
+import javax.swing.JDesktopPane;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
@@ -31,24 +33,24 @@ public class WorkshopPanel extends JPanel{
 	private final JFrame dialogFrame;
 
 	public WorkshopPanel(){
-        JPanel panel1 = new JPanel();
-
-        JPanel panel2 = new JPanel();
-
-        JPanel panel3 = new JPanel();
-
 		dialogFrame = new JFrame();
-		JLabel label = new JLabel("Double Click for Descriptions");
+		JLabel label = new JLabel("Double Click for Descriptions, Right Click to Register");
 		loadData();
 		createTable();
         scrollPane = new JScrollPane(table);
         scrollPane.setPreferredSize(new Dimension(900,450));
         this.add(label);
-        this.add(scrollPane);
+        //this.add(scrollPane);
+       
+        JInternalFrame frame = new JInternalFrame("Register Participants");
+        frame.setSize(200,150);
+        frame.setVisible(true);
+		JDesktopPane desktop = new JDesktopPane();
+		desktop.add(frame);
+		frame.moveToFront();
 	}
 	public void loadData(){
-		ReadFromFile r = new ReadFromFile();
-		workshops = r.getWorkshops();
+		workshops = ReadFromFile.getWorkshops();
 	}
 	public void createTable(){
 		String [] columnNames = {"Location","Title","Date","Time"};
@@ -71,49 +73,61 @@ public class WorkshopPanel extends JPanel{
 		MouseListener MyMouseListener = new MyMouseListener();
 		table.addMouseListener(MyMouseListener);
 	}
+	public void createDialog(MouseEvent e){
+		Point p = e.getPoint();
+		String name = workshops.get(table.rowAtPoint(p)).getTitle();
+		String descrip = workshops.get(table.rowAtPoint(p)).getDescrip();
+		JTextArea t = new JTextArea(descrip);
+		t.setLineWrap(true);
+		t.setWrapStyleWord(true);
+		t.setEditable(false);
+		JOptionPane optionPane = new JOptionPane(t);
+		JDialog dialog = optionPane.createDialog(dialogFrame,name);
+		dialog.setSize(new Dimension(500,250));
+		dialog.setVisible(true);
+	}
+	public void createPopup(MouseEvent e){
+		int r = table.rowAtPoint(e.getPoint());
+        if (r >= 0 && r < table.getRowCount()) {
+            table.setRowSelectionInterval(r, r);
+        } else {
+            table.clearSelection();
+        }
+
+        int rowindex = table.getSelectedRow();
+        if (rowindex < 0)
+            return;
+        if (e.isPopupTrigger() && e.getComponent() instanceof JTable ) {
+            JPopupMenu popup = new JPopupMenu();
+            popup = new JPopupMenu();
+            JMenuItem menuItem = new JMenuItem("Register Participants");
+            menuItem.addActionListener(new MenuActionListener());
+            popup.add(menuItem);
+            popup.show(e.getComponent(), e.getX(), e.getY());
+        }
+	}
 	public class MyMouseListener extends MouseAdapter{
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			if (e.getClickCount() > 1) {
-				Point p = e.getPoint();
-				String name = workshops.get(table.rowAtPoint(p)).getTitle();
-				String descrip = workshops.get(table.rowAtPoint(p)).getDescrip();
-				JTextArea t = new JTextArea(descrip);
-				t.setLineWrap(true);
-				t.setWrapStyleWord(true);
-				t.setEditable(false);
-				JOptionPane optionPane = new JOptionPane(t);
-				JDialog dialog = optionPane.createDialog(dialogFrame,name);
-				dialog.setSize(new Dimension(500,250));
-				dialog.setVisible(true);
+				createDialog(e);
 			}
 		}
 		public void mouseReleased(MouseEvent e) {
-	        int r = table.rowAtPoint(e.getPoint());
-	        if (r >= 0 && r < table.getRowCount()) {
-	            table.setRowSelectionInterval(r, r);
-	        } else {
-	            table.clearSelection();
-	        }
-
-	        int rowindex = table.getSelectedRow();
-	        if (rowindex < 0)
-	            return;
-	        if (e.isPopupTrigger() && e.getComponent() instanceof JTable ) {
-	            JPopupMenu popup = new JPopupMenu();
-	            popup = new JPopupMenu();
-	            JMenuItem menuItem = new JMenuItem("Register Participants");
-	            menuItem.addActionListener(new MenuActionListener());
-	            popup.add(menuItem);
-	            popup.show(e.getComponent(), e.getX(), e.getY());
-	        }
+	        createPopup(e);
 	    }
 	}
 	public class MenuActionListener implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			JPanel test = new JPanel();
-			
+			JInternalFrame popupFrame = new JInternalFrame("Register Participants");
+			popupFrame.setSize(new Dimension(500,400));
+			popupFrame.setVisible(true);
+			JDesktopPane desktop= new JDesktopPane();
+			desktop.add(popupFrame);
+			try {
+	            popupFrame.setSelected(true);
+	        } catch (java.beans.PropertyVetoException e1) {}
 		}
 	}
 }
