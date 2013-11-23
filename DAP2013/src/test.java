@@ -13,7 +13,6 @@ public class test implements ActionListener {
         JFrame frame = new JFrame("DAP2013");
         frame.setResizable(false);
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setPreferredSize(new Dimension(1000,600));
 
@@ -27,7 +26,7 @@ public class test implements ActionListener {
 
 		tabbedPane.addTab("Workshops",panel1);
 		tabbedPane.addTab("Register Members",panel2);
-		tabbedPane.addTab("Tab3",panel3);
+		tabbedPane.addTab("Register for Workshops",panel3);
 
 
         NavigationBar nav = new NavigationBar();

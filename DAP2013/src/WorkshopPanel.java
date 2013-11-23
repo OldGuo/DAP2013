@@ -1,14 +1,19 @@
 import java.awt.Dimension;
 import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
@@ -26,18 +31,12 @@ public class WorkshopPanel extends JPanel{
 	private final JFrame dialogFrame;
 
 	public WorkshopPanel(){
-		//this.setLayout(null);
-		JTabbedPane tabbedPane = new JTabbedPane();
-
         JPanel panel1 = new JPanel();
 
         JPanel panel2 = new JPanel();
 
         JPanel panel3 = new JPanel();
-        tabbedPane.addTab("DC",panel1);
-        tabbedPane.addTab("MN",panel2);
-        tabbedPane.addTab("LA",panel3);
-        this.add(tabbedPane);
+
 		dialogFrame = new JFrame();
 		JLabel label = new JLabel("Double Click for Descriptions");
 		loadData();
@@ -69,32 +68,52 @@ public class WorkshopPanel extends JPanel{
 		table.getColumnModel().getColumn(2).setPreferredWidth(75);
 		table.getColumnModel().getColumn(3).setPreferredWidth(75);
 
-		table.addMouseListener(new MouseAdapter(){
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				if (e.getClickCount() > 1) {
-					Point p = e.getPoint();
-					JTextArea t = new JTextArea(workshops.get(table.rowAtPoint(p)).getDescrip());
-					t.setLineWrap(true);
-					t.setWrapStyleWord(true);
-					t.setEditable(false);
-					JOptionPane optionPane = new JOptionPane(t);
-					JDialog dialog = optionPane.createDialog(dialogFrame,workshops.get(table.rowAtPoint(p)).getTitle());
-					dialog.setSize(new Dimension(500,250));
-					dialog.setVisible(true);
-				}
-			}
-		});
+		MouseListener MyMouseListener = new MyMouseListener();
+		table.addMouseListener(MyMouseListener);
 	}
-	public class MyTableModel extends JTable {
+	public class MyMouseListener extends MouseAdapter{
 		@Override
-		public boolean isCellEditable(int row, int column) {
-			return false;
+		public void mouseClicked(MouseEvent e) {
+			if (e.getClickCount() > 1) {
+				Point p = e.getPoint();
+				String name = workshops.get(table.rowAtPoint(p)).getTitle();
+				String descrip = workshops.get(table.rowAtPoint(p)).getDescrip();
+				JTextArea t = new JTextArea(descrip);
+				t.setLineWrap(true);
+				t.setWrapStyleWord(true);
+				t.setEditable(false);
+				JOptionPane optionPane = new JOptionPane(t);
+				JDialog dialog = optionPane.createDialog(dialogFrame,name);
+				dialog.setSize(new Dimension(500,250));
+				dialog.setVisible(true);
+			}
 		}
+		public void mouseReleased(MouseEvent e) {
+	        int r = table.rowAtPoint(e.getPoint());
+	        if (r >= 0 && r < table.getRowCount()) {
+	            table.setRowSelectionInterval(r, r);
+	        } else {
+	            table.clearSelection();
+	        }
+
+	        int rowindex = table.getSelectedRow();
+	        if (rowindex < 0)
+	            return;
+	        if (e.isPopupTrigger() && e.getComponent() instanceof JTable ) {
+	            JPopupMenu popup = new JPopupMenu();
+	            popup = new JPopupMenu();
+	            JMenuItem menuItem = new JMenuItem("Register Participants");
+	            menuItem.addActionListener(new MenuActionListener());
+	            popup.add(menuItem);
+	            popup.show(e.getComponent(), e.getX(), e.getY());
+	        }
+	    }
+	}
+	public class MenuActionListener implements ActionListener{
 		@Override
-		public JToolTip createToolTip(){
-			JToolTip tip = new JToolTip();
-			return tip;
+		public void actionPerformed(ActionEvent e) {
+			JPanel test = new JPanel();
+			
 		}
 	}
 }
