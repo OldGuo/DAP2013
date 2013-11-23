@@ -40,14 +40,7 @@ public class WorkshopPanel extends JPanel{
         scrollPane = new JScrollPane(table);
         scrollPane.setPreferredSize(new Dimension(900,450));
         this.add(label);
-        //this.add(scrollPane);
-       
-        JInternalFrame frame = new JInternalFrame("Register Participants");
-        frame.setSize(200,150);
-        frame.setVisible(true);
-		JDesktopPane desktop = new JDesktopPane();
-		desktop.add(frame);
-		frame.moveToFront();
+        this.add(scrollPane);
 	}
 	public void loadData(){
 		workshops = ReadFromFile.getWorkshops();
@@ -120,14 +113,9 @@ public class WorkshopPanel extends JPanel{
 	public class MenuActionListener implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			JInternalFrame popupFrame = new JInternalFrame("Register Participants");
-			popupFrame.setSize(new Dimension(500,400));
-			popupFrame.setVisible(true);
-			JDesktopPane desktop= new JDesktopPane();
-			desktop.add(popupFrame);
-			try {
-	            popupFrame.setSelected(true);
-	        } catch (java.beans.PropertyVetoException e1) {}
+			JFrame frame = new ParticipantRegistrationFrame("Choose Participants");
+			frame.setSize(400,500);
+			frame.setVisible(true);
 		}
 	}
 }

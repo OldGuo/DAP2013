@@ -1,9 +1,12 @@
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
@@ -27,7 +30,6 @@ public class test implements ActionListener {
 		tabbedPane.addTab("Register for Workshops",workshopPanel);
 		tabbedPane.addTab("Register Members",registrationPanel);
 		tabbedPane.addTab("Participants",participantPanel);
-
 
         NavigationBar nav = new NavigationBar();
 		frame.setJMenuBar(nav.getMenu());
