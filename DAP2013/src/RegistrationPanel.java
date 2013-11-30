@@ -1,3 +1,6 @@
+//Panel where participants can register
+//Input: Location, Type (Member, Adviser, Guest), First Name, Last Name, and Chapter
+
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,20 +15,20 @@ import javax.swing.JTextField;
 
 
 public class RegistrationPanel extends JPanel implements ActionListener{
-	private JComboBox type;
-	private JComboBox location;
-	private JButton send;
-	private JTextField first,last,chapter;
+	private final JComboBox type;
+	private final JComboBox location;
+	private final JButton send;
+	private final JTextField first,last,chapter;
 	private ArrayList<String> information;
-	
+
 	public RegistrationPanel(){
 		this.setLayout(new GridLayout(8,2));
 		information = new ArrayList<String>();
-		
+
 		send = new JButton("SEND");
 	    send.setToolTipText("click to send your information");
 	    send.addActionListener(this);
-	    
+
 	    first = new JTextField();
 	    last = new JTextField();
 	    chapter = new JTextField();
@@ -53,7 +56,7 @@ public class RegistrationPanel extends JPanel implements ActionListener{
 		if(e.getSource() == send){
 			information = new ArrayList<String>();
 			Collections.addAll(information,(String)location.getSelectedItem(),(String)type.getSelectedItem(),first.getText(),last.getText(),chapter.getText());
-			
+
 			first.setText("");
 			last.setText("");
 			chapter.setText("");

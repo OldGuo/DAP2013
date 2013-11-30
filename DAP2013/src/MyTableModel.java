@@ -1,7 +1,14 @@
 import javax.swing.JTable;
 
 public class MyTableModel extends JTable{
-	public boolean isCellEditable(int row, int column) {
-		return false;
-	}
+	@Override
+	public boolean isCellEditable(int row, int col) {
+        //Note that the data/cell address is constant,
+        //no matter where the cell appears onscreen.
+        if (col == 4) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

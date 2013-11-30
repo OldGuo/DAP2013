@@ -7,20 +7,16 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
-import javax.swing.JDesktopPane;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
-import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
-import javax.swing.JToolTip;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -106,6 +102,7 @@ public class WorkshopPanel extends JPanel{
 				createDialog(e);
 			}
 		}
+		@Override
 		public void mouseReleased(MouseEvent e) {
 	        createPopup(e);
 	    }
@@ -113,9 +110,8 @@ public class WorkshopPanel extends JPanel{
 	public class MenuActionListener implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			JFrame frame = new ParticipantRegistrationFrame("Choose Participants");
-			frame.setSize(400,500);
-			frame.setVisible(true);
+			JDialog dialog = new ParticipantRegistrationFrame();
+			dialog.setVisible(true);
 		}
 	}
 }
