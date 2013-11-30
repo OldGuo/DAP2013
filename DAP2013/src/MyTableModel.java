@@ -11,4 +11,14 @@ public class MyTableModel extends JTable{
             return false;
         }
     }
+	@Override
+	public Class<?> getColumnClass(int columnIndex){
+		Class clazz = String.class;
+		switch (columnIndex) {
+	        case 4:
+	        	clazz = Boolean.class;
+	        	break;
+		}
+		return clazz;
+	}	
 }

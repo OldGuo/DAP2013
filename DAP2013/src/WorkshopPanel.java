@@ -110,7 +110,7 @@ public class WorkshopPanel extends JPanel{
 	public class MenuActionListener implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			JDialog dialog = new ParticipantRegistrationFrame();
+			JDialog dialog = new ParticipantRegistrationWindow();
 			dialog.setVisible(true);
 		}
 	}
