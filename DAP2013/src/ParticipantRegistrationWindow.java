@@ -8,14 +8,13 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JDialog;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 public class ParticipantRegistrationWindow extends JDialog implements ActionListener{
-	private JTable table;
+	private final JTable table;
 	private Object[]data;
 	private ArrayList<Participant>participants;
 	private DefaultTableModel model;
@@ -54,16 +53,22 @@ public class ParticipantRegistrationWindow extends JDialog implements ActionList
 			model.addRow(data);
 		}
 	}
+	@Override
 	public void actionPerformed(ActionEvent e) {
 	    if ("save".equals(e.getActionCommand())){
 	    	Register();
 	    	this.dispose();
 	    }
-	} 
+	}
 	public void Register(){
+		String info;
 		for(int i = 0; i < table.getRowCount();i++){
 			for(int j = 0; j < table.getColumnCount();j++){
-				
+				if(model.getValueAt(i, j).equals(Boolean.TRUE)){
+					info = model.getValueAt(i, 0) + " " + model.getValueAt(i, 1) +
+							" " + model.getValueAt(i, 2) + " " + model.getValueAt(i, 3);
+					System.out.println(info);
+				}
 			}
 		}
 	}
@@ -73,7 +78,7 @@ public class ParticipantRegistrationWindow extends JDialog implements ActionList
 	        Point p = e.getPoint();
 	        int row = table.rowAtPoint(p);
 	        int col = table.columnAtPoint(p);
-	       	System.out.println(model.getValueAt(row, col));
+	       	//System.out.println(model.getValueAt(row, col));
 	    }
 	}
 }
