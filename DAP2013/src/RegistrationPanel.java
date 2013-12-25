@@ -60,8 +60,8 @@ public class RegistrationPanel extends JPanel implements ActionListener{
 			first.setText("");
 			last.setText("");
 			chapter.setText("");
-			PrintToFile print = new PrintToFile("PARTICIPANT",information);
-			print.registerParticipant();
+			PrintToFile print = new PrintToFile("PARTICIPANT");
+			print.registerParticipant(information);
 		}
 	}
 }

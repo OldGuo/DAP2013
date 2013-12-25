@@ -34,3 +34,7 @@
 [34],[DC],[Member],[taylor],[gupta],[1]
 [35],[DC],[Member],[audrey],[swen],[1]
 [36],[DC],[Member],[allison],[joe],[5]
+[37],[DC],[Member],[bowen],[jiang],[55]
+[38],[DC],[Member],[alex],[vu],[54]
+[39],[DC],[Member],[andrew],[wang],[8]
+[40],[DC],[Member],[kevin],[guo],[898]

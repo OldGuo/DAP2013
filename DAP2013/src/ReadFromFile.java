@@ -24,6 +24,10 @@ public class ReadFromFile {
 			input = OpenFile.open("C:\\Users\\Young\\git\\FBLADAP2013\\DAP2013\\PARTICIPANTS.txt"); //desktop
 			//input = OpenFile.open("C:\\Users\\Young\\Documents\\GitHub\\DAP2013\\DAP2013\\PARTICIPANTS.txt"); //laptop
 		}
+		if(choice.equals("WKSHP_REGISTRATIONS")){ //participants
+			input = OpenFile.open("C:\\Users\\Young\\git\\FBLADAP2013\\DAP2013\\WKSHP_REGISTRATIONS.txt"); //desktop
+			//input = OpenFile.open("C:\\Users\\Young\\Documents\\GitHub\\DAP2013\\DAP2013\\WKSHP_REGISTRATIONS.txt"); //laptop
+		}
 		ArrayList<String>info = new ArrayList<String>(); //holds all the information for a specific workshop line
 		while(input.hasNextLine()){
 			info = new ArrayList<String>(); //clears the arraylist after each new line

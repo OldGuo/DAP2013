@@ -1,5 +1,6 @@
 //Window where user can choose participants to register for a specific workshop
 
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -33,8 +34,9 @@ public class ParticipantRegistrationWindow extends JDialog implements ActionList
 		loadData();
 		createTable();
 		scrollPane = new JScrollPane(table);
-	    this.add(saveButton);
+		scrollPane.setPreferredSize(new Dimension(900,350));
 	    this.add(scrollPane);
+	    this.add(saveButton);
 	}
 	public void loadData(){
 		participants = ReadFromFile.getData("PARTICIPANTS");
@@ -65,7 +67,9 @@ public class ParticipantRegistrationWindow extends JDialog implements ActionList
 		for(int i = 0; i < table.getRowCount();i++){
 			for(int j = 0; j < table.getColumnCount();j++){
 				if(model.getValueAt(i, j).equals(Boolean.TRUE)){
-					//write into the middle of WKSHOP_REGISTRATIONS.txt
+					Participant participant = (Participant)participants.get(i);
+					PrintToFile print = new PrintToFile("WKSHP_REGISTRATIONS");
+					print.registerForWorkshop(workshop,participant);
 				}
 			}
 		}
