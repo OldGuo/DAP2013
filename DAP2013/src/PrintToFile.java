@@ -39,7 +39,7 @@ public class PrintToFile {
 		bufferedWriter = new BufferedWriter(fileWriter);
 	}
 	public void registerParticipant(){
-		int count = ReadFromFile.getParticipants().size()+1;
+		int count = ReadFromFile.getData("PARTICIPANTS").size()+1;
 		try {
 			bufferedWriter.write("["+count+"],");
 			String s = "";
@@ -54,5 +54,8 @@ public class PrintToFile {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	public void registerForWorkshop(Workshop w, Participant p){
+
 	}
 }
