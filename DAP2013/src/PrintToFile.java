@@ -1,7 +1,5 @@
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,30 +17,36 @@ public class PrintToFile {
 	private FileWriter fileWriter;
 	private ArrayList<String>information;
 
-	public PrintToFile(String type){
-		setWriter(type);
+	public PrintToFile(){
 		information = new ArrayList<String>();
 	}
 	public void setWriter(String t){
 		if(t.equals("PARTICIPANT")){
 			//printFile = new File("C:\\Users\\Young\\Documents\\GitHub\\DAP2013\\DAP2013\\PARTICIPANTS.txt"); //laptop
 			printFile = new File("C:\\Users\\Young\\git\\FBLADAP2013\\DAP2013\\PARTICIPANTS.txt"); //desktop
+			try {
+				fileWriter = new FileWriter(printFile,true);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		if(t.equals("WKSHP_REGISTRATIONS")){
 			//printFile = new File("C:\\Users\\Young\\Documents\\GitHub\\DAP2013\\DAP2013\\WKSHP_REGISTRATIONS.txt"); //laptop
 			printFile = new File("C:\\Users\\Young\\git\\FBLADAP2013\\DAP2013\\WKSHP_REGISTRATIONS.txt"); //desktop
-		}
-		try {
-			fileWriter = new FileWriter(printFile,true);
-		} catch (IOException e) {
-			System.out.println("sorry, can't open your file");
-			e.printStackTrace();
+			try {
+				fileWriter = new FileWriter(printFile,false);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		bufferedWriter = new BufferedWriter(fileWriter);
 	}
 	public void registerParticipant(ArrayList<String>a){
+		setWriter("PARTICIPANT");
 		information = a;
-		int count = ReadFromFile.getData("PARTICIPANTS").size()+1;
+		int count = ReadFromFile.getData().size()+1;
 		try {
 			bufferedWriter.write("["+count+"],");
 			String s = "";
@@ -59,30 +63,22 @@ public class PrintToFile {
 		}
 	}
 	public void registerForWorkshop(Workshop w, Participant p){
-		BufferedReader reader = null;
-		ArrayList<String>registrations = new ArrayList<String>();
-		try {
-			File file = new File("C:\\Users\\Young\\git\\FBLADAP2013\\DAP2013\\WKSHP_REGISTRATIONS.txt");
-		    reader = new BufferedReader(new FileReader(file));
-
-		    String line = reader.readLine();
-		    while (line != null) {
-		    	String workshopId = "["+w.getId()+"]";
-		        if(line.substring(0,5).equals(workshopId)){
-		        	System.out.println(w.getTitle());
-		        	String replacement = line + ",["+p.getID()+"]";
-		        	line = line.replaceAll(line, replacement);
-		        }
-		    	line = reader.readLine();
-		    }
-		} catch (IOException e) {
-		    e.printStackTrace();
-		} finally {
-		    try {
-		        reader.close();
-		    } catch (IOException e) {
-		        e.printStackTrace();
-		    }
+		ReadFromFile read = new ReadFromFile("WKSHP_REGISTRATIONS");
+		ArrayList<String>registrations = read.getRegistrations();
+		setWriter("WKSHP_REGISTRATIONS");
+		for(int i = 0; i < registrations.size();i++){
+			String wkshpID = "[" + w.getID() + "]";
+			if(wkshpID.equals(registrations.get(i).substring(0,5))){
+				registrations.set(i,registrations.get(i) + ",[" + p.getID() + "]");
+			}
+		}
+		for(int j = 0; j < registrations.size();j++){
+			try {
+				bufferedWriter.write(registrations.get(j));
+				bufferedWriter.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 }

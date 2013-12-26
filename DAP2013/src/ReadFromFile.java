@@ -3,31 +3,30 @@ import java.util.Scanner;
 
 public class ReadFromFile {
 
-	private static ArrayList<Workshop>workshops;
-	private static ArrayList<Participant>participants;
-	private static String choice;
+	private static Scanner input;
+	private static String readType;
 
-	public ReadFromFile(){
-		workshops = new ArrayList<Workshop>();
-		participants = new ArrayList<Participant>();
+	public ReadFromFile(String s){
+		readType = s;
+		selectReader(readType);
 	}
-	public static ArrayList<Object> getData(String s){
-		String choice = s;
-		ArrayList<Object> data = new ArrayList<Object>();
-		Scanner input = null;
-
-		if(choice.equals("WORKSHOPS")){
+	public static void selectReader(String s){
+		if(s.equals("WORKSHOPS")){
 			input = OpenFile.open("C:\\Users\\Young\\git\\FBLADAP2013\\DAP2013\\WORKSHOPS.txt"); //desktop
 			//input = OpenFile.open("C:\\Users\\Young\\Documents\\GitHub\\DAP2013\\DAP2013\\WORKSHOPS.txt"); //laptop
 		}
-		if(choice.equals("PARTICIPANTS")){ //participants
+		if(s.equals("PARTICIPANTS")){ //participants
 			input = OpenFile.open("C:\\Users\\Young\\git\\FBLADAP2013\\DAP2013\\PARTICIPANTS.txt"); //desktop
 			//input = OpenFile.open("C:\\Users\\Young\\Documents\\GitHub\\DAP2013\\DAP2013\\PARTICIPANTS.txt"); //laptop
 		}
-		if(choice.equals("WKSHP_REGISTRATIONS")){ //participants
+		if(s.equals("WKSHP_REGISTRATIONS")){
 			input = OpenFile.open("C:\\Users\\Young\\git\\FBLADAP2013\\DAP2013\\WKSHP_REGISTRATIONS.txt"); //desktop
 			//input = OpenFile.open("C:\\Users\\Young\\Documents\\GitHub\\DAP2013\\DAP2013\\WKSHP_REGISTRATIONS.txt"); //laptop
 		}
+	}
+	public static ArrayList<Object> getData(){
+		ArrayList<Object> data = new ArrayList<Object>();
+
 		ArrayList<String>info = new ArrayList<String>(); //holds all the information for a specific workshop line
 		while(input.hasNextLine()){
 			info = new ArrayList<String>(); //clears the arraylist after each new line
@@ -48,12 +47,20 @@ public class ReadFromFile {
 				}
 				i++;
 			}
-			if(choice.equals("WORKSHOPS")){
+			if(readType.equals("WORKSHOPS")){
 				data.add(new Workshop(info));
 			}else{ //participants
 				data.add(new Participant(info));
 			}
 		}
 		return data;
+	}
+	public static ArrayList<String> getRegistrations(){
+		ArrayList<String>registrations = new ArrayList<String>();
+		while(input.hasNextLine()){
+			registrations.add(input.nextLine());
+		}
+		System.out.println(registrations);
+		return registrations;
 	}
 }

@@ -39,7 +39,8 @@ public class ParticipantRegistrationWindow extends JDialog implements ActionList
 	    this.add(saveButton);
 	}
 	public void loadData(){
-		participants = ReadFromFile.getData("PARTICIPANTS");
+		ReadFromFile read = new ReadFromFile("PARTICIPANTS");
+		participants = ReadFromFile.getData();
 	}
 	public void createTable(){
 		String [] columnNames = {"Type","First","Last","Chapter","Register"};
@@ -68,7 +69,7 @@ public class ParticipantRegistrationWindow extends JDialog implements ActionList
 			for(int j = 0; j < table.getColumnCount();j++){
 				if(model.getValueAt(i, j).equals(Boolean.TRUE)){
 					Participant participant = (Participant)participants.get(i);
-					PrintToFile print = new PrintToFile("WKSHP_REGISTRATIONS");
+					PrintToFile print = new PrintToFile();
 					print.registerForWorkshop(workshop,participant);
 				}
 			}

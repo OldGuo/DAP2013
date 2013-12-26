@@ -18,7 +18,7 @@ public class Workshop {
 	private final String DESCRIPTION;
 	private final String DATE;
 	private final String TIME;
-	private ArrayList<String>participants;
+	private final ArrayList<String>participants;
 
 	public Workshop(ArrayList<String>a){
 		ID = a.get(0);
@@ -29,7 +29,7 @@ public class Workshop {
 		TIME = a.get(5);
 		participants = new ArrayList<String>();
 	}
-	public String getId(){
+	public String getID(){
 		return ID;
 	}
 	public String getCode(){

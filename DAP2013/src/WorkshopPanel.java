@@ -40,7 +40,8 @@ public class WorkshopPanel extends JPanel{
         this.add(scrollPane);
 	}
 	public void loadData(){
-		workshops = ReadFromFile.getData("WORKSHOPS");
+		ReadFromFile read = new ReadFromFile("WORKSHOPS");
+		workshops = read.getData();
 	}
 	public void createTable(){
 		//Creates a table from an arraylist populated from the file WORKSHOPS.txt
