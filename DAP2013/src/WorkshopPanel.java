@@ -18,6 +18,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 
 
 public class WorkshopPanel extends JPanel{
@@ -25,7 +26,7 @@ public class WorkshopPanel extends JPanel{
 	private Object[]data;
 	private DefaultTableModel model;
 	private JTable table;
-	private ArrayList<Workshop>workshops;
+	private ArrayList<Object>workshops;
 	private final JFrame dialogFrame;
 
 	public WorkshopPanel(){
@@ -39,33 +40,39 @@ public class WorkshopPanel extends JPanel{
         this.add(scrollPane);
 	}
 	public void loadData(){
-		workshops = ReadFromFile.getWorkshops();
+		ReadFromFile read = new ReadFromFile("WORKSHOPS");
+		workshops = read.getData();
 	}
 	public void createTable(){
+		//Creates a table from an arraylist populated from the file WORKSHOPS.txt
 		String [] columnNames = {"Location","Title","Date","Time"};
 		table = new MyTableModel();
+		table.getTableHeader().setReorderingAllowed(false);
         model = (DefaultTableModel) table.getModel();
         model.setColumnIdentifiers(columnNames);
 		data = new String[4];
 		for(int i = 0; i < workshops.size();i++){
-			data[0]= workshops.get(i).getCode().toString();
-			data[1]= workshops.get(i).getTitle().toString();
-			data[2]= workshops.get(i).getDate().toString();
-			data[3]= workshops.get(i).getTime().toString();
+			Workshop w = (Workshop) workshops.get(i);
+			data[0]= w.getCode().toString();
+			data[1]= w.getTitle().toString();
+			data[2]= w.getDate().toString();
+			data[3]= w.getTime().toString();
 			model.addRow(data);
 		}
-		table.getColumnModel().getColumn(0).setPreferredWidth(75);
-		table.getColumnModel().getColumn(1).setPreferredWidth(1000);
-		table.getColumnModel().getColumn(2).setPreferredWidth(75);
-		table.getColumnModel().getColumn(3).setPreferredWidth(75);
+		TableColumnModel t = table.getColumnModel();
+		t.getColumn(0).setPreferredWidth(75);
+		t.getColumn(1).setPreferredWidth(1000);
+		t.getColumn(2).setPreferredWidth(75);
+		t.getColumn(3).setPreferredWidth(75);
 
 		MouseListener MyMouseListener = new MyMouseListener();
 		table.addMouseListener(MyMouseListener);
 	}
 	public void createDialog(MouseEvent e){
+		//opens the window showing the description
 		Point p = e.getPoint();
-		String name = workshops.get(table.rowAtPoint(p)).getTitle();
-		String descrip = workshops.get(table.rowAtPoint(p)).getDescrip();
+		String name = ((Workshop)workshops.get(table.rowAtPoint(p))).getTitle();
+		String descrip = ((Workshop)workshops.get(table.rowAtPoint(p))).getDescrip();
 		JTextArea t = new JTextArea(descrip);
 		t.setLineWrap(true);
 		t.setWrapStyleWord(true);
@@ -76,21 +83,14 @@ public class WorkshopPanel extends JPanel{
 		dialog.setVisible(true);
 	}
 	public void createPopup(MouseEvent e){
-		int r = table.rowAtPoint(e.getPoint());
-        if (r >= 0 && r < table.getRowCount()) {
-            table.setRowSelectionInterval(r, r);
-        } else {
-            table.clearSelection();
-        }
-
-        int rowindex = table.getSelectedRow();
-        if (rowindex < 0)
-            return;
+		//register participants for the workshop using right click
+		Point p = e.getPoint();
+		Workshop workshop = (Workshop)workshops.get(table.rowAtPoint(p));
         if (e.isPopupTrigger() && e.getComponent() instanceof JTable ) {
             JPopupMenu popup = new JPopupMenu();
             popup = new JPopupMenu();
             JMenuItem menuItem = new JMenuItem("Register Participants");
-            menuItem.addActionListener(new MenuActionListener());
+            menuItem.addActionListener(new MenuActionListener(workshop));
             popup.add(menuItem);
             popup.show(e.getComponent(), e.getX(), e.getY());
         }
@@ -108,9 +108,14 @@ public class WorkshopPanel extends JPanel{
 	    }
 	}
 	public class MenuActionListener implements ActionListener{
+		Workshop workshop;
+		public MenuActionListener(Workshop w) {
+			workshop = w;
+		}
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			JDialog dialog = new ParticipantRegistrationWindow();
+			//opens the ParticipantRegistrationWindow
+			JDialog dialog = new ParticipantRegistrationWindow(workshop);
 			dialog.setVisible(true);
 		}
 	}

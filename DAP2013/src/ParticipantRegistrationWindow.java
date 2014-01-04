@@ -1,44 +1,46 @@
+//Window where user can choose participants to register for a specific workshop
+
+import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JDialog;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 public class ParticipantRegistrationWindow extends JDialog implements ActionListener{
-	private JTable table;
+	private final Workshop workshop;
+	private final JTable table;
 	private Object[]data;
-	private ArrayList<Participant>participants;
+	private ArrayList<Object>participants;
 	private DefaultTableModel model;
 	private final JScrollPane scrollPane;
 	private final JButton saveButton;
 
-	public ParticipantRegistrationWindow(){
+	public ParticipantRegistrationWindow(Workshop w){
+		super.setTitle(w.getTitle());
 		this.setLayout(new FlowLayout());
+		workshop = w;
 		table = new MyTableModel();
-		MouseListener MyMouseListener = new MyMouseListener();
-		table.addMouseListener(MyMouseListener);
-		saveButton = new JButton("Save Changes");
+		table.getTableHeader().setReorderingAllowed(false);
+		saveButton = new JButton("Register Selected Participants");
 		saveButton.addActionListener(this);
 		saveButton.setActionCommand("save");
-		this.setSize(900,450);
+		this.setSize(1000,450);
 		loadData();
 		createTable();
 		scrollPane = new JScrollPane(table);
-	    this.add(saveButton);
+		scrollPane.setPreferredSize(new Dimension(900,350));
 	    this.add(scrollPane);
+	    this.add(saveButton);
 	}
 	public void loadData(){
-		participants = ReadFromFile.getParticipants();
+		ReadFromFile read = new ReadFromFile("PARTICIPANTS");
+		participants = ReadFromFile.getData();
 	}
 	public void createTable(){
 		String [] columnNames = {"Type","First","Last","Chapter","Register"};
@@ -46,34 +48,31 @@ public class ParticipantRegistrationWindow extends JDialog implements ActionList
         model.setColumnIdentifiers(columnNames);
 		data = new Object[5];
 		for(int i = 0; i < participants.size();i++){
-			data[0]= participants.get(i).getType().toString();
-			data[1]= participants.get(i).getFirstName().toString();
-			data[2]= participants.get(i).getLastName().toString();
-			data[3]= participants.get(i).getChapter().toString();
+			Participant p = (Participant)participants.get(i);
+			data[0]= p.getType().toString();
+			data[1]= p.getFirstName().toString();
+			data[2]= p.getLastName().toString();
+			data[3]= p.getChapter().toString();
 			data[4] = new Boolean(false);
 			model.addRow(data);
 		}
 	}
+	@Override
 	public void actionPerformed(ActionEvent e) {
 	    if ("save".equals(e.getActionCommand())){
 	    	Register();
 	    	this.dispose();
 	    }
-	} 
+	}
 	public void Register(){
 		for(int i = 0; i < table.getRowCount();i++){
 			for(int j = 0; j < table.getColumnCount();j++){
-				
+				if(model.getValueAt(i, j).equals(Boolean.TRUE)){
+					Participant participant = (Participant)participants.get(i);
+					PrintToFile print = new PrintToFile();
+					print.registerForWorkshop(workshop,participant);
+				}
 			}
 		}
-	}
-	public class MyMouseListener extends MouseAdapter{
-		@Override
-		public void mouseReleased(MouseEvent e) {
-	        Point p = e.getPoint();
-	        int row = table.rowAtPoint(p);
-	        int col = table.columnAtPoint(p);
-	       	System.out.println(model.getValueAt(row, col));
-	    }
 	}
 }
