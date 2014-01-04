@@ -22,8 +22,8 @@ public class PrintToFile {
 	}
 	public void setWriter(String t){
 		if(t.equals("PARTICIPANT")){
-			//printFile = new File("C:\\Users\\Young\\Documents\\GitHub\\DAP2013\\DAP2013\\PARTICIPANTS.txt"); //laptop
-			printFile = new File("C:\\Users\\Young\\git\\FBLADAP2013\\DAP2013\\PARTICIPANTS.txt"); //desktop
+			printFile = new File("C:\\Users\\Young\\Documents\\GitHub\\DAP2013\\DAP2013\\PARTICIPANTS.txt"); //laptop
+			//printFile = new File("C:\\Users\\Young\\git\\FBLADAP2013\\DAP2013\\PARTICIPANTS.txt"); //desktop
 			try {
 				fileWriter = new FileWriter(printFile,true);
 			} catch (IOException e) {
@@ -32,8 +32,8 @@ public class PrintToFile {
 			}
 		}
 		if(t.equals("WKSHP_REGISTRATIONS")){
-			//printFile = new File("C:\\Users\\Young\\Documents\\GitHub\\DAP2013\\DAP2013\\WKSHP_REGISTRATIONS.txt"); //laptop
-			printFile = new File("C:\\Users\\Young\\git\\FBLADAP2013\\DAP2013\\WKSHP_REGISTRATIONS.txt"); //desktop
+			printFile = new File("C:\\Users\\Young\\Documents\\GitHub\\DAP2013\\DAP2013\\WKSHP_REGISTRATIONS.txt"); //laptop
+			//printFile = new File("C:\\Users\\Young\\git\\FBLADAP2013\\DAP2013\\WKSHP_REGISTRATIONS.txt"); //desktop
 			try {
 				fileWriter = new FileWriter(printFile,false);
 			} catch (IOException e) {
@@ -73,12 +73,16 @@ public class PrintToFile {
 			}
 		}
 		for(int j = 0; j < registrations.size();j++){
-			try {
+			System.out.println(registrations.get(j));
+		}
+		try {
+			for(int j = 0; j < registrations.size();j++){
 				bufferedWriter.write(registrations.get(j));
-				bufferedWriter.close();
-			} catch (IOException e) {
-				e.printStackTrace();
+				bufferedWriter.newLine();
 			}
+			bufferedWriter.close();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 }
