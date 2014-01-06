@@ -16,24 +16,31 @@ public class PrintToFile {
 	private BufferedWriter bufferedWriter;
 	private FileWriter fileWriter;
 	private ArrayList<String>information;
+	private final String station;
 
 	public PrintToFile(){
+		station = "desktop";
 		information = new ArrayList<String>();
 	}
 	public void setWriter(String t){
 		if(t.equals("PARTICIPANT")){
-			printFile = new File("C:\\Users\\Young\\Documents\\GitHub\\DAP2013\\DAP2013\\PARTICIPANTS.txt"); //laptop
-			//printFile = new File("C:\\Users\\Young\\git\\FBLADAP2013\\DAP2013\\PARTICIPANTS.txt"); //desktop
+			if(station.equals("desktop")){
+				printFile = new File("C:\\Users\\Young\\git\\FBLADAP2013\\DAP2013\\PARTICIPANTS.txt"); //desktop
+			}else{
+				printFile = new File("C:\\Users\\Young\\Documents\\GitHub\\DAP2013\\DAP2013\\PARTICIPANTS.txt"); //laptop
+			}
 			try {
 				fileWriter = new FileWriter(printFile,true);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 		if(t.equals("WKSHP_REGISTRATIONS")){
-			printFile = new File("C:\\Users\\Young\\Documents\\GitHub\\DAP2013\\DAP2013\\WKSHP_REGISTRATIONS.txt"); //laptop
-			//printFile = new File("C:\\Users\\Young\\git\\FBLADAP2013\\DAP2013\\WKSHP_REGISTRATIONS.txt"); //desktop
+			if(station.equals("desktop")){
+				printFile = new File("C:\\Users\\Young\\git\\FBLADAP2013\\DAP2013\\WKSHP_REGISTRATIONS.txt"); //desktop
+			}else{
+				printFile = new File("C:\\Users\\Young\\Documents\\GitHub\\DAP2013\\DAP2013\\WKSHP_REGISTRATIONS.txt"); //laptop
+			}
 			try {
 				fileWriter = new FileWriter(printFile,false);
 			} catch (IOException e) {

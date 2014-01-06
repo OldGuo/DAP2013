@@ -1,5 +1,4 @@
 import java.awt.Dimension;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -12,7 +11,6 @@ public class test implements ActionListener {
         //Create and set up the window.
         JFrame frame = new JFrame("DAP2013");
         frame.setResizable(false);
-        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setPreferredSize(new Dimension(1000,600));
 

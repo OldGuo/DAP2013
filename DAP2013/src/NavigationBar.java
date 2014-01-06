@@ -1,11 +1,9 @@
 //
 
-import java.awt.MenuBar;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
 import javax.swing.ButtonGroup;
-import javax.swing.ImageIcon;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -17,39 +15,27 @@ import javax.swing.KeyStroke;
 public class NavigationBar extends JMenuBar{
 	//menus
 	JMenuBar menuBar;
-	JMenu menu, submenu;		
-	JMenuItem menuItem;
+	JMenu menu, submenu;
+	JMenuItem menuItem,menuItem2,menuItem3;
 	JRadioButtonMenuItem rbMenuItem;
 	JCheckBoxMenuItem cbMenuItem;
-	
+
 	public NavigationBar(){
 		//Create the menu bar.
 		menuBar = new JMenuBar();
 
 		//Build the first menu.
-		menu = new JMenu("A Menu");
-		menu.setMnemonic(KeyEvent.VK_A);
-		menu.getAccessibleContext().setAccessibleDescription(
-		        "The only menu in this program that has menu items");
+		menu = new JMenu("Reports");
 		menuBar.add(menu);
 
 		//a group of JMenuItems
-		menuItem = new JMenuItem("A text-only menu item",
-		                         KeyEvent.VK_T);
-		menuItem.setAccelerator(KeyStroke.getKeyStroke(
-		        KeyEvent.VK_1, ActionEvent.ALT_MASK));
-		menuItem.getAccessibleContext().setAccessibleDescription(
-		        "This doesn't really do anything");
+		menuItem = new JMenuItem("Conference Participants");
 		menu.add(menuItem);
+		menuItem2 = new JMenuItem("Participant List for Each Workshop");
+		menu.add(menuItem2);
+		menuItem3 = new JMenuItem("Participant Schedule");
+		menu.add(menuItem3);
 
-		menuItem = new JMenuItem("Both text and icon",
-		                         new ImageIcon("images/middle.gif"));
-		menuItem.setMnemonic(KeyEvent.VK_B);
-		menu.add(menuItem);
-
-		menuItem = new JMenuItem(new ImageIcon("images/middle.gif"));
-		menuItem.setMnemonic(KeyEvent.VK_D);
-		menu.add(menuItem);
 
 		//a group of radio button menu items
 		menu.addSeparator();
@@ -81,23 +67,14 @@ public class NavigationBar extends JMenuBar{
 		submenu.setMnemonic(KeyEvent.VK_S);
 
 		menuItem = new JMenuItem("An item in the submenu");
-		menuItem.setAccelerator(KeyStroke.getKeyStroke(
-		        KeyEvent.VK_2, ActionEvent.ALT_MASK));
+		menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_2, ActionEvent.ALT_MASK));
 		submenu.add(menuItem);
 
 		menuItem = new JMenuItem("Another item");
 		submenu.add(menuItem);
 		menu.add(submenu);
-
-		//Build second menu in the menu bar.
-		menu = new JMenu("Another Menu");
-		menu.setMnemonic(KeyEvent.VK_N);
-		menu.getAccessibleContext().setAccessibleDescription(
-		        "This menu does nothing");
-		menuBar.add(menu);
 	}
 	public JMenuBar getMenu(){
 		return menuBar;
 	}
-	
 }
