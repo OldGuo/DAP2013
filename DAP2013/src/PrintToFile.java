@@ -79,9 +79,6 @@ public class PrintToFile {
 				registrations.set(i,registrations.get(i) + ",[" + p.getID() + "]");
 			}
 		}
-		for(int j = 0; j < registrations.size();j++){
-			System.out.println(registrations.get(j));
-		}
 		try {
 			for(int j = 0; j < registrations.size();j++){
 				bufferedWriter.write(registrations.get(j));

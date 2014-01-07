@@ -20,6 +20,9 @@ public class test implements ActionListener {
 
         JPanel registrationPanel = new RegistrationPanel();
 
+        JPanel participantPanel = new ParticipantPanel();
+
+        tabbedPane.addTab("View Registered Participants",participantPanel);
 		tabbedPane.addTab("Register for Workshops",workshopPanel);
 		tabbedPane.addTab("Register Members",registrationPanel);
 

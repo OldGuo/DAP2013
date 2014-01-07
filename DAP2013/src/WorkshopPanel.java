@@ -29,6 +29,8 @@ public class WorkshopPanel extends JPanel{
 	private ArrayList<Object>workshops;
 	private final JFrame dialogFrame;
 
+	//CHECK OUT TABLE SORTERS WHEN YOU HAVE THE CHANCE
+	//http://docs.oracle.com/javase/tutorial/uiswing/components/table.html
 	public WorkshopPanel(){
 		dialogFrame = new JFrame();
 		JLabel label = new JLabel("Double Click for Descriptions, Right Click to Register");
