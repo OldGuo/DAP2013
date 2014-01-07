@@ -44,7 +44,6 @@ public class ParticipantPanel extends JPanel{
 		createTable();
 
 		this.add(label);
-		this.add(scrollPane);
 		this.add(DC);
 		this.add(LA);
 		this.add(MN);
@@ -53,6 +52,16 @@ public class ParticipantPanel extends JPanel{
 		ReadFromFile read = new ReadFromFile("PARTICIPANTS");
 		participants = read.getData();
 
+		//filter the t able based on the states of the checkboxes
+		if(DC.isSelected()){
+
+		}
+		if(MN.isSelected()){
+
+		}
+		if(LA.isSelected()){
+
+		}
 		String [] columnNames = {"Type","First","Last","Chapter"};
         model = (DefaultTableModel)table.getModel();
         model.setColumnIdentifiers(columnNames);
@@ -65,16 +74,12 @@ public class ParticipantPanel extends JPanel{
 			data[3]= p.getChapter().toString();
 			model.addRow(data);
 		}
+		this.add(scrollPane);
 	}
 	public void itemStateChanged(ItemEvent e) {
 	    Object source = e.getItemSelectable();
-
-	    if (source == DC) {
-	        //update table
-	    } else if (source == MN) {
-	        //update table
-	    } else if (source == LA) {
-	        //update table
-	    }
+	    this.remove(table);
+	    createTable();
+	    this.add(table);
 	}
 }
