@@ -1,21 +1,21 @@
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.ArrayList;
 
 import javax.swing.JCheckBox;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 
-public class ParticipantPanel extends JPanel{
+public class ParticipantPanel extends JPanel implements ItemListener{
 
 	private final JScrollPane scrollPane;
 	private final JTable table;
 	private Object[]data;
-	private final JLabel label;
 	private DefaultTableModel model;
 	private ArrayList<Object>participants;
 	private final JCheckBox DC, LA, MN;
@@ -27,59 +27,76 @@ public class ParticipantPanel extends JPanel{
 	//
 	//
 	public ParticipantPanel(){
+		setLayout(new FlowLayout());
 		DC = new JCheckBox("Show DC Participants");
-		DC.setSelected(true);
+		DC.addItemListener(this);
 
 		LA = new JCheckBox("Show LA Participants");
-		LA.setSelected(true);
+		LA.addItemListener(this);
 
 		MN = new JCheckBox("Show MN Participants");
-		MN.setSelected(true);
+		MN.addItemListener(this);
 
 		table = new MyTableModel();
-		label = new JLabel("Participant list!!11");
+
 		scrollPane = new JScrollPane(table);
 		scrollPane.setPreferredSize(new Dimension(900,450));
 
-		createTable();
+		DC.setSelected(true);
+		LA.setSelected(true);
+		MN.setSelected(true);
 
-		this.add(label);
 		this.add(DC);
 		this.add(LA);
 		this.add(MN);
+
+		createTable();
 	}
 	public void createTable(){
 		ReadFromFile read = new ReadFromFile("PARTICIPANTS");
 		participants = read.getData();
 
 		//filter the t able based on the states of the checkboxes
-		if(DC.isSelected()){
+		filterParticipants();
 
-		}
-		if(MN.isSelected()){
-
-		}
-		if(LA.isSelected()){
-
-		}
 		String [] columnNames = {"Type","First","Last","Chapter"};
         model = (DefaultTableModel)table.getModel();
         model.setColumnIdentifiers(columnNames);
+        model.setRowCount(0);
+
 		data = new Object[4];
 		for(int i = 0; i < participants.size();i++){
 			Participant p = (Participant)participants.get(i);
 			data[0]= p.getType().toString();
 			data[1]= p.getFirstName().toString();
 			data[2]= p.getLastName().toString();
-			data[3]= p.getChapter().toString();
+			data[3]= p.getCode().toString(); //change back to chapter later
 			model.addRow(data);
 		}
 		this.add(scrollPane);
 	}
+	public void filterParticipants(){
+		for(int i = 0; i < participants.size();i++)
+		{
+			Participant p = (Participant)participants.get(i);
+
+			if(p.getCode().equals("DC") && !DC.isSelected()){
+				participants.remove(i);
+				i--;
+			}
+			if(p.getCode().equals("MN") && !MN.isSelected()){
+				participants.remove(i);
+				i--;
+			}
+			if(p.getCode().equals("LA") && !LA.isSelected()){
+				participants.remove(i);
+				i--;
+			}
+		}
+	}
+	@Override
 	public void itemStateChanged(ItemEvent e) {
-	    Object source = e.getItemSelectable();
-	    this.remove(table);
-	    createTable();
-	    this.add(table);
+		createTable();
+		table.repaint();
 	}
 }
