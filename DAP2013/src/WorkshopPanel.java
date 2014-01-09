@@ -48,7 +48,7 @@ public class WorkshopPanel extends JPanel{
 	public void createTable(){
 		//Creates a table from an arraylist populated from the file WORKSHOPS.txt
 		String [] columnNames = {"Location","Title","Date","Time"};
-		table = new MyTableModel();
+		table = new CustomTable();
 		table.getTableHeader().setReorderingAllowed(false);
         model = (DefaultTableModel) table.getModel();
         model.setColumnIdentifiers(columnNames);

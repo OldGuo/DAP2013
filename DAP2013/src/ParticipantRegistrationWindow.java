@@ -25,7 +25,7 @@ public class ParticipantRegistrationWindow extends JDialog implements ActionList
 		super.setTitle(w.getTitle());
 		this.setLayout(new FlowLayout());
 		workshop = w;
-		table = new MyTableModel();
+		table = new CustomTable();
 		table.getTableHeader().setReorderingAllowed(false);
 		saveButton = new JButton("Register Selected Participants");
 		saveButton.addActionListener(this);

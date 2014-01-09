@@ -1,6 +1,6 @@
 import javax.swing.JTable;
 
-public class MyTableModel extends JTable{
+public class CustomTable extends JTable{
 	@Override
 	public boolean isCellEditable(int row, int col) {
         //Note that the data/cell address is constant,
@@ -20,5 +20,5 @@ public class MyTableModel extends JTable{
 	        	break;
 		}
 		return clazz;
-	}	
+	}
 }
