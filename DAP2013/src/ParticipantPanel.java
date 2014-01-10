@@ -55,6 +55,7 @@ public class ParticipantPanel extends JPanel implements ItemListener{
 
 		//filter the t able based on the states of the checkboxes
 		filterParticipants();
+		
 		Object [][] data = new Object[participants.size()][4];
 		String [] columnNames = {"Type","First","Last","Chapter"};
 

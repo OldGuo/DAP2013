@@ -19,27 +19,28 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+import javax.swing.table.TableRowSorter;
 
 
 public class WorkshopPanel extends JPanel{
-	private final JScrollPane scrollPane;
+	private JScrollPane scrollPane;
 	private Object[]data;
 	private DefaultTableModel model;
 	private JTable table;
 	private ArrayList<Object>workshops;
 	private final JFrame dialogFrame;
-
+	private TableRowSorter<MyTableModel> sorter;
+	
 	//CHECK OUT TABLE SORTERS WHEN YOU HAVE THE CHANCE
 	//http://docs.oracle.com/javase/tutorial/uiswing/components/table.html
+	//registering is wrong since when you sort the table, it doesn't change the order of the arraylist
+	
 	public WorkshopPanel(){
 		dialogFrame = new JFrame();
 		JLabel label = new JLabel("Double Click for Descriptions, Right Click to Register");
 		loadData();
 		createTable();
-        scrollPane = new JScrollPane(table);
-        scrollPane.setPreferredSize(new Dimension(900,450));
         this.add(label);
-        this.add(scrollPane);
 	}
 	public void loadData(){
 		ReadFromFile read = new ReadFromFile("WORKSHOPS");
@@ -48,19 +49,26 @@ public class WorkshopPanel extends JPanel{
 	public void createTable(){
 		//Creates a table from an arraylist populated from the file WORKSHOPS.txt
 		String [] columnNames = {"Location","Title","Date","Time"};
-		table = new CustomTable();
-		table.getTableHeader().setReorderingAllowed(false);
-        model = (DefaultTableModel) table.getModel();
-        model.setColumnIdentifiers(columnNames);
-		data = new String[4];
+		
+        Object[][]data = new Object[workshops.size()][4];
 		for(int i = 0; i < workshops.size();i++){
 			Workshop w = (Workshop) workshops.get(i);
-			data[0]= w.getCode().toString();
-			data[1]= w.getTitle().toString();
-			data[2]= w.getDate().toString();
-			data[3]= w.getTime().toString();
-			model.addRow(data);
+			for(int j = 0; j < 4; j++){
+				data[i][0]= w.getCode().toString();
+				data[i][1]= w.getTitle().toString();
+				data[i][2]= w.getDate().toString();
+				data[i][3]= w.getTime().toString();
+			}
 		}
+		MyTableModel model = new MyTableModel(data,columnNames);
+        sorter = new TableRowSorter<MyTableModel>(model);
+        table = new JTable(model);
+        table.setRowSorter(sorter);
+        table.getTableHeader().setReorderingAllowed(false);
+        scrollPane = new JScrollPane(table);
+		scrollPane.setPreferredSize(new Dimension(900,450));
+        this.add(scrollPane);
+        
 		TableColumnModel t = table.getColumnModel();
 		t.getColumn(0).setPreferredWidth(75);
 		t.getColumn(1).setPreferredWidth(1000);

@@ -11,31 +11,27 @@ import javax.swing.JDialog;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 public class ParticipantRegistrationWindow extends JDialog implements ActionListener{
 	private final Workshop workshop;
-	private final JTable table;
-	private Object[]data;
 	private ArrayList<Object>participants;
 	private DefaultTableModel model;
-	private final JScrollPane scrollPane;
+	private JScrollPane scrollPane;
 	private final JButton saveButton;
+	private TableRowSorter<MyTableModel> sorter;
+	private JTable table;
 
 	public ParticipantRegistrationWindow(Workshop w){
 		super.setTitle(w.getTitle());
 		this.setLayout(new FlowLayout());
 		workshop = w;
-		table = new CustomTable();
-		table.getTableHeader().setReorderingAllowed(false);
 		saveButton = new JButton("Register Selected Participants");
 		saveButton.addActionListener(this);
 		saveButton.setActionCommand("save");
 		this.setSize(1000,450);
 		loadData();
 		createTable();
-		scrollPane = new JScrollPane(table);
-		scrollPane.setPreferredSize(new Dimension(900,350));
-	    this.add(scrollPane);
 	    this.add(saveButton);
 	}
 	public void loadData(){
@@ -44,18 +40,26 @@ public class ParticipantRegistrationWindow extends JDialog implements ActionList
 	}
 	public void createTable(){
 		String [] columnNames = {"Type","First","Last","Chapter","Register"};
-        model = (DefaultTableModel)table.getModel();
-        model.setColumnIdentifiers(columnNames);
-		data = new Object[5];
+        
+        Object [][] data = new Object[participants.size()][5];
 		for(int i = 0; i < participants.size();i++){
 			Participant p = (Participant)participants.get(i);
-			data[0]= p.getType().toString();
-			data[1]= p.getFirstName().toString();
-			data[2]= p.getLastName().toString();
-			data[3]= p.getChapter().toString();
-			data[4] = new Boolean(false);
-			model.addRow(data);
+			for(int j = 0; j < 5; j++){
+				data[i][0]= p.getType().toString();
+				data[i][1]= p.getFirstName().toString();
+				data[i][2]= p.getLastName().toString();
+				data[i][3]= p.getChapter().toString();
+				data[i][4] = new Boolean(false);
+			}
 		}
+		MyTableModel model = new MyTableModel(data,columnNames);
+        sorter = new TableRowSorter<MyTableModel>(model);
+        table = new JTable(model);
+        table.setRowSorter(sorter);
+        table.getTableHeader().setReorderingAllowed(false);
+        scrollPane = new JScrollPane(table);
+		scrollPane.setPreferredSize(new Dimension(900,450));
+        this.add(scrollPane);
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
