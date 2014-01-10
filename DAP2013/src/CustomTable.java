@@ -5,20 +5,11 @@ public class CustomTable extends JTable{
 	public boolean isCellEditable(int row, int col) {
         //Note that the data/cell address is constant,
         //no matter where the cell appears onscreen.
+		System.out.println("asdfasdf");
         if (col == 4) {
             return true;
         } else {
             return false;
         }
     }
-	@Override
-	public Class<?> getColumnClass(int columnIndex){
-		Class clazz = String.class;
-		switch (columnIndex) {
-	        case 4:
-	        	clazz = Boolean.class;
-	        	break;
-		}
-		return clazz;
-	}
 }
