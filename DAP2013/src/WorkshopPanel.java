@@ -11,19 +11,20 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.JTextArea;
 import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableRowSorter;
 
 
 public class WorkshopPanel extends JPanel{
 	private JScrollPane scrollPane;
-	private Object[]data;
-	private DefaultTableModel model;
+	private Object[][]data;
+	private MyTableModel model;
 	private JTable table;
 	private ArrayList<Object>workshops;
 	private final JFrame dialogFrame;
@@ -47,8 +48,8 @@ public class WorkshopPanel extends JPanel{
 	public void createTable(){
 		//Creates a table from an arraylist populated from the file WORKSHOPS.txt
 		String [] columnNames = {"Location","Title","Date","Time"};
+		data = new Object[workshops.size()][4];
 		
-        Object[][]data = new Object[workshops.size()][4];
 		for(int i = 0; i < workshops.size();i++){
 			Workshop w = (Workshop) workshops.get(i);
 			for(int j = 0; j < 4; j++){
@@ -58,7 +59,7 @@ public class WorkshopPanel extends JPanel{
 				data[i][3]= w.getTime().toString();
 			}
 		}
-		MyTableModel model = new MyTableModel(data,columnNames);
+		model = new MyTableModel(data,columnNames);
         sorter = new TableRowSorter<MyTableModel>(model);
         table = new JTable(model);
         table.setRowSorter(sorter);
@@ -79,14 +80,14 @@ public class WorkshopPanel extends JPanel{
 	public void createDialog(MouseEvent e){
 		//opens the window showing the description
 		Point p = e.getPoint();
-		System.out.println(model.getValueAt(table.rowAtPoint(p), 0));
-		/*String code = (String) model.getValueAt(table.rowAtPoint(p), 0);
+		
+		String code = (String) model.getValueAt(table.rowAtPoint(p), 0);
 		String title = (String) model.getValueAt(table.rowAtPoint(p), 1);;
 		String date = (String) model.getValueAt(table.rowAtPoint(p), 2);;
 		String time = (String) model.getValueAt(table.rowAtPoint(p), 3);;
-		Workshop w = ReadFromFile.getWorkshop(code, title, date, time);*/
+		Workshop w = ReadFromFile.getWorkshop(code, title, date, time);
 		
-		/*String name = w.getTitle();
+		String name = w.getTitle();
 		String descrip = w.getDescrip();
 		
 		JTextArea t = new JTextArea(descrip);
@@ -96,7 +97,7 @@ public class WorkshopPanel extends JPanel{
 		JOptionPane optionPane = new JOptionPane(t);
 		JDialog dialog = optionPane.createDialog(dialogFrame,name);
 		dialog.setSize(new Dimension(500,250));
-		dialog.setVisible(true);*/
+		dialog.setVisible(true);
 	}
 	public void createPopup(MouseEvent e){
 		//register participants for the workshop using right click

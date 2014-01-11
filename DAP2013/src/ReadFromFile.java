@@ -73,9 +73,9 @@ public class ReadFromFile {
 		return registrations;
 	}
 	public static Workshop getWorkshop(String code, String title, String date, String time){
-		selectReader("WORKSHOPS");
+		ReadFromFile read = new ReadFromFile("WORKSHOPS");
 		Workshop w = null;
-		ArrayList<Object>data = getData();
+		ArrayList<Object>data = read.getData();
 		for(int i = 0; i < data.size();i++){
 			Workshop temp = (Workshop)data.get(i);
 			if(temp.getCode().equals(code) && temp.getTitle().equals(title) && temp.getDate().equals(date) && temp.getTime().equals(time)){
