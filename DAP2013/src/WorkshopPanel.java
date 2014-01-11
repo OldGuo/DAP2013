@@ -11,12 +11,10 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextArea;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableRowSorter;
@@ -81,9 +79,16 @@ public class WorkshopPanel extends JPanel{
 	public void createDialog(MouseEvent e){
 		//opens the window showing the description
 		Point p = e.getPoint();
+		System.out.println(model.getValueAt(table.rowAtPoint(p), 0));
+		/*String code = (String) model.getValueAt(table.rowAtPoint(p), 0);
+		String title = (String) model.getValueAt(table.rowAtPoint(p), 1);;
+		String date = (String) model.getValueAt(table.rowAtPoint(p), 2);;
+		String time = (String) model.getValueAt(table.rowAtPoint(p), 3);;
+		Workshop w = ReadFromFile.getWorkshop(code, title, date, time);*/
 		
-		String name = ((Workshop)workshops.get(table.rowAtPoint(p))).getTitle();
-		String descrip = ((Workshop)workshops.get(table.rowAtPoint(p))).getDescrip();
+		/*String name = w.getTitle();
+		String descrip = w.getDescrip();
+		
 		JTextArea t = new JTextArea(descrip);
 		t.setLineWrap(true);
 		t.setWrapStyleWord(true);
@@ -91,7 +96,7 @@ public class WorkshopPanel extends JPanel{
 		JOptionPane optionPane = new JOptionPane(t);
 		JDialog dialog = optionPane.createDialog(dialogFrame,name);
 		dialog.setSize(new Dimension(500,250));
-		dialog.setVisible(true);
+		dialog.setVisible(true);*/
 	}
 	public void createPopup(MouseEvent e){
 		//register participants for the workshop using right click

@@ -72,13 +72,13 @@ public class ReadFromFile {
 		}
 		return registrations;
 	}
-	public static Workshop getWorkshopByID(int id){
+	public static Workshop getWorkshop(String code, String title, String date, String time){
 		selectReader("WORKSHOPS");
 		Workshop w = null;
 		ArrayList<Object>data = getData();
 		for(int i = 0; i < data.size();i++){
 			Workshop temp = (Workshop)data.get(i);
-			if(temp.getID().equals(id)){
+			if(temp.getCode().equals(code) && temp.getTitle().equals(title) && temp.getDate().equals(date) && temp.getTime().equals(time)){
 				w = temp;
 			}
 		}
