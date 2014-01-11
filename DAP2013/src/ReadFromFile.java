@@ -72,4 +72,16 @@ public class ReadFromFile {
 		}
 		return registrations;
 	}
+	public static Workshop getWorkshopByID(int id){
+		selectReader("WORKSHOPS");
+		Workshop w = null;
+		ArrayList<Object>data = getData();
+		for(int i = 0; i < data.size();i++){
+			Workshop temp = (Workshop)data.get(i);
+			if(temp.getID().equals(id)){
+				w = temp;
+			}
+		}
+		return w;
+	}
 }

@@ -81,6 +81,7 @@ public class WorkshopPanel extends JPanel{
 	public void createDialog(MouseEvent e){
 		//opens the window showing the description
 		Point p = e.getPoint();
+		
 		String name = ((Workshop)workshops.get(table.rowAtPoint(p))).getTitle();
 		String descrip = ((Workshop)workshops.get(table.rowAtPoint(p))).getDescrip();
 		JTextArea t = new JTextArea(descrip);
