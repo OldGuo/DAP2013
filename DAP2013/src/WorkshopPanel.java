@@ -30,8 +30,6 @@ public class WorkshopPanel extends JPanel{
 	private final JFrame dialogFrame;
 	private TableRowSorter<MyTableModel> sorter;
 	
-	//CHECK OUT TABLE SORTERS WHEN YOU HAVE THE CHANCE
-	//http://docs.oracle.com/javase/tutorial/uiswing/components/table.html
 	//registering is wrong since when you sort the table, it doesn't change the order of the arraylist
 	
 	public WorkshopPanel(){
@@ -62,7 +60,8 @@ public class WorkshopPanel extends JPanel{
 		model = new MyTableModel(data,columnNames);
         sorter = new TableRowSorter<MyTableModel>(model);
         table = new JTable(model);
-        table.setRowSorter(sorter);
+        table.setAutoCreateRowSorter(true);
+        //table.setRowSorter(sorter);
         table.getTableHeader().setReorderingAllowed(false);
         scrollPane = new JScrollPane(table);
 		scrollPane.setPreferredSize(new Dimension(900,450));
@@ -79,12 +78,19 @@ public class WorkshopPanel extends JPanel{
 	}
 	public void createDialog(MouseEvent e){
 		//opens the window showing the description
+		
+		/*for(int i = 0; i < data.length;i++){
+			for(int j = 0; j < data[i].length; j++){
+				System.out.print(data[i][j] + " ");
+			}
+			System.out.println();
+		}*/
 		Point p = e.getPoint();
 		
-		String code = (String) model.getValueAt(table.rowAtPoint(p), 0);
-		String title = (String) model.getValueAt(table.rowAtPoint(p), 1);;
-		String date = (String) model.getValueAt(table.rowAtPoint(p), 2);;
-		String time = (String) model.getValueAt(table.rowAtPoint(p), 3);;
+		String code = (String) table.getValueAt(table.rowAtPoint(p), 0);
+		String title = (String) table.getValueAt(table.rowAtPoint(p), 1);;
+		String date = (String) table.getValueAt(table.rowAtPoint(p), 2);;
+		String time = (String) table.getValueAt(table.rowAtPoint(p), 3);;
 		Workshop w = ReadFromFile.getWorkshop(code, title, date, time);
 		
 		String name = w.getTitle();

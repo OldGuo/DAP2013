@@ -19,7 +19,7 @@ public class PrintToFile {
 	private final String station;
 
 	public PrintToFile(){
-		station = "desktop";
+		station = "laptop";
 		information = new ArrayList<String>();
 	}
 	public void setWriter(String t){
