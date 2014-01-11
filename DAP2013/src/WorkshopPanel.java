@@ -60,8 +60,7 @@ public class WorkshopPanel extends JPanel{
 		model = new MyTableModel(data,columnNames);
         sorter = new TableRowSorter<MyTableModel>(model);
         table = new JTable(model);
-        table.setAutoCreateRowSorter(true);
-        //table.setRowSorter(sorter);
+        table.setRowSorter(sorter);
         table.getTableHeader().setReorderingAllowed(false);
         scrollPane = new JScrollPane(table);
 		scrollPane.setPreferredSize(new Dimension(900,450));
@@ -73,18 +72,11 @@ public class WorkshopPanel extends JPanel{
 		t.getColumn(2).setPreferredWidth(75);
 		t.getColumn(3).setPreferredWidth(75);
 
-		MouseListener MyMouseListener = new MyMouseListener();
-		table.addMouseListener(MyMouseListener);
+			MouseListener MyMouseListener = new MyMouseListener();
+			table.addMouseListener(MyMouseListener);
 	}
 	public void createDialog(MouseEvent e){
 		//opens the window showing the description
-		
-		/*for(int i = 0; i < data.length;i++){
-			for(int j = 0; j < data[i].length; j++){
-				System.out.print(data[i][j] + " ");
-			}
-			System.out.println();
-		}*/
 		Point p = e.getPoint();
 		
 		String code = (String) table.getValueAt(table.rowAtPoint(p), 0);
@@ -108,8 +100,13 @@ public class WorkshopPanel extends JPanel{
 	public void createPopup(MouseEvent e){
 		//register participants for the workshop using right click
 		Point p = e.getPoint();
-		Workshop workshop = (Workshop)workshops.get(table.rowAtPoint(p));
-        if (e.isPopupTrigger() && e.getComponent() instanceof JTable ) {
+		String code = (String) table.getValueAt(table.rowAtPoint(p), 0);
+		String title = (String) table.getValueAt(table.rowAtPoint(p), 1);;
+		String date = (String) table.getValueAt(table.rowAtPoint(p), 2);;
+		String time = (String) table.getValueAt(table.rowAtPoint(p), 3);;
+		Workshop workshop = ReadFromFile.getWorkshop(code, title, date, time);
+        
+		if (e.isPopupTrigger() && e.getComponent() instanceof JTable ) {
             JPopupMenu popup = new JPopupMenu();
             popup = new JPopupMenu();
             JMenuItem menuItem = new JMenuItem("Register Participants");

@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -49,7 +50,10 @@ public class ParticipantRegistrationWindow extends JDialog implements ActionList
 				data[i][1]= p.getFirstName().toString();
 				data[i][2]= p.getLastName().toString();
 				data[i][3]= p.getChapter().toString();
-				data[i][4] = new Boolean(false);
+				if(i%2 == 0)
+					data[i][4] = new Boolean(true);
+				else
+					data[i][4] = new Boolean(false);
 			}
 		}
 		MyTableModel model = new MyTableModel(data,columnNames);
@@ -58,7 +62,7 @@ public class ParticipantRegistrationWindow extends JDialog implements ActionList
         table.setRowSorter(sorter);
         table.getTableHeader().setReorderingAllowed(false);
         scrollPane = new JScrollPane(table);
-		scrollPane.setPreferredSize(new Dimension(900,450));
+		scrollPane.setPreferredSize(new Dimension(900,300));
         this.add(scrollPane);
 	}
 	@Override
@@ -70,12 +74,16 @@ public class ParticipantRegistrationWindow extends JDialog implements ActionList
 	}
 	public void Register(){
 		for(int i = 0; i < table.getRowCount();i++){
-			for(int j = 0; j < table.getColumnCount();j++){
-				if(model.getValueAt(i, j).equals(Boolean.TRUE)){
-					Participant participant = (Participant)participants.get(i);
-					PrintToFile print = new PrintToFile();
-					print.registerForWorkshop(workshop,participant);
-				}
+			if(table.getValueAt(i, 4).equals(Boolean.TRUE)){
+				//get participant based on the rest of their information
+				String type = (String) table.getValueAt(i, 0);
+				String first = (String) table.getValueAt(i, 1);
+				String last = (String) table.getValueAt(i, 2);
+				String chapter = (String) table.getValueAt(i, 3);
+				
+				Participant participant = ReadFromFile.getParticipant(type,first,last,chapter);
+				PrintToFile print = new PrintToFile();
+				print.registerForWorkshop(workshop,participant);
 			}
 		}
 	}

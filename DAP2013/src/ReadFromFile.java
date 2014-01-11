@@ -74,8 +74,8 @@ public class ReadFromFile {
 	}
 	public static Workshop getWorkshop(String code, String title, String date, String time){
 		ReadFromFile read = new ReadFromFile("WORKSHOPS");
-		Workshop w = null;
 		ArrayList<Object>data = read.getData();
+		Workshop w = null;
 		for(int i = 0; i < data.size();i++){
 			Workshop temp = (Workshop)data.get(i);
 			if(temp.getCode().equals(code) && temp.getTitle().equals(title) && temp.getDate().equals(date) && temp.getTime().equals(time)){
@@ -83,5 +83,17 @@ public class ReadFromFile {
 			}
 		}
 		return w;
+	}
+	public static Participant getParticipant(String type, String first, String last, String chapter){
+		ReadFromFile read = new ReadFromFile("PARTICIPANTS");
+		ArrayList<Object>data = read.getData();
+		Participant p = null;
+		for(int i = 0; i < data.size();i++){
+			Participant temp = (Participant)data.get(i);
+			if(temp.getType().equals(type) && temp.getFirstName().equals(first) && temp.getLastName().equals(last) && temp.getChapter().equals(chapter)){
+				p = temp;
+			}
+		}
+		return p;
 	}
 }
