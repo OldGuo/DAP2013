@@ -16,10 +16,10 @@ public class ParticipantPanel extends JPanel implements ItemListener{
 
 	private JScrollPane scrollPane;
 	private JTable table;
-	private DefaultTableModel model;
 	private ArrayList<Object>participants;
 	private final JCheckBox DC, LA, MN;
 	private TableRowSorter<MyTableModel> sorter;
+	private MyTableModel model;
 
 	// Sort by:
 	// Participant type, last name
@@ -29,24 +29,19 @@ public class ParticipantPanel extends JPanel implements ItemListener{
 	//
 	public ParticipantPanel(){
 		setLayout(new FlowLayout());
-		DC = new JCheckBox("Show DC Participants");
+		DC = new JCheckBox("Show DC Participants",true);
 		DC.addItemListener(this);
 
-		LA = new JCheckBox("Show LA Participants");
+		LA = new JCheckBox("Show LA Participants",true);
 		LA.addItemListener(this);
 
-		MN = new JCheckBox("Show MN Participants");
+		MN = new JCheckBox("Show MN Participants",true);
 		MN.addItemListener(this);
-
-		//table = new CustomTable();
-
-		DC.setSelected(true);
-		LA.setSelected(true);
-		MN.setSelected(true);
-
+		
 		this.add(DC);
 		this.add(LA);
 		this.add(MN);
+	
 		createTable();
 	}
 	public void createTable(){
@@ -64,15 +59,23 @@ public class ParticipantPanel extends JPanel implements ItemListener{
 			data[i][0] = p.getType().toString();
 			data[i][1] = p.getFirstName().toString();
 			data[i][2] = p.getLastName().toString();
-			data[i][3] = p.getCode().toString(); //change back to chapter later
+			data[i][3] = p.getChapter().toString(); //change back to chapter later
 		}
-		MyTableModel model = new MyTableModel(data,columnNames);
+		model = new MyTableModel(data,columnNames);
         sorter = new TableRowSorter<MyTableModel>(model);
         table = new JTable(model);
-        table.setRowSorter(sorter);
-        table.getTableHeader().setReorderingAllowed(false);
-        scrollPane = new JScrollPane(table);
+        
+		scrollPane = new JScrollPane(table);
 		scrollPane.setPreferredSize(new Dimension(900,450));
+
+        table.setAutoCreateRowSorter(true);
+        table.getTableHeader().setReorderingAllowed(false);
+        table.setRowSorter(sorter);
+        
+
+        this.add(scrollPane);
+        this.add(scrollPane);
+        this.add(scrollPane);
         this.add(scrollPane);
 	}
 	public void filterParticipants(){
@@ -97,5 +100,6 @@ public class ParticipantPanel extends JPanel implements ItemListener{
 	@Override
 	public void itemStateChanged(ItemEvent e) {
 		//createTable();
+		//table.repaint();
 	}
 }

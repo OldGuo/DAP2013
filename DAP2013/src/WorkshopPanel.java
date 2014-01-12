@@ -72,8 +72,8 @@ public class WorkshopPanel extends JPanel{
 		t.getColumn(2).setPreferredWidth(75);
 		t.getColumn(3).setPreferredWidth(75);
 
-			MouseListener MyMouseListener = new MyMouseListener();
-			table.addMouseListener(MyMouseListener);
+		MouseListener MyMouseListener = new MyMouseListener();
+		table.addMouseListener(MyMouseListener);
 	}
 	public void createDialog(MouseEvent e){
 		//opens the window showing the description
