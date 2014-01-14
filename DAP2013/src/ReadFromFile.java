@@ -7,7 +7,7 @@ public class ReadFromFile {
 	private static String readType;
 	private static String station;
 	public ReadFromFile(String s){
-		station = "laptop";
+		station = "desktop";
 		readType = s;
 		selectReader(readType);
 	}
