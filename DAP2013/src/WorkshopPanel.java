@@ -18,7 +18,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.table.TableColumnModel;
-import javax.swing.table.TableRowSorter;
 
 
 public class WorkshopPanel extends JPanel{
@@ -28,9 +27,6 @@ public class WorkshopPanel extends JPanel{
 	private JTable table;
 	private ArrayList<Object>workshops;
 	private final JFrame dialogFrame;
-	private TableRowSorter<MyTableModel> sorter;
-	
-	//registering is wrong since when you sort the table, it doesn't change the order of the arraylist
 	
 	public WorkshopPanel(){
 		dialogFrame = new JFrame();
@@ -58,10 +54,12 @@ public class WorkshopPanel extends JPanel{
 			}
 		}
 		model = new MyTableModel(data,columnNames);
-        sorter = new TableRowSorter<MyTableModel>(model);
-        table = new JTable(model);
-        table.setRowSorter(sorter);
+        
+		table = new JTable(model);
+        table.setAutoCreateRowSorter(true);
+        table.getTableHeader().setResizingAllowed(false);
         table.getTableHeader().setReorderingAllowed(false);
+        
         scrollPane = new JScrollPane(table);
 		scrollPane.setPreferredSize(new Dimension(900,450));
         this.add(scrollPane);

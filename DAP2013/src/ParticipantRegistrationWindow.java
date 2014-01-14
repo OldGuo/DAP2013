@@ -11,7 +11,6 @@ import javax.swing.JDialog;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableRowSorter;
 
 public class ParticipantRegistrationWindow extends JDialog implements ActionListener{
 	private final Workshop workshop;
@@ -19,7 +18,6 @@ public class ParticipantRegistrationWindow extends JDialog implements ActionList
 	private DefaultTableModel model;
 	private JScrollPane scrollPane;
 	private final JButton saveButton;
-	private TableRowSorter<MyTableModel> sorter;
 	private JTable table;
 
 	public ParticipantRegistrationWindow(Workshop w){
@@ -53,10 +51,12 @@ public class ParticipantRegistrationWindow extends JDialog implements ActionList
 			}
 		}
 		MyTableModel model = new MyTableModel(data,columnNames);
-        sorter = new TableRowSorter<MyTableModel>(model);
+		
         table = new JTable(model);
-        table.setRowSorter(sorter);
         table.getTableHeader().setReorderingAllowed(false);
+        table.setAutoCreateRowSorter(true);
+        table.getTableHeader().setReorderingAllowed(false);
+        
         scrollPane = new JScrollPane(table);
 		scrollPane.setPreferredSize(new Dimension(900,300));
         this.add(scrollPane);

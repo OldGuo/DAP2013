@@ -8,12 +8,6 @@ public class MyTableModel extends AbstractTableModel {
 			data = d;
 			columnNames = c;
 		}
-		public void setData(Object [][] d){
-			data = d;
-		}
-		public void setColumnNames(String [] c){
-			columnNames = c;
-		}
         @Override
 		public int getColumnCount() {
             return columnNames.length;
