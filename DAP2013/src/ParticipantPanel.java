@@ -8,7 +8,6 @@ import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
 
@@ -20,6 +19,8 @@ public class ParticipantPanel extends JPanel implements ItemListener{
 	private final JCheckBox DC, LA, MN;
 	private TableRowSorter<MyTableModel> sorter;
 	private MyTableModel model;
+	private Object [][] data;
+	private String [] columnNames;
 
 	// Sort by:
 	// Participant type, last name
@@ -41,17 +42,18 @@ public class ParticipantPanel extends JPanel implements ItemListener{
 		this.add(DC);
 		this.add(LA);
 		this.add(MN);
-	
+		
+		loadData();
 		createTable();
 	}
-	public void createTable(){
+	public void loadData(){
 		ReadFromFile read = new ReadFromFile("PARTICIPANTS");
 		participants = read.getData();
 
 		//filter the t able based on the states of the checkboxes
 		filterParticipants();
 		
-		Object [][] data = new Object[participants.size()][4];
+		data = new Object[participants.size()][4];
 		String [] columnNames = {"Type","First","Last","Chapter"};
 
 		for(int i = 0; i < participants.size();i++){
@@ -61,7 +63,17 @@ public class ParticipantPanel extends JPanel implements ItemListener{
 			data[i][2] = p.getLastName().toString();
 			data[i][3] = p.getChapter().toString(); //change back to chapter later
 		}
+		for(int a = 0; a < data.length; a++){
+			for(int j = 0; j < data[a].length;j++){
+				System.out.print(data[a][j] + ",");
+			}
+			System.out.println();
+		}
+		System.out.println("-----------------------------------------------------------");
+		//THEREFORE THE DATA IS CORRECT, THE TABLE JUST ISN'T UPDATING
 		model = new MyTableModel(data,columnNames);
+	}
+	public void createTable(){
         sorter = new TableRowSorter<MyTableModel>(model);
         table = new JTable(model);
         
@@ -72,10 +84,6 @@ public class ParticipantPanel extends JPanel implements ItemListener{
         table.getTableHeader().setReorderingAllowed(false);
         table.setRowSorter(sorter);
         
-
-        this.add(scrollPane);
-        this.add(scrollPane);
-        this.add(scrollPane);
         this.add(scrollPane);
 	}
 	public void filterParticipants(){
@@ -99,7 +107,7 @@ public class ParticipantPanel extends JPanel implements ItemListener{
 	}
 	@Override
 	public void itemStateChanged(ItemEvent e) {
-		//createTable();
-		//table.repaint();
+		loadData();
+		table.setModel(model);
 	}
 }

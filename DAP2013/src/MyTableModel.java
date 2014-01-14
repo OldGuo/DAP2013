@@ -1,11 +1,17 @@
 import javax.swing.table.AbstractTableModel;
 
 public class MyTableModel extends AbstractTableModel {
-		private final Object[][]data;
-		private final String [] columnNames;
+		private Object[][]data;
+		private String [] columnNames;
 
 		public MyTableModel(Object [][] d, String [] c){
 			data = d;
+			columnNames = c;
+		}
+		public void setData(Object [][] d){
+			data = d;
+		}
+		public void setColumnNames(String [] c){
 			columnNames = c;
 		}
         @Override
