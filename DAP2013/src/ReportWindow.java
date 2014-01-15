@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
@@ -27,11 +29,14 @@ public class ReportWindow extends JDialog{
 			JPanel workshops = new JPanel();
 			
 			tabbedPane.add(workshops,"Workshop");
-			
 		}else if(reportType.equals("Participant Schedule")){
-			for(int i = 0; i < 40; i++){
+			ReadFromFile read = new ReadFromFile("PARTICIPANTS");
+			ArrayList<Object>participants = read.getData();
+			
+			for(int i = 0; i < participants.size(); i++){
+				Participant p = (Participant)participants.get(i);
 				JPanel temp = new JPanel();
-				tabbedPane.add(temp,"Space");
+				tabbedPane.add(temp,p.getFirstName() + " " + p.getLastName());
 			}
 		}
 		this.add(tabbedPane);
