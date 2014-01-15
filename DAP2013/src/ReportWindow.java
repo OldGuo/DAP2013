@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
@@ -36,6 +37,9 @@ public class ReportWindow extends JDialog{
 			for(int i = 0; i < participants.size(); i++){
 				Participant p = (Participant)participants.get(i);
 				JPanel temp = new JPanel();
+				temp.add(new JLabel(p.getID()));
+				temp.add(new JLabel(p.getType()));
+				temp.add(new JLabel(p.getCode()));
 				tabbedPane.add(temp,p.getFirstName() + " " + p.getLastName());
 			}
 		}
