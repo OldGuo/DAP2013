@@ -75,6 +75,8 @@ public class WorkshopPanel extends JPanel{
 	}
 	public void createDialog(MouseEvent e){
 		//opens the window showing the description
+		//DIALOG
+		
 		Point p = e.getPoint();
 		
 		String code = (String) table.getValueAt(table.rowAtPoint(p), 0);
@@ -97,6 +99,8 @@ public class WorkshopPanel extends JPanel{
 	}
 	public void createPopup(MouseEvent e){
 		//register participants for the workshop using right click
+		//creates the little thing that asks for to register
+		
 		Point p = e.getPoint();
 		String code = (String) table.getValueAt(table.rowAtPoint(p), 0);
 		String title = (String) table.getValueAt(table.rowAtPoint(p), 1);;
@@ -107,7 +111,7 @@ public class WorkshopPanel extends JPanel{
 		if (e.isPopupTrigger() && e.getComponent() instanceof JTable ) {
             JPopupMenu popup = new JPopupMenu();
             popup = new JPopupMenu();
-            JMenuItem menuItem = new JMenuItem("Register Participants");
+            JMenuItem menuItem = new JMenuItem("Register Participants: " + title);
             menuItem.addActionListener(new MenuActionListener(workshop));
             popup.add(menuItem);
             popup.show(e.getComponent(), e.getX(), e.getY());
@@ -126,6 +130,7 @@ public class WorkshopPanel extends JPanel{
 	    }
 	}
 	public class MenuActionListener implements ActionListener{
+		//opens the participation registration window 
 		Workshop workshop;
 		public MenuActionListener(Workshop w) {
 			workshop = w;
