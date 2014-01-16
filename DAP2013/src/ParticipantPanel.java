@@ -16,6 +16,7 @@ public class ParticipantPanel extends JPanel implements ItemListener{
 	private MyTableModel model;
 	private Object [][] data;
 	private String [] columnNames;
+	private String conferenceCode;
 
 	// Sort by:
 	// Participant type, last name
@@ -23,7 +24,9 @@ public class ParticipantPanel extends JPanel implements ItemListener{
 	// each chapter should begin on a new page
 	// http://docs.oracle.com/javase/tutorial/displayCode.html?code=http://docs.oracle.com/javase/tutorial/uiswing/examples/components/TableFilterDemoProject/src/components/TableFilterDemo.java
 	//
-	public ParticipantPanel(){
+	public ParticipantPanel(String code){
+		conferenceCode = code;
+		
 		table = new JTable();
         table.getTableHeader().setResizingAllowed(false);
         table.setAutoCreateRowSorter(true);
@@ -31,7 +34,7 @@ public class ParticipantPanel extends JPanel implements ItemListener{
         table.getTableHeader().setReorderingAllowed(false);
         
 		scrollPane = new JScrollPane(table);
-		scrollPane.setPreferredSize(new Dimension(900,450));
+		scrollPane.setPreferredSize(new Dimension(900,325));
 		
 		createTable();
 		
@@ -41,6 +44,8 @@ public class ParticipantPanel extends JPanel implements ItemListener{
 		ReadFromFile read = new ReadFromFile("PARTICIPANTS");
 		participants = read.getData();
 
+		filterParticipants();
+		
 		data = new Object[participants.size()][5];
 		String [] columnNames = {"Conference","Type","First","Last","Chapter"};
 
@@ -53,6 +58,15 @@ public class ParticipantPanel extends JPanel implements ItemListener{
 			data[i][4] = p.getChapter().toString(); //change back to chapter later
 		}
 		table.setModel(new MyTableModel(data,columnNames));
+	}
+	public void filterParticipants(){
+		for(int i = 0; i < participants.size(); i++){
+			Participant p = (Participant)participants.get(i);
+			if(p.getCode().equals(conferenceCode) == false){
+				participants.remove(i);
+				i--;
+			}
+		}
 	}
 	@Override
 	public void itemStateChanged(ItemEvent arg0) {

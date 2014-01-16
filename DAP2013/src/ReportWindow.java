@@ -18,9 +18,9 @@ public class ReportWindow extends JDialog{
 	public void createReport(){
 		JTabbedPane tabbedPane = new JTabbedPane();
 		if(reportType.equals("Conference Participants")){
-			JPanel DC = new JPanel();
-			JPanel LA = new JPanel();
-			JPanel MN = new JPanel();
+			JPanel DC = new ParticipantPanel("DC");
+			JPanel LA = new ParticipantPanel("LA");
+			JPanel MN = new ParticipantPanel("MN");
 			
 			tabbedPane.add(DC,"DC");
 			tabbedPane.add(LA,"LA");
