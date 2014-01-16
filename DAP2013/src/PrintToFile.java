@@ -71,7 +71,7 @@ public class PrintToFile {
 	}
 	public void registerForWorkshop(Workshop w, Participant p){
 		ReadFromFile read = new ReadFromFile("WKSHP_REGISTRATIONS");
-		ArrayList<String>registrations = read.getRegistrations();
+		ArrayList<String>registrations = read.getRegistrationList();
 		setWriter("WKSHP_REGISTRATIONS");
 		for(int i = 0; i < registrations.size();i++){
 			String wkshpID = "[" + w.getID() + "]";

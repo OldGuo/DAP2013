@@ -34,13 +34,23 @@ public class ReportWindow extends JDialog{
 			ReadFromFile read = new ReadFromFile("PARTICIPANTS");
 			ArrayList<Object>participants = read.getData();
 			
+			ReadFromFile read2 = new ReadFromFile("CONFERENCES");
+			ArrayList<Object>conferences = read.getData();
+			
 			for(int i = 0; i < participants.size(); i++){
 				Participant p = (Participant)participants.get(i);
+				Conference c = null;
+				for(int j = 0; j < conferences.size(); j++){
+					Conference temp = (Conference)conferences.get(j);
+					if(p.getCode().equals(temp.getCode())){
+						c = (Conference)conferences.get(j);
+					}
+				}
 				JPanel temp = new JPanel();
-				temp.add(new JLabel(p.getID()));
-				temp.add(new JLabel(p.getType()));
-				temp.add(new JLabel(p.getCode()));
-				tabbedPane.add(temp,p.getFirstName() + " " + p.getLastName());
+				
+				temp.add(new JLabel(c.getStartDate() + " to " + c.getEndDate()));
+
+				tabbedPane.add(temp,p.getFirstName() + " " + p.getLastName() + ", " + p.getCode());
 			}
 		}
 		this.add(tabbedPane);
