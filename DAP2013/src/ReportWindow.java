@@ -37,8 +37,6 @@ public class ReportWindow extends JDialog{
 				JPanel temp = new JPanel();
 				tabbedPane.add(w.getTitle(),temp);
 			}
-			
-			
 			tabbedPane.add(registrations,"Workshop");
 		}else if(reportType.equals("Participant Schedule")){
 			ReadFromFile read = new ReadFromFile("PARTICIPANTS");

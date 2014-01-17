@@ -108,6 +108,7 @@ public class WorkshopPanel extends JPanel{
 		String time = (String) table.getValueAt(table.rowAtPoint(p), 3);;
 		Workshop workshop = ReadFromFile.getWorkshop(code, title, date, time);
         
+		//popup asking for registration
 		if (e.isPopupTrigger() && e.getComponent() instanceof JTable ) {
             JPopupMenu popup = new JPopupMenu();
             popup = new JPopupMenu();

@@ -15,16 +15,20 @@ import javax.swing.JTextField;
 
 
 public class RegistrationPanel extends JPanel implements ActionListener{
-	private final JComboBox type;
-	private final JComboBox location;
-	private final JButton send;
-	private final JTextField first,last,chapter;
+	private JComboBox type;
+	private JComboBox location;
+	private JButton send;
+	private JTextField first;
+	private JTextField last;
+	private JTextField chapter;
 	private ArrayList<String> information;
 
 	public RegistrationPanel(){
 		this.setLayout(new GridLayout(8,2));
 		information = new ArrayList<String>();
-
+		createComponents();
+	}
+	public void createComponents(){
 		send = new JButton("SEND");
 	    send.setToolTipText("click to send your information");
 	    send.addActionListener(this);
@@ -35,33 +39,51 @@ public class RegistrationPanel extends JPanel implements ActionListener{
 
 		String [] types = {"Member","Advisor","Guest"};
 		String [] locations = {"DC","MN","LA"};
+		
 		type = new JComboBox(types);
 		type.addActionListener(this);
 		location = new JComboBox(locations);
 		location.addActionListener(this);
-	    this.add(new JLabel("Location:"));
+	    
+		this.add(new JLabel("Conference Location:"));
 	    this.add(location);
-	    this.add(new JLabel("Type:"));
+	    
+	    this.add(new JLabel("Participant Type:"));
 	    this.add(type);
-		this.add(new JLabel("first name"));
+		
+	    this.add(new JLabel("Participant First Name:"));
 		this.add(first);
-		this.add(new JLabel("last name"));
+		
+		this.add(new JLabel("Participant Last Name:"));
 		this.add(last);
-		this.add(new JLabel("chapter"));
+		
+		this.add(new JLabel("FBLA Chapter:"));
 		this.add(chapter);
+		
 		this.add(send);
 	}
 	@Override
 	public void actionPerformed(ActionEvent e){
 		if(e.getSource() == send){
-			information = new ArrayList<String>();
-			Collections.addAll(information,(String)location.getSelectedItem(),(String)type.getSelectedItem(),first.getText(),last.getText(),chapter.getText());
+			String loc = (String)location.getSelectedItem();
+			String participantType = (String)type.getSelectedItem();
+			String firstName = first.getText();
+			String lastName = last.getText();
+			String chapterID = chapter.getText();
+			
+			if(firstName.length() > 0 && lastName.length() > 0 && chapterID.length() > 0){
+				information = new ArrayList<String>();
+				Collections.addAll(information,loc,participantType,firstName,lastName,chapterID);
 
-			first.setText("");
-			last.setText("");
-			chapter.setText("");
-			PrintToFile print = new PrintToFile();
-			print.registerParticipant(information);
+				first.setText("");
+				last.setText("");
+				chapter.setText("");
+				PrintToFile print = new PrintToFile();
+				print.registerParticipant(information);
+			}else{
+				System.out.println("PLEASE FILL OUT EVERYTHING WTF");
+				//create a dialog warning or something
+			}
 		}
 	}
 }
