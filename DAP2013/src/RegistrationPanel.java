@@ -9,7 +9,9 @@ import java.util.Collections;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -22,9 +24,11 @@ public class RegistrationPanel extends JPanel implements ActionListener{
 	private JTextField last;
 	private JTextField chapter;
 	private ArrayList<String> information;
+	private JFrame frame;
 
 	public RegistrationPanel(){
-		this.setLayout(new GridLayout(8,2));
+		this.frame = frame;
+		this.setLayout(new GridLayout(6,2));
 		information = new ArrayList<String>();
 		createComponents();
 	}
@@ -81,7 +85,7 @@ public class RegistrationPanel extends JPanel implements ActionListener{
 				PrintToFile print = new PrintToFile();
 				print.registerParticipant(information);
 			}else{
-				System.out.println("PLEASE FILL OUT EVERYTHING WTF");
+				JOptionPane.showMessageDialog(frame, "Please fill out all registration areas","Fields Incomplete",JOptionPane.ERROR_MESSAGE);
 				//create a dialog warning or something
 			}
 		}

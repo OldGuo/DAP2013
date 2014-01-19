@@ -10,9 +10,10 @@ public class test implements ActionListener {
 	private static void createAndShowGUI() {
         //Create and set up the window.
         JFrame frame = new JFrame("DAP2013");
+        frame.setPreferredSize(new Dimension(1080,720));
+        
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setPreferredSize(new Dimension(1000,600));
         JTabbedPane tabbedPane = new JTabbedPane();
 
         JPanel workshopPanel = new WorkshopPanel();
@@ -26,6 +27,7 @@ public class test implements ActionListener {
 		frame.setJMenuBar(nav.getMenu());
 		frame.add(tabbedPane);
 		frame.pack();
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
     public static void main(String[] args) {

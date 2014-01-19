@@ -61,11 +61,11 @@ public class WorkshopPanel extends JPanel{
         table.getTableHeader().setReorderingAllowed(false);
         
         scrollPane = new JScrollPane(table);
-		scrollPane.setPreferredSize(new Dimension(900,450));
+		scrollPane.setPreferredSize(new Dimension(1000,575));
         this.add(scrollPane);
         
 		TableColumnModel t = table.getColumnModel();
-		t.getColumn(0).setPreferredWidth(75);
+		t.getColumn(0).setPreferredWidth(90);
 		t.getColumn(1).setPreferredWidth(1000);
 		t.getColumn(2).setPreferredWidth(75);
 		t.getColumn(3).setPreferredWidth(75);
@@ -95,6 +95,7 @@ public class WorkshopPanel extends JPanel{
 		JOptionPane optionPane = new JOptionPane(t);
 		JDialog dialog = optionPane.createDialog(dialogFrame,name);
 		dialog.setSize(new Dimension(500,250));
+		dialog.setLocationRelativeTo(null);
 		dialog.setVisible(true);
 	}
 	public void createPopup(MouseEvent e){
