@@ -64,12 +64,14 @@ public class ReadFromFile {
 				}
 				i++;
 			}
-			if(readType.equals("WORKSHOPS")){
-				data.add(new Workshop(info));
-			}else if(readType.equals("PARTICIPANTS")){ //participants
-				data.add(new Participant(info));
-			}else if(readType.equals("CONFERENCES")){
-				data.add(new Conference(info));
+			if(info.size() > 0){
+				if(readType.equals("WORKSHOPS")){
+					data.add(new Workshop(info));
+				}else if(readType.equals("PARTICIPANTS")){ //participants
+					data.add(new Participant(info));
+				}else if(readType.equals("CONFERENCES")){
+					data.add(new Conference(info));
+				}
 			}
 		}
 		return data;

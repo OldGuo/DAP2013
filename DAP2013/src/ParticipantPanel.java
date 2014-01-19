@@ -43,7 +43,7 @@ public class ParticipantPanel extends JPanel implements ItemListener{
 	public void createTable(){
 		ReadFromFile read = new ReadFromFile("PARTICIPANTS");
 		participants = read.getData();
-
+		
 		filterParticipants();
 		
 		data = new Object[participants.size()][5];
