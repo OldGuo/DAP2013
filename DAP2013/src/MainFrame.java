@@ -6,7 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
-public class test implements ActionListener {
+public class MainFrame implements ActionListener {
 	private static void createAndShowGUI() {
         //Create and set up the window.
 		
