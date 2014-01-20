@@ -12,19 +12,21 @@ public class ReportWindow extends JDialog{
 	public ReportWindow(String t){
 		super.setTitle(t);
 		this.setSize(1000,450);
+		this.setLocationRelativeTo(null);
 		reportType = t;
 		createReport();
 	}
 	public void createReport(){
 		JTabbedPane tabbedPane = new JTabbedPane();
 		if(reportType.equals("Conference Participants")){
-			JPanel DC = new ParticipantPanel("DC");
-			JPanel LA = new ParticipantPanel("LA");
-			JPanel MN = new ParticipantPanel("MN");
+			ReadFromFile read = new ReadFromFile("CONFERENCES");
+			ArrayList<Object>conferences = read.getData();
 			
-			tabbedPane.add(DC,"DC");
-			tabbedPane.add(LA,"LA");
-			tabbedPane.add(MN,"MN");
+			for(int i = 0; i < conferences.size(); i++){
+				Conference c = (Conference)conferences.get(i);
+				JPanel temp = new ParticipantPanel(c.getCode());
+				tabbedPane.add(temp,c.getLocation() + "; " + c.getStartDate() + " - " + c.getEndDate());
+			}
 			
 		}else if(reportType.equals("Participant List for Each Workshop")){
 			JPanel registrations = new JPanel();
@@ -43,7 +45,7 @@ public class ReportWindow extends JDialog{
 			ArrayList<Object>participants = read.getData();
 			
 			ReadFromFile read2 = new ReadFromFile("CONFERENCES");
-			ArrayList<Object>conferences = read.getData();
+			ArrayList<Object>conferences = read2.getData();
 			
 			for(int i = 0; i < participants.size(); i++){
 				Participant p = (Participant)participants.get(i);
@@ -58,7 +60,7 @@ public class ReportWindow extends JDialog{
 				
 				temp.add(new JLabel(c.getStartDate() + " to " + c.getEndDate()));
 
-				tabbedPane.add(temp,p.getFirstName() + " " + p.getLastName() + ", " + p.getCode());
+				tabbedPane.add(temp,p.getFirstName() + " " + p.getLastName());
 			}
 		}
 		this.add(tabbedPane);

@@ -32,9 +32,9 @@ public class WorkshopPanel extends JPanel{
 	public WorkshopPanel(){
 		dialogFrame = new JFrame();
 		JLabel label = new JLabel("Double Click for Descriptions, Right Click to Register");
+        this.add(label);
 		loadData();
 		createTable();
-        this.add(label);
 	}
 	public void loadData(){
 		ReadFromFile read = new ReadFromFile("WORKSHOPS");
@@ -147,6 +147,7 @@ public class WorkshopPanel extends JPanel{
 		public void actionPerformed(ActionEvent e) {
 			//opens the ParticipantRegistrationWindow
 			JDialog dialog = new ParticipantRegistrationWindow(workshop);
+			dialog.setLocationRelativeTo(null);
 			dialog.setVisible(true);
 		}
 	}

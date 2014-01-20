@@ -13,7 +13,7 @@ import javax.swing.JRadioButtonMenuItem;
 public class NavigationBar extends JMenuBar implements ActionListener{
 	//menus
 	JMenuBar menuBar;
-	JMenu menu, submenu;
+	JMenu menu, menu2;
 	JMenuItem menuItem,menuItem2,menuItem3;
 	JRadioButtonMenuItem rbMenuItem;
 	JCheckBoxMenuItem cbMenuItem;
@@ -39,6 +39,9 @@ public class NavigationBar extends JMenuBar implements ActionListener{
 		menu.add(menuItem);
 		menu.add(menuItem2);
 		menu.add(menuItem3);
+	
+		menu2 = new JMenu("Help");
+		menuBar.add(menu2);
 	}
 	public JMenuBar getMenu(){
 		return menuBar;

@@ -107,5 +107,4 @@ public class ReadFromFile {
 		}
 		return p;
 	}
-	
 }
