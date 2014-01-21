@@ -14,7 +14,7 @@ public class NavigationBar extends JMenuBar implements ActionListener{
 	//menus
 	JMenuBar menuBar;
 	JMenu menu, menu2;
-	JMenuItem menuItem,menuItem2,menuItem3;
+	JMenuItem menuItem,menuItem2,menuItem3,menuItem4;
 	JRadioButtonMenuItem rbMenuItem;
 	JCheckBoxMenuItem cbMenuItem;
 
@@ -42,13 +42,19 @@ public class NavigationBar extends JMenuBar implements ActionListener{
 	
 		menu2 = new JMenu("Help");
 		menuBar.add(menu2);
+		
+		menuItem4 = new JMenuItem("Registration Help");
+		menuItem4.addActionListener(this);
+		
+		menu2.add(menuItem4);
+		
 	}
 	public JMenuBar getMenu(){
 		return menuBar;
 	}
 	public void actionPerformed(ActionEvent e) {
 		String reportType = e.getActionCommand();
-		JDialog dialog = new ReportWindow(reportType);
+		JDialog dialog = new ExtraWindow(reportType);
 		dialog.setVisible(true);
 	}
 }
