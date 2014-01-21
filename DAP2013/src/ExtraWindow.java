@@ -7,24 +7,30 @@ import javax.swing.JTabbedPane;
 
 
 public class ExtraWindow extends JDialog{
-	private String reportType;
+	private String windowType;
 	
 	public ExtraWindow(String t){
 		super.setTitle(t);
 		this.setSize(1000,450);
 		this.setLocationRelativeTo(null);
-		reportType = t;
-		createReport();
+		windowType = t;
+		createWindow();
 	}
-	public void createReport(){
+	public void createWindow(){
 		JTabbedPane tabbedPane = new JTabbedPane();
-		if(reportType.equals("Conference Participants")){
+		if(windowType.equals("Conference Participants")){
 			createParticipantReport();
-		}else if(reportType.equals("Participant List for Each Workshop")){
+		}else if(windowType.equals("Participant List for Each Workshop")){
 			createWorkshopReport();
-		}else if(reportType.equals("Participant Schedule")){
+		}else if(windowType.equals("Participant Schedule")){
 			createScheduleReport();
+		}else if(windowType.equals("Registration Instructions")){
+			createInstructionReport();
 		}
+	}
+	public void createInstructionReport(){
+		JLabel temp = new JLabel("PUT SOME IMAGES OR SOMETHING SHOWING HOW TO USE THE WINDOWS, NEED TO GET THE FINAL LOOK TO MAKE SCREENSHOTS THOUGH");
+		this.add(temp);
 	}
 	public void createScheduleReport(){
 		JTabbedPane tabbedPane = new JTabbedPane();

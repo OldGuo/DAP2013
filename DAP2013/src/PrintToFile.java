@@ -53,8 +53,10 @@ public class PrintToFile {
 	public void registerParticipant(ArrayList<String>a){
 		setWriter("PARTICIPANT");
 		information = a;
-		int count = ReadFromFile.getData().size()+1;
+		ReadFromFile read = new ReadFromFile("PARTICIPANTS");
+		int count = read.getData().size()+1;
 		try {
+			System.out.println(count);
 			bufferedWriter.write("["+count+"],");
 			String s = "";
 			for(int i = 0; i < information.size();i++){

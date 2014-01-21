@@ -84,6 +84,7 @@ public class RegistrationPanel extends JPanel implements ActionListener{
 				chapter.setText("");
 				PrintToFile print = new PrintToFile();
 				print.registerParticipant(information);
+				JOptionPane.showMessageDialog(frame, firstName + " " + lastName + " successfully registered");
 			}else{
 				JOptionPane.showMessageDialog(frame, "Please fill out all registration areas","Fields Incomplete",JOptionPane.ERROR_MESSAGE);
 				//create a dialog warning or something

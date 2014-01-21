@@ -43,7 +43,7 @@ public class NavigationBar extends JMenuBar implements ActionListener{
 		menu2 = new JMenu("Help");
 		menuBar.add(menu2);
 		
-		menuItem4 = new JMenuItem("Registration Help");
+		menuItem4 = new JMenuItem("Registration Instructions");
 		menuItem4.addActionListener(this);
 		
 		menu2.add(menuItem4);
@@ -53,8 +53,8 @@ public class NavigationBar extends JMenuBar implements ActionListener{
 		return menuBar;
 	}
 	public void actionPerformed(ActionEvent e) {
-		String reportType = e.getActionCommand();
-		JDialog dialog = new ExtraWindow(reportType);
+		String windowType = e.getActionCommand();
+		JDialog dialog = new ExtraWindow(windowType);
 		dialog.setVisible(true);
 	}
 }

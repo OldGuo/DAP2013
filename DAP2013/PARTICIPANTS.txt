@@ -38,3 +38,6 @@
 [38],[DC],[Member],[Alex],[Vu],[54]
 [39],[LA],[Member],[Andrew],[Wang],[8]
 [40],[DC],[Member],[Kevin],[Walker],[898]
+[41],[DC],[Member],[Yingjia],[Lee],[6447]
+[42],[DC],[Member],[John],[Hsiao],[234]
+[43],[LA],[Member],[Ryan],[Ke],[983]
