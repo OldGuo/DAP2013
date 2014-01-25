@@ -8,6 +8,8 @@ import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -18,10 +20,12 @@ public class ParticipantRegistrationWindow extends JDialog implements ActionList
 	private JScrollPane scrollPane;
 	private final JButton saveButton;
 	private MyTableModel model;	
+	private JFrame frame;
 	private JTable table;
 
 	public ParticipantRegistrationWindow(Workshop w){
 		super.setTitle(w.getTitle());
+		frame = this.frame;
 		this.setLayout(new FlowLayout());
 		workshop = w;
 		saveButton = new JButton("Register Selected Participants");
@@ -54,7 +58,6 @@ public class ParticipantRegistrationWindow extends JDialog implements ActionList
 		model.setData(data);
 		model.setColumns(columnNames);
 
-		MyTableModel model = new MyTableModel(data,columnNames);
         table = new JTable(model);
         table.getTableHeader().setReorderingAllowed(false);
         table.setAutoCreateRowSorter(true);
@@ -85,5 +88,7 @@ public class ParticipantRegistrationWindow extends JDialog implements ActionList
 				print.registerForWorkshop(workshop,participant);
 			}
 		}
+		//do some error checking with the registration
+		JOptionPane.showMessageDialog(frame, "Registration Successful");
 	}
 }

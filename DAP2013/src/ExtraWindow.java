@@ -58,7 +58,10 @@ public class ExtraWindow extends JDialog{
 		this.add(tabbedPane);
 	}
 	public void createWorkshopReport(){
+		//WORKSHOP REGISTRATIONS
 		JTabbedPane tabbedPane = new JTabbedPane();
+		tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
+		
 		JPanel registrations = new JPanel();
 		
 		ReadFromFile read = new ReadFromFile("WORKSHOPS");
@@ -68,11 +71,16 @@ public class ExtraWindow extends JDialog{
 			Workshop w = (Workshop)workshops.get(i);
 			JPanel temp = new JPanel();
 			tabbedPane.add(w.getTitle(),temp);
+			
+			
 		}
 		this.add(tabbedPane);
 	}
 	public void createParticipantReport(){
+		//create schedules for each participant
 		JTabbedPane tabbedPane = new JTabbedPane();
+		tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
+
 		ReadFromFile read = new ReadFromFile("CONFERENCES");
 		ArrayList<Object>conferences = read.getData();
 		

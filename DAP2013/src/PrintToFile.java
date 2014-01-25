@@ -56,7 +56,7 @@ public class PrintToFile {
 		ReadFromFile read = new ReadFromFile("PARTICIPANTS");
 		int count = read.getData().size()+1;
 		try {
-			System.out.println(count);
+			bufferedWriter.newLine();
 			bufferedWriter.write("["+count+"],");
 			String s = "";
 			for(int i = 0; i < information.size();i++){
