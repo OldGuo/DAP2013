@@ -17,9 +17,9 @@ import javax.swing.table.TableRowSorter;
 public class ParticipantRegistrationWindow extends JDialog implements ActionListener{
 	private final Workshop workshop;
 	private ArrayList<Object>participants;
-	private DefaultTableModel model;
 	private JScrollPane scrollPane;
 	private final JButton saveButton;
+	private MyTableModel model;
 	private TableRowSorter<MyTableModel> sorter;
 	private JTable table;
 
@@ -31,6 +31,7 @@ public class ParticipantRegistrationWindow extends JDialog implements ActionList
 		saveButton.addActionListener(this);
 		saveButton.setActionCommand("save");
 		this.setSize(1000,450);
+		model = new MyTableModel();
 		loadData();
 		createTable();
 	    this.add(saveButton);
@@ -56,7 +57,8 @@ public class ParticipantRegistrationWindow extends JDialog implements ActionList
 					data[i][4] = new Boolean(false);
 			}
 		}
-		MyTableModel model = new MyTableModel(data,columnNames);
+		model.setData(data);
+		model.setColumns(columnNames);
         sorter = new TableRowSorter<MyTableModel>(model);
         table = new JTable(model);
         table.setRowSorter(sorter);

@@ -35,6 +35,7 @@ public class WorkshopPanel extends JPanel{
 	public WorkshopPanel(){
 		dialogFrame = new JFrame();
 		JLabel label = new JLabel("Double Click for Descriptions, Right Click to Register");
+		model = new MyTableModel();
 		loadData();
 		createTable();
         this.add(label);
@@ -57,7 +58,8 @@ public class WorkshopPanel extends JPanel{
 				data[i][3]= w.getTime().toString();
 			}
 		}
-		model = new MyTableModel(data,columnNames);
+		model.setData(data);
+		model.setColumns(columnNames);
         sorter = new TableRowSorter<MyTableModel>(model);
         table = new JTable(model);
         table.setRowSorter(sorter);

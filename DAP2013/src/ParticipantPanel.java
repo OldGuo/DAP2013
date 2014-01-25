@@ -38,6 +38,15 @@ public class ParticipantPanel extends JPanel implements ItemListener{
 		MN = new JCheckBox("Show MN Participants",true);
 		MN.addItemListener(this);
 		
+		model = new MyTableModel();
+	    table = new JTable(model);    
+		//table = new JTable();
+		
+		scrollPane = new JScrollPane(table);
+		scrollPane.setPreferredSize(new Dimension(900,450));
+	    table.setAutoCreateRowSorter(true);
+	    table.getTableHeader().setReorderingAllowed(false);
+	        
 		this.add(DC);
 		this.add(LA);
 		this.add(MN);
@@ -61,21 +70,11 @@ public class ParticipantPanel extends JPanel implements ItemListener{
 			data[i][2] = p.getLastName().toString();
 			data[i][3] = p.getChapter().toString(); //change back to chapter later
 		}
-		model = new MyTableModel(data,columnNames);
-        sorter = new TableRowSorter<MyTableModel>(model);
-        table = new JTable(model);
-        
-		scrollPane = new JScrollPane(table);
-		scrollPane.setPreferredSize(new Dimension(900,450));
-
-        table.setAutoCreateRowSorter(true);
-        table.getTableHeader().setReorderingAllowed(false);
-        table.setRowSorter(sorter);
-        
-
-        this.add(scrollPane);
-        this.add(scrollPane);
-        this.add(scrollPane);
+		model.setData(data);
+		model.setColumns(columnNames);
+		sorter = new TableRowSorter<MyTableModel>(model);
+		table.setRowSorter(sorter);
+		
         this.add(scrollPane);
 	}
 	public void filterParticipants(){
