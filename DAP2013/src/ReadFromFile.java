@@ -33,6 +33,13 @@ public class ReadFromFile {
 				input = OpenFile.open("C:\\Users\\Young\\Documents\\GitHub\\DAP2013\\DAP2013\\WKSHP_REGISTRATIONS.txt"); //laptop
 			}
 		}
+		if(s.equals("CONFERENCES")){
+			if(station.equals("desktop")){
+				input = OpenFile.open("C:\\Users\\Young\\git\\FBLADAP2013\\DAP2013\\CONFERENCES.txt"); //desktop
+			}else{
+				input = OpenFile.open("C:\\Users\\Young\\Documents\\GitHub\\DAP2013\\DAP2013\\CONFERENCES.txt"); //laptop
+			}
+		}
 	}
 	public static ArrayList<Object> getData(){
 		ArrayList<Object> data = new ArrayList<Object>();
@@ -57,15 +64,19 @@ public class ReadFromFile {
 				}
 				i++;
 			}
-			if(readType.equals("WORKSHOPS")){
-				data.add(new Workshop(info));
-			}else{ //participants
-				data.add(new Participant(info));
+			if(info.size() > 0){
+				if(readType.equals("WORKSHOPS")){
+					data.add(new Workshop(info));
+				}else if(readType.equals("PARTICIPANTS")){ //participants
+					data.add(new Participant(info));
+				}else if(readType.equals("CONFERENCES")){
+					data.add(new Conference(info));
+				}
 			}
 		}
 		return data;
 	}
-	public static ArrayList<String> getRegistrations(){
+	public static ArrayList<String> getRegistrationList(){
 		ArrayList<String>registrations = new ArrayList<String>();
 		while(input.hasNextLine()){
 			registrations.add(input.nextLine());

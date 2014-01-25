@@ -21,6 +21,7 @@ public class Participant {
 		return ID;
 	}
 	public String getCode(){
+		//Conference code
 		return CODE;
 	}
 	public String getType(){

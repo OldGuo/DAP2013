@@ -4,7 +4,6 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -12,15 +11,13 @@ import javax.swing.JDialog;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableRowSorter;
 
 public class ParticipantRegistrationWindow extends JDialog implements ActionListener{
 	private final Workshop workshop;
 	private ArrayList<Object>participants;
 	private JScrollPane scrollPane;
 	private final JButton saveButton;
-	private MyTableModel model;
-	private TableRowSorter<MyTableModel> sorter;
+	private MyTableModel model;	
 	private JTable table;
 
 	public ParticipantRegistrationWindow(Workshop w){
@@ -51,18 +48,18 @@ public class ParticipantRegistrationWindow extends JDialog implements ActionList
 				data[i][1]= p.getFirstName().toString();
 				data[i][2]= p.getLastName().toString();
 				data[i][3]= p.getChapter().toString();
-				if(i%2 == 0)
-					data[i][4] = new Boolean(true);
-				else
-					data[i][4] = new Boolean(false);
+				data[i][4] = new Boolean(false);
 			}
 		}
 		model.setData(data);
 		model.setColumns(columnNames);
-        sorter = new TableRowSorter<MyTableModel>(model);
+
+		MyTableModel model = new MyTableModel(data,columnNames);
         table = new JTable(model);
-        table.setRowSorter(sorter);
         table.getTableHeader().setReorderingAllowed(false);
+        table.setAutoCreateRowSorter(true);
+        table.getTableHeader().setReorderingAllowed(false);
+        
         scrollPane = new JScrollPane(table);
 		scrollPane.setPreferredSize(new Dimension(900,300));
         this.add(scrollPane);

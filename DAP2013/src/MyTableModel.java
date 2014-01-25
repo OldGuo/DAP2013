@@ -6,7 +6,11 @@ public class MyTableModel extends AbstractTableModel {
 		
 		public MyTableModel(){}
 		
-		public void setData(Object[][]d){
+		public void setData(Object [][] d){
+			data = d;
+		}
+
+		public MyTableModel(Object [][] d, String [] c){
 			data = d;
 		}
 		public void setColumns(String[]c){
@@ -38,7 +42,10 @@ public class MyTableModel extends AbstractTableModel {
 		public Class getColumnClass(int c) {
             return getValueAt(0, c).getClass();
         }
-
+        public void setValueAt(Object value, int row, int col) {
+            data[row][col] = value;
+            fireTableCellUpdated(row, col);
+        }
         /*
          * Don't need to implement this method unless your table's
          * editable.
@@ -47,10 +54,10 @@ public class MyTableModel extends AbstractTableModel {
 		public boolean isCellEditable(int row, int col) {
             //Note that the data/cell address is constant,
             //no matter where the cell appears onscreen.
-        	if (col == 4) {
+			if (col == 4) {
                 return true;
             } else {
                 return false;
             }
-        }
+		}
 	}

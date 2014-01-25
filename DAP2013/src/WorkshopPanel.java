@@ -17,8 +17,8 @@ import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumnModel;
-import javax.swing.table.TableRowSorter;
 
 
 public class WorkshopPanel extends JPanel{
@@ -28,17 +28,14 @@ public class WorkshopPanel extends JPanel{
 	private JTable table;
 	private ArrayList<Object>workshops;
 	private final JFrame dialogFrame;
-	private TableRowSorter<MyTableModel> sorter;
-	
-	//registering is wrong since when you sort the table, it doesn't change the order of the arraylist
 	
 	public WorkshopPanel(){
 		dialogFrame = new JFrame();
 		JLabel label = new JLabel("Double Click for Descriptions, Right Click to Register");
 		model = new MyTableModel();
+        this.add(label);
 		loadData();
 		createTable();
-        this.add(label);
 	}
 	public void loadData(){
 		ReadFromFile read = new ReadFromFile("WORKSHOPS");
@@ -60,25 +57,35 @@ public class WorkshopPanel extends JPanel{
 		}
 		model.setData(data);
 		model.setColumns(columnNames);
-        sorter = new TableRowSorter<MyTableModel>(model);
         table = new JTable(model);
-        table.setRowSorter(sorter);
+		model = new MyTableModel(data,columnNames);
+        
+        table.setAutoCreateRowSorter(true);
+        table.getTableHeader().setResizingAllowed(false);
         table.getTableHeader().setReorderingAllowed(false);
+        
         scrollPane = new JScrollPane(table);
-		scrollPane.setPreferredSize(new Dimension(900,450));
+		scrollPane.setPreferredSize(new Dimension(1000,575));
         this.add(scrollPane);
         
 		TableColumnModel t = table.getColumnModel();
-		t.getColumn(0).setPreferredWidth(75);
+		t.getColumn(0).setPreferredWidth(90);
 		t.getColumn(1).setPreferredWidth(1000);
 		t.getColumn(2).setPreferredWidth(75);
 		t.getColumn(3).setPreferredWidth(75);
+		
+		DefaultTableCellRenderer renderer =
+                new DefaultTableCellRenderer();
+        renderer.setToolTipText("Click for combo box"); //get the actual location from CONFERENCES.TXT
+		t.getColumn(0).setCellRenderer(renderer);
 
 		MouseListener MyMouseListener = new MyMouseListener();
 		table.addMouseListener(MyMouseListener);
 	}
 	public void createDialog(MouseEvent e){
 		//opens the window showing the description
+		//DIALOG
+		
 		Point p = e.getPoint();
 		
 		String code = (String) table.getValueAt(table.rowAtPoint(p), 0);
@@ -97,10 +104,13 @@ public class WorkshopPanel extends JPanel{
 		JOptionPane optionPane = new JOptionPane(t);
 		JDialog dialog = optionPane.createDialog(dialogFrame,name);
 		dialog.setSize(new Dimension(500,250));
+		dialog.setLocationRelativeTo(null);
 		dialog.setVisible(true);
 	}
 	public void createPopup(MouseEvent e){
 		//register participants for the workshop using right click
+		//creates the little thing that asks for to register
+		
 		Point p = e.getPoint();
 		String code = (String) table.getValueAt(table.rowAtPoint(p), 0);
 		String title = (String) table.getValueAt(table.rowAtPoint(p), 1);;
@@ -108,10 +118,11 @@ public class WorkshopPanel extends JPanel{
 		String time = (String) table.getValueAt(table.rowAtPoint(p), 3);;
 		Workshop workshop = ReadFromFile.getWorkshop(code, title, date, time);
         
+		//popup asking for registration
 		if (e.isPopupTrigger() && e.getComponent() instanceof JTable ) {
             JPopupMenu popup = new JPopupMenu();
             popup = new JPopupMenu();
-            JMenuItem menuItem = new JMenuItem("Register Participants");
+            JMenuItem menuItem = new JMenuItem("Register Participants: " + title);
             menuItem.addActionListener(new MenuActionListener(workshop));
             popup.add(menuItem);
             popup.show(e.getComponent(), e.getX(), e.getY());
@@ -130,6 +141,7 @@ public class WorkshopPanel extends JPanel{
 	    }
 	}
 	public class MenuActionListener implements ActionListener{
+		//opens the participation registration window 
 		Workshop workshop;
 		public MenuActionListener(Workshop w) {
 			workshop = w;
@@ -138,6 +150,7 @@ public class WorkshopPanel extends JPanel{
 		public void actionPerformed(ActionEvent e) {
 			//opens the ParticipantRegistrationWindow
 			JDialog dialog = new ParticipantRegistrationWindow(workshop);
+			dialog.setLocationRelativeTo(null);
 			dialog.setVisible(true);
 		}
 	}

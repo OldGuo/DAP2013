@@ -1,22 +1,20 @@
 //
 
 import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
+import java.awt.event.ActionListener;
 
-import javax.swing.ButtonGroup;
 import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JDialog;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JRadioButtonMenuItem;
-import javax.swing.KeyStroke;
 
-
-public class NavigationBar extends JMenuBar{
+public class NavigationBar extends JMenuBar implements ActionListener{
 	//menus
 	JMenuBar menuBar;
-	JMenu menu, submenu;
-	JMenuItem menuItem,menuItem2,menuItem3;
+	JMenu menu, menu2;
+	JMenuItem menuItem,menuItem2,menuItem3,menuItem4;
 	JRadioButtonMenuItem rbMenuItem;
 	JCheckBoxMenuItem cbMenuItem;
 
@@ -30,51 +28,33 @@ public class NavigationBar extends JMenuBar{
 
 		//a group of JMenuItems
 		menuItem = new JMenuItem("Conference Participants");
-		menu.add(menuItem);
+		menuItem.addActionListener(this);
+		
 		menuItem2 = new JMenuItem("Participant List for Each Workshop");
-		menu.add(menuItem2);
+		menuItem2.addActionListener(this);
+		
 		menuItem3 = new JMenuItem("Participant Schedule");
+		menuItem3.addActionListener(this);
+		
+		menu.add(menuItem);
+		menu.add(menuItem2);
 		menu.add(menuItem3);
-
-
-		//a group of radio button menu items
-		menu.addSeparator();
-		ButtonGroup group = new ButtonGroup();
-		rbMenuItem = new JRadioButtonMenuItem("A radio button menu item");
-		rbMenuItem.setSelected(true);
-		rbMenuItem.setMnemonic(KeyEvent.VK_R);
-		group.add(rbMenuItem);
-		menu.add(rbMenuItem);
-
-		rbMenuItem = new JRadioButtonMenuItem("Another one");
-		rbMenuItem.setMnemonic(KeyEvent.VK_O);
-		group.add(rbMenuItem);
-		menu.add(rbMenuItem);
-
-		//a group of check box menu items
-		menu.addSeparator();
-		cbMenuItem = new JCheckBoxMenuItem("A check box menu item");
-		cbMenuItem.setMnemonic(KeyEvent.VK_C);
-		menu.add(cbMenuItem);
-
-		cbMenuItem = new JCheckBoxMenuItem("Another one");
-		cbMenuItem.setMnemonic(KeyEvent.VK_H);
-		menu.add(cbMenuItem);
-
-		//a submenu
-		menu.addSeparator();
-		submenu = new JMenu("A submenu");
-		submenu.setMnemonic(KeyEvent.VK_S);
-
-		menuItem = new JMenuItem("An item in the submenu");
-		menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_2, ActionEvent.ALT_MASK));
-		submenu.add(menuItem);
-
-		menuItem = new JMenuItem("Another item");
-		submenu.add(menuItem);
-		menu.add(submenu);
+	
+		menu2 = new JMenu("Help");
+		menuBar.add(menu2);
+		
+		menuItem4 = new JMenuItem("Registration Instructions");
+		menuItem4.addActionListener(this);
+		
+		menu2.add(menuItem4);
+		
 	}
 	public JMenuBar getMenu(){
 		return menuBar;
+	}
+	public void actionPerformed(ActionEvent e) {
+		String windowType = e.getActionCommand();
+		JDialog dialog = new ExtraWindow(windowType);
+		dialog.setVisible(true);
 	}
 }
