@@ -91,4 +91,18 @@ public class ExtraWindow extends JDialog{
 		}
 		this.add(tabbedPane);
 	}
+	public void createTable(){
+		Object [][] data;
+		if(windowType.equals("Participant List for Each Workshop")){
+			//table list of participants registered from the workshops - from WKSHP_REGISTRATIONS
+			ReadFromFile read = new ReadFromFile("WKSHP_REGISTRATIONS");
+			
+			String [] columnNames = {"First","Last","Chapter"};
+			data = new Object[0][4];
+		}else if(windowType.equals("Participant Schedule")){
+			//table of the schedule
+			String [] columnNames = {"Time","Event"};
+			data = new Object[0][4];
+		}
+	}
 }
