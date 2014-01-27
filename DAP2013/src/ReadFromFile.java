@@ -95,7 +95,19 @@ public class ReadFromFile {
 		}
 		return w;
 	}
-	public static Participant getParticipant(String type, String first, String last, String chapter){
+	public static Participant getParticipantByID(String ID){
+		ReadFromFile read = new ReadFromFile("PARTICIPANTS");
+		ArrayList<Object>data = read.getData();
+		Participant p = null;
+		for(int i = 0; i < data.size();i++){
+			Participant temp = (Participant)data.get(i);
+			if(temp.getID().equals(ID)){
+				p = temp;
+			}
+		}
+		return p;
+	}
+	public static Participant getParticipantByInfo(String type, String first, String last, String chapter){
 		ReadFromFile read = new ReadFromFile("PARTICIPANTS");
 		ArrayList<Object>data = read.getData();
 		Participant p = null;

@@ -12,7 +12,6 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 
 public class ParticipantRegistrationWindow extends JDialog implements ActionListener{
 	private final Workshop workshop;
@@ -83,7 +82,7 @@ public class ParticipantRegistrationWindow extends JDialog implements ActionList
 				String last = (String) table.getValueAt(i, 2);
 				String chapter = (String) table.getValueAt(i, 3);
 				
-				Participant participant = ReadFromFile.getParticipant(type,first,last,chapter);
+				Participant participant = ReadFromFile.getParticipantByInfo(type,first,last,chapter);
 				PrintToFile print = new PrintToFile();
 				print.registerForWorkshop(workshop,participant);
 			}

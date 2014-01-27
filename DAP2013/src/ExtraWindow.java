@@ -71,8 +71,7 @@ public class ExtraWindow extends JDialog{
 			Workshop w = (Workshop)workshops.get(i);
 			JPanel temp = new JPanel();
 			tabbedPane.add(w.getTitle(),temp);
-			
-			
+			createTable(w);
 		}
 		this.add(tabbedPane);
 	}
@@ -91,16 +90,35 @@ public class ExtraWindow extends JDialog{
 		}
 		this.add(tabbedPane);
 	}
-	public void createTable(){
+	public void createTable(Workshop w){
 		Object [][] data;
 		if(windowType.equals("Participant List for Each Workshop")){
 			//table list of participants registered from the workshops - from WKSHP_REGISTRATIONS
+			Workshop workshop = w;
+			
 			ReadFromFile read = new ReadFromFile("WKSHP_REGISTRATIONS");
+			ArrayList<String>registrations = read.getRegistrationList();
 			
 			String [] columnNames = {"First","Last","Chapter"};
 			data = new Object[0][4];
+		
+			for(int i = 0; i < registrations.size(); i++){
+				if(registrations.get(i).substring(1,4).equals(w.getID())){
+					//get all the participants registered for that workshop
+					//get the IDs - find them in the participant list 
+				}
+			}
 		}else if(windowType.equals("Participant Schedule")){
 			//table of the schedule
+			//WORKSHOP ARE 45 MINUTES LONG
+			//Day 1: 1PM - 3PM (Workshops)
+			/* Registration 11 AM, 7 PM
+			 * Opening General Session 9PM 	
+			 * */
+			//Day 2: 9AM - 3:30 PM
+			/* Closing General Session 5 PM
+			 * Blue Jeans for babies dance 9 PM
+			 * */
 			String [] columnNames = {"Time","Event"};
 			data = new Object[0][4];
 		}
