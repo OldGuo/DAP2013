@@ -95,6 +95,7 @@ public class ExtraWindow extends JDialog{
 		if(windowType.equals("Participant List for Each Workshop")){
 			//table list of participants registered from the workshops - from WKSHP_REGISTRATIONS
 			Workshop workshop = w;
+			int numParticipants = 0;
 			
 			ReadFromFile read = new ReadFromFile("WKSHP_REGISTRATIONS");
 			ArrayList<String>registrations = read.getRegistrationList();
@@ -102,10 +103,21 @@ public class ExtraWindow extends JDialog{
 			String [] columnNames = {"First","Last","Chapter"};
 			data = new Object[0][4];
 		
-			for(int i = 0; i < registrations.size(); i++){
-				if(registrations.get(i).substring(1,4).equals(w.getID())){
-					//get all the participants registered for that workshop
-					//get the IDs - find them in the participant list 
+			for(int i = 0; i < registrations.size(); i++){ //lines of WKSHP_REGISTRATIONS
+				String line = registrations.get(i);
+				if(line.substring(1,4).equals(w.getID())){ //gets the registered ID's
+					for(int j = 5; j < line.length(); j++){
+						if(line.substring(j,j+1).equals("[")){
+							String temp = "";
+							int count = j+1;
+							while(!line.substring(count,count+1).equals("]")){
+								temp += line.substring(count,count+1);
+								count++;
+							}
+							System.out.println(w.getID() + ":" + temp);
+							numParticipants++;
+						}
+					}
 				}
 			}
 		}else if(windowType.equals("Participant Schedule")){
