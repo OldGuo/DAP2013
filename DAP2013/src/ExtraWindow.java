@@ -1,9 +1,12 @@
+import java.awt.Dimension;
 import java.util.ArrayList;
 
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
+import javax.swing.JTable;
 
 
 public class ExtraWindow extends JDialog{
@@ -34,6 +37,7 @@ public class ExtraWindow extends JDialog{
 	}
 	public void createScheduleReport(){
 		JTabbedPane tabbedPane = new JTabbedPane();
+		tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 		ReadFromFile read = new ReadFromFile("PARTICIPANTS");
 		ArrayList<Object>participants = read.getData();
 		
@@ -58,7 +62,7 @@ public class ExtraWindow extends JDialog{
 		this.add(tabbedPane);
 	}
 	public void createWorkshopReport(){
-		//WORKSHOP REGISTRATIONS
+		//WORKSHOP REGISTRATIONS, Create a table showing each participant for each schedule
 		JTabbedPane tabbedPane = new JTabbedPane();
 		tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 		
@@ -70,8 +74,8 @@ public class ExtraWindow extends JDialog{
 		for(int i = 0; i < workshops.size(); i++){
 			Workshop w = (Workshop)workshops.get(i);
 			JPanel temp = new JPanel();
-			tabbedPane.add(w.getTitle(),temp);
-			createTable(w);
+			tabbedPane.add(w.getTitle() + ", " + w.getCode(),temp);
+			createTable(w,temp);
 		}
 		this.add(tabbedPane);
 	}
@@ -90,7 +94,8 @@ public class ExtraWindow extends JDialog{
 		}
 		this.add(tabbedPane);
 	}
-	public void createTable(Workshop w){
+	public void createTable(Workshop w, JPanel p){
+		JPanel panel = p;
 		Object [][] data;
 		if(windowType.equals("Participant List for Each Workshop")){
 			//table list of participants registered from the workshops - from WKSHP_REGISTRATIONS
@@ -101,8 +106,8 @@ public class ExtraWindow extends JDialog{
 			ArrayList<String>registrations = read.getRegistrationList();
 			
 			String [] columnNames = {"First","Last","Chapter"};
-			data = new Object[0][4];
 		
+			ArrayList<String>participants = new ArrayList<String>();
 			for(int i = 0; i < registrations.size(); i++){ //lines of WKSHP_REGISTRATIONS
 				String line = registrations.get(i);
 				if(line.substring(1,4).equals(w.getID())){ //gets the registered ID's
@@ -114,12 +119,38 @@ public class ExtraWindow extends JDialog{
 								temp += line.substring(count,count+1);
 								count++;
 							}
-							System.out.println(w.getID() + ":" + temp);
+							participants.add(temp);
 							numParticipants++;
 						}
 					}
 				}
 			}
+			data = new Object[numParticipants][4];
+			ReadFromFile participantReader = new ReadFromFile("PARTICIPANTS");
+			for(int i = 0; i < participants.size();i++){
+				Participant part = read.getParticipantByID(participants.get(i));
+				data[i][0] = part.getFirstName();
+				data[i][1] = part.getLastName();
+				data[i][2] = part.getCode();
+			}
+			//get the data
+			
+			MyTableModel model = new MyTableModel();
+			JTable table = new JTable();
+			JScrollPane scrollPane = new JScrollPane();
+			model.setData(data);
+			model.setColumns(columnNames);
+	        table = new JTable(model);
+			model = new MyTableModel(data,columnNames);
+	        
+			if(data.length > 0)
+				table.setAutoCreateRowSorter(true);
+	        table.getTableHeader().setResizingAllowed(false);
+	        table.getTableHeader().setReorderingAllowed(false);
+	        
+	        scrollPane = new JScrollPane(table);
+			scrollPane.setPreferredSize(new Dimension(900,350));
+	        panel.add(scrollPane);
 		}else if(windowType.equals("Participant Schedule")){
 			//table of the schedule
 			//WORKSHOP ARE 45 MINUTES LONG
