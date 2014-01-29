@@ -53,8 +53,8 @@ public class PrintToFile {
 	public void registerParticipant(ArrayList<String>a){
 		setWriter("PARTICIPANT");
 		information = a;
-		ReadFromFile read = new ReadFromFile("PARTICIPANTS");
-		int count = read.getData().size()+1;
+		//ReadFromFile read = new ReadFromFile("PARTICIPANTS");
+		int count = ReadFromFile.getData("PARTICIPANTS").size()+1;
 		try {
 			bufferedWriter.newLine();
 			bufferedWriter.write("["+count+"],");
@@ -72,8 +72,7 @@ public class PrintToFile {
 		}
 	}
 	public void registerForWorkshop(Workshop w, Participant p){
-		ReadFromFile read = new ReadFromFile("WKSHP_REGISTRATIONS");
-		ArrayList<String>registrations = read.getRegistrationList();
+		ArrayList<String>registrations = ReadFromFile.getRegistrationList();
 		setWriter("WKSHP_REGISTRATIONS");
 		for(int i = 0; i < registrations.size();i++){
 			String wkshpID = "[" + w.getID() + "]";

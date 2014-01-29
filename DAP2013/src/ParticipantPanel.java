@@ -43,8 +43,8 @@ public class ParticipantPanel extends JPanel implements ItemListener{
 		this.add(scrollPane);
 	}
 	public void createTable(){
-		ReadFromFile read = new ReadFromFile("PARTICIPANTS");
-		participants = read.getData();
+		//ReadFromFile read = new ReadFromFile("PARTICIPANTS");
+		participants = ReadFromFile.getData("PARTICIPANTS");
 		
 		filterParticipants();
 		

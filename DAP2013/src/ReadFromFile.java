@@ -8,10 +8,11 @@ public class ReadFromFile {
 	private static String station;
 	public ReadFromFile(String s){
 		station = "desktop";
-		readType = s;
-		selectReader(readType);
+		//readType = s;
+		//selectReader(readType);
 	}
 	public static void selectReader(String s){
+		readType = s;
 		if(s.equals("WORKSHOPS")){
 			if(station.equals("desktop")){
 				input = OpenFile.open("C:\\Users\\Young\\git\\FBLADAP2013\\DAP2013\\WORKSHOPS.txt"); //desktop
@@ -41,7 +42,8 @@ public class ReadFromFile {
 			}
 		}
 	}
-	public static ArrayList<Object> getData(){
+	public static ArrayList<Object> getData(String s){
+		selectReader(s);
 		ArrayList<Object> data = new ArrayList<Object>();
 
 		ArrayList<String>info = new ArrayList<String>(); //holds all the information for a specific workshop line
@@ -77,6 +79,7 @@ public class ReadFromFile {
 		return data;
 	}
 	public static ArrayList<String> getRegistrationList(){
+		selectReader("WKSHP_REGISTRATIONS");
 		ArrayList<String>registrations = new ArrayList<String>();
 		while(input.hasNextLine()){
 			registrations.add(input.nextLine());
@@ -84,8 +87,7 @@ public class ReadFromFile {
 		return registrations;
 	}
 	public static Workshop getWorkshop(String code, String title, String date, String time){
-		ReadFromFile read = new ReadFromFile("WORKSHOPS");
-		ArrayList<Object>data = read.getData();
+		ArrayList<Object>data = ReadFromFile.getData("WORKSHOPS");
 		Workshop w = null;
 		for(int i = 0; i < data.size();i++){
 			Workshop temp = (Workshop)data.get(i);
@@ -96,8 +98,7 @@ public class ReadFromFile {
 		return w;
 	}
 	public static Participant getParticipantByID(String ID){
-		ReadFromFile read = new ReadFromFile("PARTICIPANTS");
-		ArrayList<Object>data = read.getData();
+		ArrayList<Object>data = ReadFromFile.getData("PARTICIPANTS");
 		Participant p = null;
 		for(int i = 0; i < data.size();i++){
 			Participant temp = (Participant)data.get(i);
@@ -108,8 +109,7 @@ public class ReadFromFile {
 		return p;
 	}
 	public static Participant getParticipantByInfo(String type, String first, String last, String chapter){
-		ReadFromFile read = new ReadFromFile("PARTICIPANTS");
-		ArrayList<Object>data = read.getData();
+		ArrayList<Object>data = ReadFromFile.getData("PARTICIPANTS");
 		Participant p = null;
 		for(int i = 0; i < data.size();i++){
 			Participant temp = (Participant)data.get(i);

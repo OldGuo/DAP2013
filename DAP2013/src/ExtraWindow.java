@@ -16,6 +16,7 @@ public class ExtraWindow extends JDialog{
 		super.setTitle(t);
 		this.setSize(1000,450);
 		this.setLocationRelativeTo(null);
+		
 		windowType = t;
 		createWindow();
 	}
@@ -38,11 +39,8 @@ public class ExtraWindow extends JDialog{
 	public void createScheduleReport(){
 		JTabbedPane tabbedPane = new JTabbedPane();
 		tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
-		ReadFromFile read = new ReadFromFile("PARTICIPANTS");
-		ArrayList<Object>participants = read.getData();
-		
-		ReadFromFile read2 = new ReadFromFile("CONFERENCES");
-		ArrayList<Object>conferences = read2.getData();
+		ArrayList<Object>participants = ReadFromFile.getData("PARTICIPANTS");
+		ArrayList<Object>conferences = ReadFromFile.getData("CONFERENCES");
 		
 		for(int i = 0; i < participants.size(); i++){
 			Participant p = (Participant)participants.get(i);
@@ -68,8 +66,7 @@ public class ExtraWindow extends JDialog{
 		
 		JPanel registrations = new JPanel();
 		
-		ReadFromFile read = new ReadFromFile("WORKSHOPS");
-		ArrayList<Object>workshops = read.getData();
+		ArrayList<Object>workshops = ReadFromFile.getData("WORKSHOPS");
 		
 		for(int i = 0; i < workshops.size(); i++){
 			Workshop w = (Workshop)workshops.get(i);
@@ -83,9 +80,8 @@ public class ExtraWindow extends JDialog{
 		//create schedules for each participant
 		JTabbedPane tabbedPane = new JTabbedPane();
 		tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
-
-		ReadFromFile read = new ReadFromFile("CONFERENCES");
-		ArrayList<Object>conferences = read.getData();
+		
+		ArrayList<Object>conferences = ReadFromFile.getData("CONFERENCES");
 		
 		for(int i = 0; i < conferences.size(); i++){
 			Conference c = (Conference)conferences.get(i);
@@ -102,9 +98,7 @@ public class ExtraWindow extends JDialog{
 			Workshop workshop = w;
 			int numParticipants = 0;
 			
-			ReadFromFile read = new ReadFromFile("WKSHP_REGISTRATIONS");
-			ArrayList<String>registrations = read.getRegistrationList();
-			
+			ArrayList<String>registrations = ReadFromFile.getRegistrationList();
 			String [] columnNames = {"First","Last","Chapter"};
 		
 			ArrayList<String>participants = new ArrayList<String>();
@@ -126,9 +120,9 @@ public class ExtraWindow extends JDialog{
 				}
 			}
 			data = new Object[numParticipants][4];
-			ReadFromFile participantReader = new ReadFromFile("PARTICIPANTS");
+
 			for(int i = 0; i < participants.size();i++){
-				Participant part = read.getParticipantByID(participants.get(i));
+				Participant part = ReadFromFile.getParticipantByID(participants.get(i));
 				data[i][0] = part.getFirstName();
 				data[i][1] = part.getLastName();
 				data[i][2] = part.getCode();

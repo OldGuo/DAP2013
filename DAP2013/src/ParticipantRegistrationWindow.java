@@ -37,8 +37,8 @@ public class ParticipantRegistrationWindow extends JDialog implements ActionList
 	    this.add(saveButton);
 	}
 	public void loadData(){
-		ReadFromFile read = new ReadFromFile("PARTICIPANTS");
-		participants = read.getData();
+		//ReadFromFile read = new ReadFromFile("PARTICIPANTS");
+		participants = ReadFromFile.getData("PARTICIPANTS");
 	}
 	public void createTable(){
 		String [] columnNames = {"Type","First","Last","Chapter","Register"};

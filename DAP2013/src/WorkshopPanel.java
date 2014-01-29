@@ -39,7 +39,7 @@ public class WorkshopPanel extends JPanel{
 	}
 	public void loadData(){
 		ReadFromFile read = new ReadFromFile("WORKSHOPS");
-		workshops = read.getData();
+		workshops = ReadFromFile.getData("WORKSHOPS");
 	}
 	public void createTable(){
 		//Creates a table from an arraylist populated from the file WORKSHOPS.txt
