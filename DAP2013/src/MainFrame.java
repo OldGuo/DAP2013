@@ -14,6 +14,9 @@ public class MainFrame implements ActionListener {
 	/**
 	 * Creates all main panels and tabs for the program
 	 */
+	public MainFrame(){
+		System.out.println("THIS HAS TO RUN");
+	}
 	private static void createAndShowGUI() {
         //Create and set up the window.
 		
@@ -48,9 +51,11 @@ public class MainFrame implements ActionListener {
     public static void main(String[] args) {
         //Schedule a job for the event-dispatching thread:
         //creating and showing this application's GUI.
+    	System.out.println("run?");
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             @Override
 			public void run() {
+            	System.out.println("run?");
                 createAndShowGUI();
             }
         });

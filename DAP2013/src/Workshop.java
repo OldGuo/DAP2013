@@ -22,7 +22,7 @@ public class Workshop {
 	private final String DESCRIPTION;
 	private final String DATE;
 	private final String TIME;
-
+	private final ArrayList<String>participants;
 	/**
 	 * @param a
 	 * Arraylist of information to be converted into id, code, title, description, date, and time for the workshop
@@ -34,6 +34,7 @@ public class Workshop {
 		DESCRIPTION = a.get(3);
 		DATE = a.get(4);
 		TIME = a.get(5);
+		participants = new ArrayList<String>();
 	}
 	/**
 	 * @return
@@ -77,4 +78,11 @@ public class Workshop {
 	public String getTime(){
 		return TIME;
 	}
+	public void register(String participantID){
+		     participants.add(participantID);
+		   }
+	public ArrayList<String> getParticipants(){
+		     return participants;
+		   }
+	
 }

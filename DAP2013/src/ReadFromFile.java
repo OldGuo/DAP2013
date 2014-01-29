@@ -12,8 +12,8 @@ public class ReadFromFile {
 	private static String station;
 	public ReadFromFile(String s){
 		station = "desktop";
-		readType = s;
-		selectReader(readType);
+		//readType = s;
+		//selectReader(readType);
 	}
 	/**
 	 * @param s

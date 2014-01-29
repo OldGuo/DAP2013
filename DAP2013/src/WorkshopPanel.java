@@ -39,7 +39,12 @@ public class WorkshopPanel extends JPanel{
 		JLabel label = new JLabel("Double Click for Descriptions, Right Click to Register");
 		model = new MyTableModel();
         this.add(label);
+        loadData();
 		createTable();
+	}
+	public void loadData(){
+		ReadFromFile read = new ReadFromFile("WORKSHOPS");
+		workshops = ReadFromFile.getData("WORKSHOPS");
 	}
 	/**
 	 * Creates a table from the information grabbed from the workshops text file
@@ -47,9 +52,6 @@ public class WorkshopPanel extends JPanel{
 	public void createTable(){
 		//Creates a table from an arraylist populated from the file WORKSHOPS.txt
 		String [] columnNames = {"Location","Title","Date","Time"};
-		
-		ReadFromFile read = new ReadFromFile("WORKSHOPS");
-		workshops = ReadFromFile.getData("WORKSHOPS");
 		data = new Object[workshops.size()][4];
 		
 		for(int i = 0; i < workshops.size();i++){
@@ -61,8 +63,8 @@ public class WorkshopPanel extends JPanel{
 				data[i][3]= w.getTime().toString();
 			}
 		}
-		//model.setData(data);
-		//model.setColumns(columnNames);
+		model.setData(data);
+		model.setColumns(columnNames);
         table = new JTable(model);
 		model = new MyTableModel(data,columnNames);
         
