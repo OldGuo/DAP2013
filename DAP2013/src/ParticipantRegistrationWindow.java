@@ -77,7 +77,9 @@ public class ParticipantRegistrationWindow extends JDialog implements ActionList
 	    }
 	}
 	public void Register(){
+		boolean alreadyRegistered = false;
 		for(int i = 0; i < table.getRowCount();i++){
+			alreadyRegistered = false;
 			if(table.getValueAt(i, 4).equals(Boolean.TRUE)){
 				//get participant based on the rest of their information
 				String type = (String) table.getValueAt(i, 0);
@@ -87,10 +89,34 @@ public class ParticipantRegistrationWindow extends JDialog implements ActionList
 				
 				Participant participant = ReadFromFile.getParticipantByInfo(type,first,last,chapter);
 				PrintToFile print = new PrintToFile();
-				print.registerForWorkshop(workshop,participant);
+				
+				//check if already registered first
+				ArrayList<String>registrations = ReadFromFile.getRegistrationList();
+				for(int j = 0; j < registrations.size(); j++){
+					String line = registrations.get(j);
+					for(int k = 5; k < line.length(); k++){
+						if(line.substring(k,k+1).equals("[")){
+							String temp = "";
+							int count = k+1;
+							while(!line.substring(count,count+1).equals("]")){
+								temp += line.substring(count,count+1);
+								count++;
+							}
+							if(temp.equals(participant.getID()) && line.substring(1,4).equals(workshop.getID())){
+								alreadyRegistered = true;
+							}
+						}
+					}
+				}
+				if(alreadyRegistered == false){
+					//do some error checking with the registration
+					JOptionPane.showMessageDialog(frame, "Registration Successful: " + participant.getFirstName() + " registered");
+					print.registerForWorkshop(workshop,participant);	
+				}else{
+					String dialogString = "Registration Unsuccessful: " + participant.getFirstName() + " already registered";
+					JOptionPane.showMessageDialog(frame, dialogString,"Already Registered",JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		}
-		//do some error checking with the registration
-		JOptionPane.showMessageDialog(frame, "Registration Successful");
 	}
 }
