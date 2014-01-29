@@ -4,12 +4,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-/*
- * Prints information to files
- * 	participant information\
- * 	workshop preregistration information
+/**
+ * @author Young
+ * Prints information to different files
  */
-
 public class PrintToFile {
 
 	private File printFile;
@@ -22,6 +20,10 @@ public class PrintToFile {
 		station = "desktop";
 		information = new ArrayList<String>();
 	}
+	/**
+	 * @param t
+	 * Sets which file to write to and which type of writer to use
+	 */
 	public void setWriter(String t){
 		if(t.equals("PARTICIPANT")){
 			if(station.equals("desktop")){
@@ -50,6 +52,10 @@ public class PrintToFile {
 		}
 		bufferedWriter = new BufferedWriter(fileWriter);
 	}
+	/**
+	 * @param a
+	 * Information to create the participant from
+	 */
 	public void registerParticipant(ArrayList<String>a){
 		setWriter("PARTICIPANT");
 		information = a;
@@ -71,6 +77,12 @@ public class PrintToFile {
 			e.printStackTrace();
 		}
 	}
+	/**
+	 * @param w
+	 * Workshop to register for
+	 * @param p
+	 * Participant to register for the workshop
+	 */
 	public void registerForWorkshop(Workshop w, Participant p){
 		ArrayList<String>registrations = ReadFromFile.getRegistrationList();
 		setWriter("WKSHP_REGISTRATIONS");

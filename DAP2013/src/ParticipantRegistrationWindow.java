@@ -13,6 +13,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+/**
+ * @author Young
+ * Window to register participants for a selected workshop
+ */
 public class ParticipantRegistrationWindow extends JDialog implements ActionListener{
 	private final Workshop workshop;
 	private ArrayList<Object>participants;
@@ -22,6 +26,10 @@ public class ParticipantRegistrationWindow extends JDialog implements ActionList
 	private JFrame frame;
 	private JTable table;
 
+	/**
+	 * @param w
+	 * Workshop registering participants for
+	 */
 	public ParticipantRegistrationWindow(Workshop w){
 		super.setTitle(w.getTitle());
 		frame = this.frame;
@@ -35,10 +43,14 @@ public class ParticipantRegistrationWindow extends JDialog implements ActionList
 		createTable();
 	    this.add(saveButton);
 	}
+	/**
+	 * Creates the table of all participants registered to the specific conference of the workshop
+	 */
 	public void createTable(){
 		String [] columnNames = {"Type","First","Last","Chapter","Register"};
 		participants = ReadFromFile.getData("PARTICIPANTS");
-        //filter the participant list to only those registered to the specific conference
+        
+		//filter the participant list to only those registered to the specific conference
 		for(int j = 0; j < participants.size(); j++){
 			Participant p = (Participant)participants.get(j);
 			if(!p.getCode().equals(workshop.getCode())){
@@ -76,6 +88,9 @@ public class ParticipantRegistrationWindow extends JDialog implements ActionList
 	    	this.dispose();
 	    }
 	}
+	/**
+	 * Registers selected participants for the workshop
+	 */
 	public void Register(){
 		boolean alreadyRegistered = false;
 		for(int i = 0; i < table.getRowCount();i++){

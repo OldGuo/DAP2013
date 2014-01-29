@@ -1,4 +1,3 @@
-
 import java.awt.Dimension;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -9,6 +8,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 
+/**
+ * @author Young
+ * Panel showing a list of participants specific to each conference
+ */
 public class ParticipantPanel extends JPanel implements ItemListener{
 
 	private JScrollPane scrollPane;
@@ -19,12 +22,10 @@ public class ParticipantPanel extends JPanel implements ItemListener{
 	private String [] columnNames;
 	private String conferenceCode;
 
-	// Sort by:
-	// Participant type, last name
-	// chapter number, participant type, last name (generate a chapter registration confirmation)
-	// each chapter should begin on a new page
-	// http://docs.oracle.com/javase/tutorial/displayCode.html?code=http://docs.oracle.com/javase/tutorial/uiswing/examples/components/TableFilterDemoProject/src/components/TableFilterDemo.java
-	//
+	/**
+	 * @param code
+	 * Conference code to filter for
+	 */
 	public ParticipantPanel(String code){
 		conferenceCode = code;
 		
@@ -43,6 +44,9 @@ public class ParticipantPanel extends JPanel implements ItemListener{
 		
 		this.add(scrollPane);
 	}
+	/**
+	 * Creates the table after filtering participants for the specific conference
+	 */
 	public void createTable(){
 		//ReadFromFile read = new ReadFromFile("PARTICIPANTS");
 		participants = ReadFromFile.getData("PARTICIPANTS");
@@ -66,6 +70,9 @@ public class ParticipantPanel extends JPanel implements ItemListener{
         this.add(scrollPane);
 		table.setModel(model);
 	}
+	/**
+	 * Filters participants not in the specified conference code
+	 */
 	public void filterParticipants(){
 		for(int i = 0; i < participants.size(); i++){
 			Participant p = (Participant)participants.get(i);
@@ -78,6 +85,5 @@ public class ParticipantPanel extends JPanel implements ItemListener{
 	@Override
 	public void itemStateChanged(ItemEvent arg0) {
 		// TODO Auto-generated method stub
-		
 	}
 }

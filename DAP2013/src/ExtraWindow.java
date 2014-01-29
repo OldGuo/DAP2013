@@ -9,9 +9,17 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 
 
+/**
+ * @author Young
+ * ExtraWindow creates another window to show conference reports
+ */
 public class ExtraWindow extends JDialog{
 	private String windowType;
 	
+	/**
+	 * @param t
+	 * The type of the window to create
+	 */
 	public ExtraWindow(String t){
 		super.setTitle(t);
 		this.setSize(1000,450);
@@ -22,6 +30,9 @@ public class ExtraWindow extends JDialog{
 		windowType = t;
 		createWindow();
 	}
+	/**
+	 * Defines which window to create based on the window type
+	 */
 	public void createWindow(){
 		JTabbedPane tabbedPane = new JTabbedPane();
 		if(windowType.equals("Conference Participants")){
@@ -34,10 +45,16 @@ public class ExtraWindow extends JDialog{
 			createInstructionReport();
 		}
 	}
+	/**
+	 * Creates an instruction window
+	 */
 	public void createInstructionReport(){
 		JLabel temp = new JLabel("PUT SOME IMAGES OR SOMETHING SHOWING HOW TO USE THE WINDOWS, NEED TO GET THE FINAL LOOK TO MAKE SCREENSHOTS THOUGH");
 		this.add(temp);
 	}
+	/**
+	 * Creates schedules for each registered participant
+	 */
 	public void createScheduleReport(){
 		JTabbedPane tabbedPane = new JTabbedPane();
 		tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
@@ -65,6 +82,9 @@ public class ExtraWindow extends JDialog{
 		}
 		this.add(tabbedPane);
 	}
+	/**
+	 * Creates a report showing which participants are registered to each workshop
+	 */
 	public void createWorkshopReport(){
 		//WORKSHOP REGISTRATIONS, Create a table showing each participant for each schedule
 		JTabbedPane tabbedPane = new JTabbedPane();
@@ -82,6 +102,9 @@ public class ExtraWindow extends JDialog{
 		}
 		this.add(tabbedPane);
 	}
+	/**
+	 * Creates a list of participants registered to each specific conference
+	 */
 	public void createParticipantReport(){
 		//create schedules for each participant
 		JTabbedPane tabbedPane = new JTabbedPane();
@@ -97,6 +120,12 @@ public class ExtraWindow extends JDialog{
 		}
 		this.add(tabbedPane);
 	}
+	/**
+	 * @param o
+	 * the object to create a table for
+	 * @return
+	 * the scroll pane containing the completed table
+	 */
 	public JScrollPane createTable(Object o){
 		Object [][] data = null;
 		String [] columnNames = null;

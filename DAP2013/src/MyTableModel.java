@@ -1,18 +1,36 @@
 import javax.swing.table.AbstractTableModel;
 
+/**
+ * @author Young
+ * Custom Table Model used in all tables of the program
+ */
 public class MyTableModel extends AbstractTableModel {
 		private Object[][]data;
 		private String [] columnNames;
 		
 		public MyTableModel(){}
-		
-		public void setData(Object [][] d){
-			data = d;
-		}
 
+		/**
+		 * @param d
+		 * 2D array of data to create the table
+		 * @param c
+		 * 1D array of column names
+		 */
 		public MyTableModel(Object [][] d, String [] c){
 			data = d;
 		}
+		
+		/**
+		 * @param d
+		 * 2D array of data to create the table
+		 */
+		public void setData(Object [][] d){
+			data = d;
+		}
+		/**
+		 * @param c
+		 * 1D array of column names
+		 */
 		public void setColumns(String[]c){
 			columnNames = c;
 		}
@@ -46,14 +64,8 @@ public class MyTableModel extends AbstractTableModel {
             data[row][col] = value;
             fireTableCellUpdated(row, col);
         }
-        /*
-         * Don't need to implement this method unless your table's
-         * editable.
-         */
 		@Override
 		public boolean isCellEditable(int row, int col) {
-            //Note that the data/cell address is constant,
-            //no matter where the cell appears onscreen.
 			if (col == 4) {
                 return true;
             } else {

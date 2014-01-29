@@ -1,4 +1,5 @@
 
+
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
@@ -21,6 +22,10 @@ import javax.swing.JTextArea;
 import javax.swing.table.TableColumnModel;
 
 
+/**
+ * @author Young
+ * Creates an organized table for users to view workshops and preregister participants
+ */
 public class WorkshopPanel extends JPanel{
 	private JScrollPane scrollPane;
 	private Object[][]data;
@@ -34,16 +39,17 @@ public class WorkshopPanel extends JPanel{
 		JLabel label = new JLabel("Double Click for Descriptions, Right Click to Register");
 		model = new MyTableModel();
         this.add(label);
-		loadData();
 		createTable();
 	}
-	public void loadData(){
-		ReadFromFile read = new ReadFromFile("WORKSHOPS");
-		workshops = ReadFromFile.getData("WORKSHOPS");
-	}
+	/**
+	 * Creates a table from the information grabbed from the workshops text file
+	 */
 	public void createTable(){
 		//Creates a table from an arraylist populated from the file WORKSHOPS.txt
 		String [] columnNames = {"Location","Title","Date","Time"};
+		
+		ReadFromFile read = new ReadFromFile("WORKSHOPS");
+		workshops = ReadFromFile.getData("WORKSHOPS");
 		data = new Object[workshops.size()][4];
 		
 		for(int i = 0; i < workshops.size();i++){
@@ -55,8 +61,8 @@ public class WorkshopPanel extends JPanel{
 				data[i][3]= w.getTime().toString();
 			}
 		}
-		model.setData(data);
-		model.setColumns(columnNames);
+		//model.setData(data);
+		//model.setColumns(columnNames);
         table = new JTable(model);
 		model = new MyTableModel(data,columnNames);
         
@@ -79,7 +85,6 @@ public class WorkshopPanel extends JPanel{
 	}
 	public void createDialog(MouseEvent e){
 		//opens the window showing the description
-		//DIALOG
 		
 		Point p = e.getPoint();
 		
@@ -126,12 +131,14 @@ public class WorkshopPanel extends JPanel{
 	public class MyMouseListener extends MouseAdapter{
 		@Override
 		public void mouseClicked(MouseEvent e) {
+			//Double click to show description
 			if (e.getClickCount() > 1) {
 				createDialog(e);
 			}
 		}
 		@Override
 		public void mouseReleased(MouseEvent e) {
+			//Shows the option to register participants
 	        createPopup(e);
 	    }
 	}

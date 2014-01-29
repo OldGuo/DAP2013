@@ -6,7 +6,14 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
+/**
+ * @author Young
+ * Main JFrame of the program
+ */
 public class MainFrame implements ActionListener {
+	/**
+	 * Creates all main panels and tabs for the program
+	 */
 	private static void createAndShowGUI() {
         //Create and set up the window.
 		

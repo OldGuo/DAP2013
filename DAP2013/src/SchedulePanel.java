@@ -1,4 +1,5 @@
 
+
 import java.awt.Dimension;
 import java.util.ArrayList;
 
@@ -7,6 +8,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 
+/**
+ * @author Young
+ * Creates schedules for each specific participant
+ */
 public class SchedulePanel extends JPanel{
 	private Object [][] data;
 	private String [] columnNames;
@@ -16,6 +21,14 @@ public class SchedulePanel extends JPanel{
 	private Conference conference;
 	private int day;
 	
+	/**
+	 * @param p
+	 * Participant to create a schedule for
+	 * @param c
+	 * Conference the participant is registered to
+	 * @param d
+	 * First or second day of the conference
+	 */
 	public SchedulePanel(Participant p, Conference c, int d){
 		data = null;
 		day = d;
@@ -30,8 +43,13 @@ public class SchedulePanel extends JPanel{
 		data = new Object[25][2];
 		createTable(day,p);
 	}
+	/**
+	 * @param d
+	 * First or second day of the conference
+	 * @param p
+	 * Participant to create a schedule for
+	 */
 	public void createTable(int d, Participant p){
-		//table of the schedule
 		//WORKSHOP ARE 45 MINUTES LONG
 		//Day 1: 1PM - 3PM (Workshops)
 		//9,930,10,1030,11,1130,12,1230,1,130,2,230,3,330,4,430,5,530,6,630,7,730,8,830,9
@@ -70,6 +88,10 @@ public class SchedulePanel extends JPanel{
         this.add(scrollPane);
         //table.getColumnModel().getColumn(0).setPreferredWidth(90);
 	}
+	/**
+	 * @param table
+	 * JTable to format
+	 */
 	public void formatTable(JTable table){
 		if(data.length > 0)
 			table.setAutoCreateRowSorter(true);
@@ -81,6 +103,10 @@ public class SchedulePanel extends JPanel{
 		
         table.getColumnModel().getColumn(0).setPreferredWidth(90);
 	}
+	/**
+	 * @param p
+	 * Finds what workshops a specific participant is registered for and adds the workshop to the participant schedule
+	 */
 	public void findRegistrations(Participant p){ //inserts workshops into the participants schedule
 		ArrayList<String>registrations = ReadFromFile.getRegistrationList();
 		for(int i = 0; i < registrations.size();i++){ //goes through WKSHP_REGISTRATIONS and finds participants registered to workshops
@@ -101,6 +127,10 @@ public class SchedulePanel extends JPanel{
 			}
 		}
 	}
+	/**
+	 * @param w
+	 * Workshop to add to the participant schedule
+	 */
 	public void addWorkshopToSchedule(Workshop w){
 		Workshop workshop = w;
 		for(int i = 0; i < data.length; i++){
@@ -113,6 +143,11 @@ public class SchedulePanel extends JPanel{
 			}
 		}
 	}
+	/**
+	 * @param i 
+	 * i value from the for loop to be converted into a readable time 
+	 * @return
+	 */
 	public String convertToDigital(int i){
 		String s = "";
 		String modifier ="";

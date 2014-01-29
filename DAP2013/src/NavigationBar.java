@@ -1,58 +1,64 @@
-//
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JDialog;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JRadioButtonMenuItem;
 
+/**
+ * @author Young
+ * Navigation bar to show the reports and help options
+ */
 public class NavigationBar extends JMenuBar implements ActionListener{
 	//menus
-	JMenuBar menuBar;
-	JMenu menu, menu2;
-	JMenuItem menuItem,menuItem2,menuItem3,menuItem4;
-	JRadioButtonMenuItem rbMenuItem;
-	JCheckBoxMenuItem cbMenuItem;
-
+	private JMenuBar menuBar;
+	private JMenu reportMenu, helpMenu;
+	private JMenuItem participantItem,workshopItem,scheduleItem,helpItem;
+	
+	/**
+	 * Creates the navigation bar for the program
+	 */
 	public NavigationBar(){
 		//Create the menu bar.
 		menuBar = new JMenuBar();
 
 		//Build the first menu.
-		menu = new JMenu("Reports");
-		menuBar.add(menu);
+		reportMenu = new JMenu("Reports");
 
 		//a group of JMenuItems
-		menuItem = new JMenuItem("Conference Participants");
-		menuItem.addActionListener(this);
+		participantItem = new JMenuItem("Conference Participants");
+		participantItem.addActionListener(this);
 		
-		menuItem2 = new JMenuItem("Participant List for Each Workshop");
-		menuItem2.addActionListener(this);
+		workshopItem = new JMenuItem("Participant List for Each Workshop");
+		workshopItem.addActionListener(this);
 		
-		menuItem3 = new JMenuItem("Participant Schedule");
-		menuItem3.addActionListener(this);
+		scheduleItem = new JMenuItem("Participant Schedule");
+		scheduleItem.addActionListener(this);
 		
-		menu.add(menuItem);
-		menu.add(menuItem2);
-		menu.add(menuItem3);
+		reportMenu.add(participantItem);
+		reportMenu.add(workshopItem);
+		reportMenu.add(scheduleItem);
 	
-		menu2 = new JMenu("Help");
-		menuBar.add(menu2);
+		helpMenu = new JMenu("Help");
 		
-		menuItem4 = new JMenuItem("Registration Instructions");
-		menuItem4.addActionListener(this);
+		helpItem = new JMenuItem("Registration Instructions");
+		helpItem.addActionListener(this);
 		
-		menu2.add(menuItem4);
+		helpMenu.add(helpItem);
 		
+		menuBar.add(reportMenu);
+		menuBar.add(helpMenu);
 	}
+	/**
+	 * @return
+	 * the created menu bar
+	 */
 	public JMenuBar getMenu(){
 		return menuBar;
 	}
 	public void actionPerformed(ActionEvent e) {
+		//Creates a window based on the menu chosen
 		String windowType = e.getActionCommand();
 		JDialog dialog = new ExtraWindow(windowType);
 		dialog.setVisible(true);

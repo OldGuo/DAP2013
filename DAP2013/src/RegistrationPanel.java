@@ -1,5 +1,3 @@
-
-
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,6 +13,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 
+/**
+ * @author Young
+ * Panel with fields for users to register new participants
+ */
 public class RegistrationPanel extends JPanel implements ActionListener{
 	private JComboBox type;
 	private JComboBox location;
@@ -31,6 +33,9 @@ public class RegistrationPanel extends JPanel implements ActionListener{
 		information = new ArrayList<String>();
 		createComponents();
 	}
+	/**
+	 * Creates the components to allow the user to register new participants
+	 */
 	public void createComponents(){
 		send = new JButton("SEND");
 	    send.setToolTipText("click to send your information");
