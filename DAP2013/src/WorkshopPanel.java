@@ -1,3 +1,4 @@
+
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
@@ -86,7 +87,7 @@ public class WorkshopPanel extends JPanel{
 		String title = (String) table.getValueAt(table.rowAtPoint(p), 1);;
 		String date = (String) table.getValueAt(table.rowAtPoint(p), 2);;
 		String time = (String) table.getValueAt(table.rowAtPoint(p), 3);;
-		Workshop w = ReadFromFile.getWorkshop(code, title, date, time);
+		Workshop w = ReadFromFile.getWorkshopByInfo(code, title, date, time);
 		
 		String name = w.getTitle();
 		String descrip = w.getDescrip();
@@ -110,7 +111,7 @@ public class WorkshopPanel extends JPanel{
 		String title = (String) table.getValueAt(table.rowAtPoint(p), 1);;
 		String date = (String) table.getValueAt(table.rowAtPoint(p), 2);;
 		String time = (String) table.getValueAt(table.rowAtPoint(p), 3);;
-		Workshop workshop = ReadFromFile.getWorkshop(code, title, date, time);
+		Workshop workshop = ReadFromFile.getWorkshopByInfo(code, title, date, time);
         
 		//popup asking for registration
 		if (e.isPopupTrigger() && e.getComponent() instanceof JTable ) {

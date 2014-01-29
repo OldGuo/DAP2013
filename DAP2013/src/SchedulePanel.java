@@ -1,4 +1,6 @@
+
 import java.awt.Dimension;
+import java.util.ArrayList;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -11,9 +13,13 @@ public class SchedulePanel extends JPanel{
 	private MyTableModel model;
 	private JTable table;
 	private JScrollPane scrollPane;
+	private Conference conference;
+	private int day;
 	
-	public SchedulePanel(Participant p, Conference c, int day){
+	public SchedulePanel(Participant p, Conference c, int d){
 		data = null;
+		day = d;
+		conference = c;
 		columnNames = null;
 		model = new MyTableModel();
 		table = new JTable();
@@ -52,6 +58,8 @@ public class SchedulePanel extends JPanel{
 			data[16][1] = "Closing General Session";
 			data[24][1] = "Blue Jeans for Babies Dance";
 		}
+		findRegistrations(p);
+		
 		model.setData(data);
 		model.setColumns(columnNames);
         table = new JTable(model);
@@ -72,6 +80,39 @@ public class SchedulePanel extends JPanel{
 		scrollPane.setPreferredSize(new Dimension(900,300));
 		
         table.getColumnModel().getColumn(0).setPreferredWidth(90);
+	}
+	public void findRegistrations(Participant p){ //inserts workshops into the participants schedule
+		ArrayList<String>registrations = ReadFromFile.getRegistrationList();
+		for(int i = 0; i < registrations.size();i++){ //goes through WKSHP_REGISTRATIONS and finds participants registered to workshops
+			String line = registrations.get(i);
+			for(int j = 5; j < line.length(); j++){
+				if(line.substring(j,j+1).equals("[")){
+					String temp = "";
+					int count = j+1;
+					while(!line.substring(count,count+1).equals("]")){
+						temp += line.substring(count,count+1);
+						count++;
+					}
+					if(temp.equals(p.getID())){ //finds the participant registered to the workshop
+						Workshop w = ReadFromFile.getWorkshopByID(line.substring(1,4));
+						addWorkshopToSchedule(w);
+					}
+				}
+			}
+		}
+	}
+	public void addWorkshopToSchedule(Workshop w){
+		Workshop workshop = w;
+		for(int i = 0; i < data.length; i++){
+			System.out.println(data[i][0]);
+			if(data[i][0].equals(workshop.getTime())){
+				if(day == 1 && workshop.getDate().equals(conference.getStartDate())){
+					data[i][1] = w.getTitle();
+				}else if(day == 2 && workshop.getDate().equals(conference.getEndDate())){
+					data[i][1] = w.getTitle();
+				}
+			}
+		}
 	}
 	public String convertToDigital(int i){
 		String s = "";

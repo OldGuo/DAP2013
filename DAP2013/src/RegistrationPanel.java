@@ -1,5 +1,4 @@
-//Panel where participants can register
-//Input: Location, Type (Member, Adviser, Guest), First Name, Last Name, and Chapter
+
 
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
