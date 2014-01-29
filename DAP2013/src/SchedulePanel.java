@@ -104,7 +104,6 @@ public class SchedulePanel extends JPanel{
 	public void addWorkshopToSchedule(Workshop w){
 		Workshop workshop = w;
 		for(int i = 0; i < data.length; i++){
-			System.out.println(data[i][0]);
 			if(data[i][0].equals(workshop.getTime())){
 				if(day == 1 && workshop.getDate().equals(conference.getStartDate())){
 					data[i][1] = w.getTitle();

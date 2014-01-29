@@ -110,7 +110,8 @@ public class ParticipantRegistrationWindow extends JDialog implements ActionList
 				}
 				if(alreadyRegistered == false){
 					//do some error checking with the registration
-					JOptionPane.showMessageDialog(frame, "Registration Successful: " + participant.getFirstName() + " registered");
+					String dialogString = "Registration Successful: " + participant.getFirstName() + " registered";
+					JOptionPane.showMessageDialog(frame, dialogString,"Registration Successful",JOptionPane.INFORMATION_MESSAGE);
 					print.registerForWorkshop(workshop,participant);	
 				}else{
 					String dialogString = "Registration Unsuccessful: " + participant.getFirstName() + " already registered";
