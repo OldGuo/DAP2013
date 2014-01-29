@@ -17,7 +17,6 @@ import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumnModel;
 
 
@@ -73,11 +72,6 @@ public class WorkshopPanel extends JPanel{
 		t.getColumn(1).setPreferredWidth(1000);
 		t.getColumn(2).setPreferredWidth(75);
 		t.getColumn(3).setPreferredWidth(75);
-		
-		DefaultTableCellRenderer renderer =
-                new DefaultTableCellRenderer();
-        renderer.setToolTipText("Click for combo box"); //get the actual location from CONFERENCES.TXT
-		t.getColumn(0).setCellRenderer(renderer);
 
 		MouseListener MyMouseListener = new MyMouseListener();
 		table.addMouseListener(MyMouseListener);

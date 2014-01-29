@@ -16,6 +16,8 @@ public class ExtraWindow extends JDialog{
 		super.setTitle(t);
 		this.setSize(1000,450);
 		this.setLocationRelativeTo(null);
+		this.setResizable(false);
+		this.setAlwaysOnTop(true);
 		
 		windowType = t;
 		createWindow();
@@ -45,17 +47,21 @@ public class ExtraWindow extends JDialog{
 		for(int i = 0; i < participants.size(); i++){
 			Participant p = (Participant)participants.get(i);
 			Conference c = null;
+			JTabbedPane inner = new JTabbedPane();
 			for(int j = 0; j < conferences.size(); j++){
 				Conference temp = (Conference)conferences.get(j);
 				if(p.getCode().equals(temp.getCode())){
 					c = (Conference)conferences.get(j);
 				}
 			}
-			JPanel temp = new JPanel();
+			JPanel dayOne = new SchedulePanel(p,c,1);
 			
-			temp.add(new JLabel(c.getStartDate() + " to " + c.getEndDate()));
-			temp.add(createTable(p));
-			tabbedPane.add(temp,p.getFirstName() + " " + p.getLastName() + ", " + p.getCode());
+			JPanel dayTwo = new SchedulePanel(p,c,2);
+			
+			inner.add(dayOne,c.getStartDate());
+			inner.add(dayTwo,c.getEndDate());
+			
+			tabbedPane.add(inner,p.getFirstName() + " " + p.getLastName() + ", " + p.getCode());
 		}
 		this.add(tabbedPane);
 	}
@@ -94,16 +100,21 @@ public class ExtraWindow extends JDialog{
 	public JScrollPane createTable(Object o){
 		Object [][] data = null;
 		String [] columnNames = null;
+		MyTableModel model = new MyTableModel();
+		JTable table = new JTable();
+		JScrollPane scrollPane = new JScrollPane();
+		
 		if(windowType.equals("Participant List for Each Workshop")){
 			//table list of participants registered from the workshops - from WKSHP_REGISTRATIONS
 			Workshop workshop = (Workshop)o;
 			int numParticipants = 0;
 			
 			ArrayList<String>registrations = ReadFromFile.getRegistrationList();
-			columnNames = new String[3];
-			columnNames[0] = "First";
-			columnNames[1] = "Last";
-			columnNames[2] = "Chapter";
+			columnNames = new String[4];
+			columnNames[0] = "Type";
+			columnNames[1] = "First";
+			columnNames[2] = "Last";
+			columnNames[3] = "Chapter";
 		
 			ArrayList<String>participants = new ArrayList<String>();
 			for(int i = 0; i < registrations.size(); i++){ //lines of WKSHP_REGISTRATIONS
@@ -127,37 +138,13 @@ public class ExtraWindow extends JDialog{
 
 			for(int i = 0; i < participants.size();i++){
 				Participant part = ReadFromFile.getParticipantByID(participants.get(i));
-				data[i][0] = part.getFirstName();
-				data[i][1] = part.getLastName();
-				data[i][2] = part.getCode();
+				data[i][0] = part.getType();
+				data[i][1] = part.getFirstName();
+				data[i][2] = part.getLastName();
+				data[i][3] = part.getCode();
 			}
 			//get the data
-		}else if(windowType.equals("Participant Schedule")){
-			//table of the schedule
-			//WORKSHOP ARE 45 MINUTES LONG
-			//Day 1: 1PM - 3PM (Workshops)
-			//9,930,10,1030,11,1130,12,1230,1,130,2,230,3,330,4,430,5,530,6,630,7,730,8,830,9
-			/* Registration 11 AM, 7 PM
-			 * Opening General Session 9PM 	
-			 * */
-			//Day 2: 9AM - 3:30 PM
-			//9,930,10,1030,11,1130,12,1230,1,130,2,230,3,330,4,430,5,530,6,630,7,730,8,830,9
-			/* Closing General Session 5 PM
-			 * Blue Jeans for babies dance 9 PM
-			 * */
-			Participant participant = (Participant)o;
-			columnNames = new String[2];
-			columnNames[0] = "Time";
-			columnNames[1] = "Event";
-			data = new Object[25][2];
-			for(int i = 0; i < data.length; i++){
-				data[i][0] = 9 + i*30;
-				data[i][1] = "EVENT";
-			}
 		}
-		MyTableModel model = new MyTableModel();
-		JTable table = new JTable();
-		JScrollPane scrollPane = new JScrollPane();
 		model.setData(data);
 		model.setColumns(columnNames);
         table = new JTable(model);
@@ -167,9 +154,12 @@ public class ExtraWindow extends JDialog{
 			table.setAutoCreateRowSorter(true);
         table.getTableHeader().setResizingAllowed(false);
         table.getTableHeader().setReorderingAllowed(false);
-        
+
         scrollPane = new JScrollPane(table);
-		scrollPane.setPreferredSize(new Dimension(900,350));
+		scrollPane.setPreferredSize(new Dimension(900,300));
+		
+        table.getColumnModel().getColumn(0).setPreferredWidth(90);
+        
 		return scrollPane;
 	}
 }
