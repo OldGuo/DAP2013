@@ -32,18 +32,21 @@ public class ParticipantRegistrationWindow extends JDialog implements ActionList
 		saveButton.setActionCommand("save");
 		this.setSize(1000,450);
 		model = new MyTableModel();
-		loadData();
 		createTable();
 	    this.add(saveButton);
 	}
-	public void loadData(){
-		//ReadFromFile read = new ReadFromFile("PARTICIPANTS");
-		participants = ReadFromFile.getData("PARTICIPANTS");
-	}
 	public void createTable(){
 		String [] columnNames = {"Type","First","Last","Chapter","Register"};
-        
-        Object [][] data = new Object[participants.size()][5];
+		participants = ReadFromFile.getData("PARTICIPANTS");
+        //filter the participant list to only those registered to the specific conference
+		for(int j = 0; j < participants.size(); j++){
+			Participant p = (Participant)participants.get(j);
+			if(!p.getCode().equals(workshop.getCode())){
+				participants.remove(j);
+				j--;
+			}
+		}
+		Object [][] data = new Object[participants.size()][5];
 		for(int i = 0; i < participants.size();i++){
 			Participant p = (Participant)participants.get(i);
 			for(int j = 0; j < 5; j++){

@@ -54,8 +54,8 @@ public class ExtraWindow extends JDialog{
 			JPanel temp = new JPanel();
 			
 			temp.add(new JLabel(c.getStartDate() + " to " + c.getEndDate()));
-
-			tabbedPane.add(temp,p.getFirstName() + " " + p.getLastName());
+			temp.add(createTable(p));
+			tabbedPane.add(temp,p.getFirstName() + " " + p.getLastName() + ", " + p.getCode());
 		}
 		this.add(tabbedPane);
 	}
@@ -72,7 +72,7 @@ public class ExtraWindow extends JDialog{
 			Workshop w = (Workshop)workshops.get(i);
 			JPanel temp = new JPanel();
 			tabbedPane.add(w.getTitle() + ", " + w.getCode(),temp);
-			createTable(w,temp);
+			temp.add(createTable(w));
 		}
 		this.add(tabbedPane);
 	}
@@ -87,24 +87,28 @@ public class ExtraWindow extends JDialog{
 			Conference c = (Conference)conferences.get(i);
 			JPanel temp = new ParticipantPanel(c.getCode());
 			tabbedPane.add(temp,c.getLocation() + "; " + c.getStartDate() + " - " + c.getEndDate());
+			//createTable();
 		}
 		this.add(tabbedPane);
 	}
-	public void createTable(Workshop w, JPanel p){
-		JPanel panel = p;
-		Object [][] data;
+	public JScrollPane createTable(Object o){
+		Object [][] data = null;
+		String [] columnNames = null;
 		if(windowType.equals("Participant List for Each Workshop")){
 			//table list of participants registered from the workshops - from WKSHP_REGISTRATIONS
-			Workshop workshop = w;
+			Workshop workshop = (Workshop)o;
 			int numParticipants = 0;
 			
 			ArrayList<String>registrations = ReadFromFile.getRegistrationList();
-			String [] columnNames = {"First","Last","Chapter"};
+			columnNames = new String[3];
+			columnNames[0] = "First";
+			columnNames[1] = "Last";
+			columnNames[2] = "Chapter";
 		
 			ArrayList<String>participants = new ArrayList<String>();
 			for(int i = 0; i < registrations.size(); i++){ //lines of WKSHP_REGISTRATIONS
 				String line = registrations.get(i);
-				if(line.substring(1,4).equals(w.getID())){ //gets the registered ID's
+				if(line.substring(1,4).equals(workshop.getID())){ //gets the registered ID's
 					for(int j = 5; j < line.length(); j++){
 						if(line.substring(j,j+1).equals("[")){
 							String temp = "";
@@ -128,36 +132,44 @@ public class ExtraWindow extends JDialog{
 				data[i][2] = part.getCode();
 			}
 			//get the data
-			
-			MyTableModel model = new MyTableModel();
-			JTable table = new JTable();
-			JScrollPane scrollPane = new JScrollPane();
-			model.setData(data);
-			model.setColumns(columnNames);
-	        table = new JTable(model);
-			model = new MyTableModel(data,columnNames);
-	        
-			if(data.length > 0)
-				table.setAutoCreateRowSorter(true);
-	        table.getTableHeader().setResizingAllowed(false);
-	        table.getTableHeader().setReorderingAllowed(false);
-	        
-	        scrollPane = new JScrollPane(table);
-			scrollPane.setPreferredSize(new Dimension(900,350));
-	        panel.add(scrollPane);
 		}else if(windowType.equals("Participant Schedule")){
 			//table of the schedule
 			//WORKSHOP ARE 45 MINUTES LONG
 			//Day 1: 1PM - 3PM (Workshops)
+			//9,930,10,1030,11,1130,12,1230,1,130,2,230,3,330,4,430,5,530,6,630,7,730,8,830,9
 			/* Registration 11 AM, 7 PM
 			 * Opening General Session 9PM 	
 			 * */
 			//Day 2: 9AM - 3:30 PM
+			//9,930,10,1030,11,1130,12,1230,1,130,2,230,3,330,4,430,5,530,6,630,7,730,8,830,9
 			/* Closing General Session 5 PM
 			 * Blue Jeans for babies dance 9 PM
 			 * */
-			String [] columnNames = {"Time","Event"};
-			data = new Object[0][4];
+			Participant participant = (Participant)o;
+			columnNames = new String[2];
+			columnNames[0] = "Time";
+			columnNames[1] = "Event";
+			data = new Object[25][2];
+			for(int i = 0; i < data.length; i++){
+				data[i][0] = 9 + i*30;
+				data[i][1] = "EVENT";
+			}
 		}
+		MyTableModel model = new MyTableModel();
+		JTable table = new JTable();
+		JScrollPane scrollPane = new JScrollPane();
+		model.setData(data);
+		model.setColumns(columnNames);
+        table = new JTable(model);
+		model = new MyTableModel(data,columnNames);
+        
+		if(data.length > 0)
+			table.setAutoCreateRowSorter(true);
+        table.getTableHeader().setResizingAllowed(false);
+        table.getTableHeader().setReorderingAllowed(false);
+        
+        scrollPane = new JScrollPane(table);
+		scrollPane.setPreferredSize(new Dimension(900,350));
+		return scrollPane;
 	}
 }
