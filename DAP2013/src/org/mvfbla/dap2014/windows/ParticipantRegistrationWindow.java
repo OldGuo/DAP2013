@@ -1,3 +1,4 @@
+package org.mvfbla.dap2014.windows;
 //Window where user can choose participants to register for a specific workshop
 
 import java.awt.Dimension;
@@ -12,6 +13,12 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+
+import org.mvfbla.dap2014.base.Participant;
+import org.mvfbla.dap2014.base.Workshop;
+import org.mvfbla.dap2014.utilities.MyTableModel;
+import org.mvfbla.dap2014.utilities.PrintToFile;
+import org.mvfbla.dap2014.utilities.ReadFromFile;
 
 /**
  * @author Young

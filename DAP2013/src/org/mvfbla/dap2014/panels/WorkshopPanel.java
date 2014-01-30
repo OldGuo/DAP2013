@@ -1,3 +1,4 @@
+package org.mvfbla.dap2014.panels;
 
 
 import java.awt.Dimension;
@@ -20,6 +21,11 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.table.TableColumnModel;
+
+import org.mvfbla.dap2014.base.Workshop;
+import org.mvfbla.dap2014.utilities.MyTableModel;
+import org.mvfbla.dap2014.utilities.ReadFromFile;
+import org.mvfbla.dap2014.windows.ParticipantRegistrationWindow;
 
 
 /**

@@ -1,3 +1,4 @@
+package org.mvfbla.dap2014.windows;
 import java.awt.Dimension;
 import java.util.ArrayList;
 
@@ -7,6 +8,14 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
+
+import org.mvfbla.dap2014.base.Conference;
+import org.mvfbla.dap2014.base.Participant;
+import org.mvfbla.dap2014.base.Workshop;
+import org.mvfbla.dap2014.panels.ParticipantPanel;
+import org.mvfbla.dap2014.panels.SchedulePanel;
+import org.mvfbla.dap2014.utilities.MyTableModel;
+import org.mvfbla.dap2014.utilities.ReadFromFile;
 
 
 /**
@@ -39,7 +48,8 @@ public class ExtraWindow extends JDialog{
 			createParticipantReport();
 		}else if(windowType.equals("Participant List for Each Workshop")){
 			createWorkshopReport();
-		}else if(windowType.equals("Participant Schedule")){
+		}else if(windowType.equals("Participant Schedules")){
+			//System.out.println("got here?");
 			createScheduleReport();
 		}else if(windowType.equals("Registration Instructions")){
 			createInstructionReport();
@@ -49,7 +59,7 @@ public class ExtraWindow extends JDialog{
 	 * Creates an instruction window
 	 */
 	public void createInstructionReport(){
-		JLabel temp = new JLabel("PUT SOME IMAGES OR SOMETHING SHOWING HOW TO USE THE WINDOWS, NEED TO GET THE FINAL LOOK TO MAKE SCREENSHOTS THOUGH");
+		JLabel temp = new JLabel("Instructions");
 		this.add(temp);
 	}
 	/**
@@ -177,7 +187,7 @@ public class ExtraWindow extends JDialog{
 		model.setData(data);
 		model.setColumns(columnNames);
         table = new JTable(model);
-		model = new MyTableModel(data,columnNames);
+        model = new MyTableModel(data,columnNames);
         
 		if(data.length > 0)
 			table.setAutoCreateRowSorter(true);

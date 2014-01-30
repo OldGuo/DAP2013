@@ -1,3 +1,4 @@
+package org.mvfbla.dap2014.utilities;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -5,6 +6,8 @@ import javax.swing.JDialog;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+
+import org.mvfbla.dap2014.windows.ExtraWindow;
 
 /**
  * @author Young
@@ -33,7 +36,7 @@ public class NavigationBar extends JMenuBar implements ActionListener{
 		workshopItem = new JMenuItem("Participant List for Each Workshop");
 		workshopItem.addActionListener(this);
 		
-		scheduleItem = new JMenuItem("Participant Schedule");
+		scheduleItem = new JMenuItem("Participant Schedules");
 		scheduleItem.addActionListener(this);
 		
 		reportMenu.add(participantItem);

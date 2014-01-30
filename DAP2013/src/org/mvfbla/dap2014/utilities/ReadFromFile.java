@@ -1,5 +1,10 @@
+package org.mvfbla.dap2014.utilities;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import org.mvfbla.dap2014.base.Conference;
+import org.mvfbla.dap2014.base.Participant;
+import org.mvfbla.dap2014.base.Workshop;
 
 /**
  * @author Young
@@ -22,32 +27,16 @@ public class ReadFromFile {
 	public static void selectReader(String s){
 		readType = s;
 		if(s.equals("WORKSHOPS")){
-			if(station.equals("desktop")){
-				input = OpenFile.open("C:\\Users\\Young\\git\\FBLADAP2013\\DAP2013\\WORKSHOPS.txt"); //desktop
-			}else{
-				input = OpenFile.open("C:\\Users\\Young\\Documents\\GitHub\\DAP2013\\DAP2013\\WORKSHOPS.txt"); //laptop
-			}
+			input = OpenFile.open("WORKSHOPS.txt"); //desktop
 		}
 		if(s.equals("PARTICIPANTS")){ //participants
-			if(station.equals("desktop")){
-				input = OpenFile.open("C:\\Users\\Young\\git\\FBLADAP2013\\DAP2013\\PARTICIPANTS.txt"); //desktop
-			}else{
-				input = OpenFile.open("C:\\Users\\Young\\Documents\\GitHub\\DAP2013\\DAP2013\\PARTICIPANTS.txt"); //laptop
-			}
+			input = OpenFile.open("PARTICIPANTS.txt"); //desktop
 		}
 		if(s.equals("WKSHP_REGISTRATIONS")){
-			if(station.equals("desktop")){
-				input = OpenFile.open("C:\\Users\\Young\\git\\FBLADAP2013\\DAP2013\\WKSHP_REGISTRATIONS.txt"); //desktop
-			}else{
-				input = OpenFile.open("C:\\Users\\Young\\Documents\\GitHub\\DAP2013\\DAP2013\\WKSHP_REGISTRATIONS.txt"); //laptop
-			}
+			input = OpenFile.open("WKSHP_REGISTRATIONS.txt"); //desktop
 		}
 		if(s.equals("CONFERENCES")){
-			if(station.equals("desktop")){
-				input = OpenFile.open("C:\\Users\\Young\\git\\FBLADAP2013\\DAP2013\\CONFERENCES.txt"); //desktop
-			}else{
-				input = OpenFile.open("C:\\Users\\Young\\Documents\\GitHub\\DAP2013\\DAP2013\\CONFERENCES.txt"); //laptop
-			}
+			input = OpenFile.open("CONFERENCES.txt"); //desktop
 		}
 	}
 	/**

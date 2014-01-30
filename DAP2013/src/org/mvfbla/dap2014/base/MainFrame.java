@@ -1,3 +1,4 @@
+package org.mvfbla.dap2014.base;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -5,6 +6,10 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+
+import org.mvfbla.dap2014.panels.RegistrationPanel;
+import org.mvfbla.dap2014.panels.WorkshopPanel;
+import org.mvfbla.dap2014.utilities.NavigationBar;
 
 /**
  * @author Young
@@ -14,9 +19,6 @@ public class MainFrame implements ActionListener {
 	/**
 	 * Creates all main panels and tabs for the program
 	 */
-	public MainFrame(){
-		System.out.println("THIS HAS TO RUN");
-	}
 	private static void createAndShowGUI() {
         //Create and set up the window.
 		
@@ -51,11 +53,9 @@ public class MainFrame implements ActionListener {
     public static void main(String[] args) {
         //Schedule a job for the event-dispatching thread:
         //creating and showing this application's GUI.
-    	System.out.println("run?");
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             @Override
 			public void run() {
-            	System.out.println("run?");
                 createAndShowGUI();
             }
         });

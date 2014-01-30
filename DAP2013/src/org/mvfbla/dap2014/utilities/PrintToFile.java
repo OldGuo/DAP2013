@@ -1,8 +1,12 @@
+package org.mvfbla.dap2014.utilities;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+
+import org.mvfbla.dap2014.base.Participant;
+import org.mvfbla.dap2014.base.Workshop;
 
 /**
  * @author Young
@@ -26,11 +30,7 @@ public class PrintToFile {
 	 */
 	public void setWriter(String t){
 		if(t.equals("PARTICIPANT")){
-			if(station.equals("desktop")){
-				printFile = new File("C:\\Users\\Young\\git\\FBLADAP2013\\DAP2013\\PARTICIPANTS.txt"); //desktop
-			}else{
-				printFile = new File("C:\\Users\\Young\\Documents\\GitHub\\DAP2013\\DAP2013\\PARTICIPANTS.txt"); //laptop
-			}
+			printFile = new File("PARTICIPANTS.txt"); //desktop
 			try {
 				fileWriter = new FileWriter(printFile,true);
 			} catch (IOException e) {
@@ -38,11 +38,7 @@ public class PrintToFile {
 			}
 		}
 		if(t.equals("WKSHP_REGISTRATIONS")){
-			if(station.equals("desktop")){
-				printFile = new File("C:\\Users\\Young\\git\\FBLADAP2013\\DAP2013\\WKSHP_REGISTRATIONS.txt"); //desktop
-			}else{
-				printFile = new File("C:\\Users\\Young\\Documents\\GitHub\\DAP2013\\DAP2013\\WKSHP_REGISTRATIONS.txt"); //laptop
-			}
+			printFile = new File("WKSHP_REGISTRATIONS.txt"); //desktop
 			try {
 				fileWriter = new FileWriter(printFile,false);
 			} catch (IOException e) {
@@ -71,7 +67,6 @@ public class PrintToFile {
 					s+=",";
 			}
 			bufferedWriter.write(s);
-			bufferedWriter.newLine();
 			bufferedWriter.close();
 		} catch (IOException e) {
 			e.printStackTrace();

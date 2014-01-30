@@ -42,3 +42,7 @@
 [42],[DC],[Member],[John],[Hsiao],[234]
 [43],[LA],[Member],[Ryan],[Ke],[983]
 [44],[DC],[Member],[Albert],[Tan],[6447]
+[45],[LA],[Member],[Derek],[Shao],[2345]
+[46],[MN],[Advisor],[Eugene],[Park],[4453]
+[47],[MN],[Advisor],[Marcus],[Hill],[3425]
+[48],[MN],[Advisor],[Peng],[Yiliang],[3452]

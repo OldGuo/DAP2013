@@ -1,3 +1,4 @@
+package org.mvfbla.dap2014.utilities;
 import javax.swing.table.AbstractTableModel;
 
 /**

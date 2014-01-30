@@ -1,3 +1,4 @@
+package org.mvfbla.dap2014.base;
 /*
  * Workshop class
  * 	Contains 6 fields to aid participants in pre-registering for workshops:

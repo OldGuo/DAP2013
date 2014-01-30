@@ -1,3 +1,4 @@
+package org.mvfbla.dap2014.panels;
 import java.awt.Dimension;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -6,6 +7,10 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+
+import org.mvfbla.dap2014.base.Participant;
+import org.mvfbla.dap2014.utilities.MyTableModel;
+import org.mvfbla.dap2014.utilities.ReadFromFile;
 
 
 /**
