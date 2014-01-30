@@ -45,6 +45,20 @@ public class RegistrationPanel extends JPanel implements ActionListener{
 	 * Creates the components to allow the user to register new participants
 	 */
 	public void createComponents(){
+		c.ipady = 0; 
+		c.ipadx = 0; 
+		c.insets = new Insets(15,50,0,50);  //top padding
+		c.fill = GridBagConstraints.CENTER; 
+		
+		c.anchor = GridBagConstraints.PAGE_START; c.gridx = 0; c.gridwidth = 2; c.gridy = 0;
+		JLabel title = new JLabel("Register Participants for Conferences");
+		title.setFont(new Font("Arial",Font.PLAIN, 24));
+		this.add(title, c);
+		
+		c.gridwidth = 1;
+		c.ipady = 50; 
+		c.fill = GridBagConstraints.HORIZONTAL; 
+		
 		send = new JButton("SEND");
 	    send.setToolTipText("click to send your information");
 	    send.addActionListener(this);
@@ -76,37 +90,35 @@ public class RegistrationPanel extends JPanel implements ActionListener{
 		location = new JComboBox(locations);
 		location.addActionListener(this);
 	    
-		c.ipady = 40; 
-		c.ipadx = 0; 
-		c.insets = new Insets(25,50,0,50);  //top padding
-		c.fill = GridBagConstraints.HORIZONTAL; 
-		
-		c.gridx = 0; c.gridy = 0; c.weightx = 1;
+		addComponents();
+	}
+	public void addComponents(){
+		c.gridx = 0; c.gridy = 1; c.weightx = 1;
 		this.add(conferenceLocation, c);
-		c.gridx = 1; c.gridy = 0; c.weightx = 2;
+		c.gridx = 1; c.gridy = 1; c.weightx = 3;
 	    this.add(location, c);
 	    
-	    c.gridx = 0; c.gridy = 1; c.weightx = 1;
+	    c.gridx = 0; c.gridy = 2; c.weightx = 1;
 	    this.add(participantType, c);
-	    c.gridx = 1; c.gridy = 1; c.weightx = 2;
+	    c.gridx = 1; c.gridy = 2; c.weightx = 3;
 	    this.add(type, c);
 		
-	    c.gridx = 0; c.gridy = 2; c.weightx = 1;
+	    c.gridx = 0; c.gridy = 3; c.weightx = 1;
 	    this.add(firstName, c);
-	    c.gridx = 1; c.gridy = 2; c.weightx = 2;
+	    c.gridx = 1; c.gridy = 3; c.weightx = 3;
 		this.add(first, c);
 		
-		c.gridx = 0; c.gridy = 3; c.weightx = 1;
+		c.gridx = 0; c.gridy = 4; c.weightx = 1;
 		this.add(lastName, c);
-		c.gridx = 1; c.gridy = 3; c.weightx = 2;
+		c.gridx = 1; c.gridy = 4; c.weightx = 3;
 		this.add(last, c);
 		
-		c.gridx = 0; c.gridy = 4; c.weightx = 1;
+		c.gridx = 0; c.gridy = 5; c.weightx = 1;
 		this.add(chapterNumber, c);
-		c.gridx = 1; c.gridy = 4; c.weightx = 2;
+		c.gridx = 1; c.gridy = 5; c.weightx = 3;
 		this.add(chapter, c);
 		
-		c.anchor = GridBagConstraints.PAGE_END; c.gridx = 0; c.gridwidth = 2; c.gridy = 5;
+		c.anchor = GridBagConstraints.PAGE_END; c.gridx = 0; c.gridwidth = 2; c.gridy = 6;
 		this.add(send, c);
 	}
 	@Override
