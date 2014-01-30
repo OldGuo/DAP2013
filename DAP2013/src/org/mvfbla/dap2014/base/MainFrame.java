@@ -3,6 +3,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
@@ -23,6 +24,7 @@ public class MainFrame implements ActionListener {
         //Create and set up the window.
 		
 		JFrame frame = new JFrame("DAP2013");
+		frame.setIconImage(new ImageIcon("Files\\fbla_large.png").getImage());
 		
 		frame.setPreferredSize(new Dimension(1080,720));
         
