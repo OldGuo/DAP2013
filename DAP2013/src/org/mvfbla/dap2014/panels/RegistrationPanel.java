@@ -1,5 +1,8 @@
 package org.mvfbla.dap2014.panels;
-import java.awt.GridLayout;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -24,16 +27,18 @@ public class RegistrationPanel extends JPanel implements ActionListener{
 	private JComboBox type;
 	private JComboBox location;
 	private JButton send;
-	private JTextField first;
-	private JTextField last;
-	private JTextField chapter;
+	private JTextField first, last, chapter;
+	private JLabel conferenceLocation, participantType,firstName, lastName, chapterNumber;
 	private ArrayList<String> information;
 	private JFrame frame;
 
+	private GridBagConstraints c;
+	
 	public RegistrationPanel(){
 		this.frame = frame;
-		this.setLayout(new GridLayout(6,2));
-		information = new ArrayList<String>();
+		//this.setLayout(new GridLayout(6,2,200,25));
+		this.setLayout(new GridBagLayout());
+		c = new GridBagConstraints();
 		createComponents();
 	}
 	/**
@@ -47,6 +52,21 @@ public class RegistrationPanel extends JPanel implements ActionListener{
 	    first = new JTextField();
 	    last = new JTextField();
 	    chapter = new JTextField();
+	    
+	    firstName = new JLabel("Participant First Name:");
+	    firstName.setFont(new Font("Arial",Font.PLAIN, 18));
+	    
+	    lastName = new JLabel("Participant Last Name:");
+	   	lastName.setFont(new Font("Arial",Font.PLAIN, 18));
+	    
+	    chapterNumber = new JLabel("FBLA Chapter:");
+	    chapterNumber.setFont(new Font("Arial",Font.PLAIN, 18));
+	    
+	    participantType = new JLabel("Participant Type:");
+	    participantType.setFont(new Font("Arial",Font.PLAIN, 18));
+	    
+	    conferenceLocation = new JLabel("Conference Location:");
+	    conferenceLocation.setFont(new Font("Arial",Font.PLAIN, 18));
 
 		String [] types = {"Member","Advisor","Guest"};
 		String [] locations = {"DC","MN","LA"};
@@ -56,22 +76,38 @@ public class RegistrationPanel extends JPanel implements ActionListener{
 		location = new JComboBox(locations);
 		location.addActionListener(this);
 	    
-		this.add(new JLabel("Conference Location:"));
-	    this.add(location);
+		c.ipady = 40; 
+		c.ipadx = 0; 
+		c.insets = new Insets(25,50,0,50);  //top padding
+		c.fill = GridBagConstraints.HORIZONTAL; 
+		
+		c.gridx = 0; c.gridy = 0; c.weightx = 1;
+		this.add(conferenceLocation, c);
+		c.gridx = 1; c.gridy = 0; c.weightx = 2;
+	    this.add(location, c);
 	    
-	    this.add(new JLabel("Participant Type:"));
-	    this.add(type);
+	    c.gridx = 0; c.gridy = 1; c.weightx = 1;
+	    this.add(participantType, c);
+	    c.gridx = 1; c.gridy = 1; c.weightx = 2;
+	    this.add(type, c);
 		
-	    this.add(new JLabel("Participant First Name:"));
-		this.add(first);
+	    c.gridx = 0; c.gridy = 2; c.weightx = 1;
+	    this.add(firstName, c);
+	    c.gridx = 1; c.gridy = 2; c.weightx = 2;
+		this.add(first, c);
 		
-		this.add(new JLabel("Participant Last Name:"));
-		this.add(last);
+		c.gridx = 0; c.gridy = 3; c.weightx = 1;
+		this.add(lastName, c);
+		c.gridx = 1; c.gridy = 3; c.weightx = 2;
+		this.add(last, c);
 		
-		this.add(new JLabel("FBLA Chapter:"));
-		this.add(chapter);
+		c.gridx = 0; c.gridy = 4; c.weightx = 1;
+		this.add(chapterNumber, c);
+		c.gridx = 1; c.gridy = 4; c.weightx = 2;
+		this.add(chapter, c);
 		
-		this.add(send);
+		c.anchor = GridBagConstraints.PAGE_END; c.gridx = 0; c.gridwidth = 2; c.gridy = 5;
+		this.add(send, c);
 	}
 	@Override
 	public void actionPerformed(ActionEvent e){

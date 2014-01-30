@@ -32,7 +32,7 @@ public class ExtraWindow extends JDialog{
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
 		this.setAlwaysOnTop(true);
-		
+
 		windowType = t;
 		createWindow();
 	}

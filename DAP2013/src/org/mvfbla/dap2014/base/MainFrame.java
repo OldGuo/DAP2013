@@ -24,10 +24,6 @@ public class MainFrame implements ActionListener {
 		
 		JFrame frame = new JFrame("DAP2013");
 		
-		//frame.setLayout(new BorderLayout());
-		//frame.setContentPane(new JLabel(new ImageIcon("C:\\Users\\Young\\Desktop\\Teemo_0 - Copy.jpg")));
-		//frame.setLayout(new FlowLayout());
-		
 		frame.setPreferredSize(new Dimension(1080,720));
         
         frame.setResizable(false);

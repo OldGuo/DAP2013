@@ -76,22 +76,24 @@ public class WorkshopRegistrationsPanel extends JPanel{
 			data[i][2] = part.getLastName();
 			data[i][3] = part.getCode();
 		}
+		formatTable();
+        this.add(scrollPane);
+	}
+	public void formatTable(){
 		//get the data
 		model.setData(data);
 		model.setColumns(columnNames);
-        table = new JTable(model);
-        model = new MyTableModel(data,columnNames);
-        
-		if(data.length > 0)
+		table = new JTable(model);
+		model = new MyTableModel(data,columnNames);
+		        
+		if(data.length > 0){
 			table.setAutoCreateRowSorter(true);
-        table.getTableHeader().setResizingAllowed(false);
-        table.getTableHeader().setReorderingAllowed(false);
-
-        scrollPane = new JScrollPane(table);
-		scrollPane.setPreferredSize(new Dimension(900,300));
+		}
+		table.getTableHeader().setResizingAllowed(false);
+		table.getTableHeader().setReorderingAllowed(false);
 		
-        table.getColumnModel().getColumn(0).setPreferredWidth(90);
-        
-        this.add(scrollPane);
+		scrollPane = new JScrollPane(table);
+		scrollPane.setPreferredSize(new Dimension(900,300));
+        table.getColumnModel().getColumn(0).setPreferredWidth(90);		        	
 	}
 }
