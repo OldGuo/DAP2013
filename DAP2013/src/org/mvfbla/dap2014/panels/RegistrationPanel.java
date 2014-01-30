@@ -83,7 +83,9 @@ public class RegistrationPanel extends JPanel implements ActionListener{
 	    conferenceLocation.setFont(new Font("Arial",Font.PLAIN, 18));
 
 		String [] types = {"Member","Advisor","Guest"};
-		String [] locations = {"DC","MN","LA"};
+		String [] locations = {"(11/7/14 - 11/8/14) Washington, DC",
+				"(11/14/14 - 11/15/14) Minneapolis, MN",
+				"(11/21/14 - 11/22/14) New Orleans, LA"};
 		
 		type = new JComboBox(types);
 		type.addActionListener(this);
@@ -124,7 +126,8 @@ public class RegistrationPanel extends JPanel implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e){
 		if(e.getSource() == send){
-			String loc = (String)location.getSelectedItem();
+			String tempLoc = (String)location.getSelectedItem();
+			String loc = tempLoc.substring(tempLoc.length() - 2, tempLoc.length());
 			String participantType = (String)type.getSelectedItem();
 			String firstName = first.getText();
 			String lastName = last.getText();

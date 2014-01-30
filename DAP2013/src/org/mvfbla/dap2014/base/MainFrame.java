@@ -36,10 +36,9 @@ public class MainFrame implements ActionListener {
         
         JPanel workshopPanel = new WorkshopPanel();
 
+		tabbedPane.addTab("Register for Workshops",workshopPanel);
 		tabbedPane.addTab("Register Members",registrationPanel);
 		
-		tabbedPane.addTab("Register for Workshops",workshopPanel);
-
         NavigationBar nav = new NavigationBar();
 		frame.setJMenuBar(nav.getMenu());
 		frame.add(tabbedPane);
