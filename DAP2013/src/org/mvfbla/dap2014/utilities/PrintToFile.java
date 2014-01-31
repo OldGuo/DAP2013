@@ -30,7 +30,7 @@ public class PrintToFile {
 	 */
 	public void setWriter(String t){
 		if(t.equals("PARTICIPANT")){
-			printFile = new File("Files\\PARTICIPANTS.txt"); //desktop
+			printFile = new File("src\\Files\\PARTICIPANTS.txt"); //desktop
 			try {
 				fileWriter = new FileWriter(printFile,true);
 			} catch (IOException e) {
@@ -38,7 +38,7 @@ public class PrintToFile {
 			}
 		}
 		if(t.equals("WKSHP_REGISTRATIONS")){
-			printFile = new File("Files\\WKSHP_REGISTRATIONS.txt"); //desktop
+			printFile = new File("src\\Files\\WKSHP_REGISTRATIONS.txt"); //desktop
 			try {
 				fileWriter = new FileWriter(printFile,false);
 			} catch (IOException e) {

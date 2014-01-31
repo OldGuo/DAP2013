@@ -2,13 +2,13 @@ package org.mvfbla.dap2014.windows;
 import java.util.ArrayList;
 
 import javax.swing.JDialog;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
 import org.mvfbla.dap2014.base.Conference;
 import org.mvfbla.dap2014.base.Participant;
 import org.mvfbla.dap2014.base.Workshop;
+import org.mvfbla.dap2014.panels.InstructionPanel;
 import org.mvfbla.dap2014.panels.ParticipantPanel;
 import org.mvfbla.dap2014.panels.SchedulePanel;
 import org.mvfbla.dap2014.panels.WorkshopRegistrationsPanel;
@@ -46,7 +46,7 @@ public class ExtraWindow extends JDialog{
 			createWorkshopReport();
 		}else if(windowType.equals("Participant Schedules")){
 			createScheduleReport();
-		}else if(windowType.equals("Registration Instructions")){
+		}else if(windowType.equals("General Instructions")){
 			createInstructionReport();
 		}
 	}
@@ -122,7 +122,10 @@ public class ExtraWindow extends JDialog{
 	 * Creates an instruction window
 	 */
 	public void createInstructionReport(){
-		JLabel temp = new JLabel("Instructions");
-		this.add(temp);
+		JTabbedPane tabbedPane = new JTabbedPane();
+		tabbedPane.add(new InstructionPanel(1), "Workshop Registration Help");
+		tabbedPane.add(new InstructionPanel(2), "Participant Registration Help");
+		tabbedPane.add(new InstructionPanel(3), "Reports Help");
+		this.add(tabbedPane);
 	}
 }

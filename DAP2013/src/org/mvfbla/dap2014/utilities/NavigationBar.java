@@ -45,7 +45,7 @@ public class NavigationBar extends JMenuBar implements ActionListener{
 	
 		helpMenu = new JMenu("Help");
 		
-		helpItem = new JMenuItem("Registration Instructions");
+		helpItem = new JMenuItem("General Instructions");
 		helpItem.addActionListener(this);
 		
 		helpMenu.add(helpItem);

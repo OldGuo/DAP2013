@@ -59,7 +59,7 @@ public class RegistrationPanel extends JPanel implements ActionListener{
 		c.ipady = 50; 
 		c.fill = GridBagConstraints.HORIZONTAL; 
 		
-		send = new JButton("SEND");
+		send = new JButton("Register");
 	    send.setToolTipText("click to send your information");
 	    send.addActionListener(this);
 

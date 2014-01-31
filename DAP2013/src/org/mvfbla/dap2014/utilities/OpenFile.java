@@ -20,7 +20,7 @@ public class OpenFile{
 		try{
 			fromFile = new Scanner(myFile);
 		}catch(FileNotFoundException e){
-			System.out.println("Sorry, can't open your file");
+			System.out.println("Sorry, can't open " + fileString);
 			System.exit(1);
 		}
 		return fromFile;
