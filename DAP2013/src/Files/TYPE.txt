@@ -1,3 +1,3 @@
-[M],[FBLA club participants eligible to participate in workshops]
-[A],[Chapter Advisers to assist members and guests in their duties]
-[G],[Chaperonees, Workshop organizers, Keynote Speakers,etc.]
+[Member],[FBLA club participants eligible to participate in workshops]
+[Adviser],[Chapter Advisers to assist members and guests in their duties]
+[Guest],[Chaperones, Workshop organizers, Keynote Speakers,etc.]
