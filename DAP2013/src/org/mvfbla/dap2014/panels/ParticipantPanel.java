@@ -53,7 +53,6 @@ public class ParticipantPanel extends JPanel implements ItemListener{
 	 * Creates the table after filtering participants for the specific conference
 	 */
 	public void createTable(){
-		//ReadFromFile read = new ReadFromFile("PARTICIPANTS");
 		participants = ReadFromFile.getData("PARTICIPANTS");
 		
 		filterParticipants();
@@ -67,7 +66,7 @@ public class ParticipantPanel extends JPanel implements ItemListener{
 			data[i][1] = p.getType().toString();
 			data[i][2] = p.getFirstName().toString();
 			data[i][3] = p.getLastName().toString();
-			data[i][4] = p.getChapter().toString(); //change back to chapter later
+			data[i][4] = p.getChapter().toString();
 		}
 		model.setData(data);
 		model.setColumns(columnNames);

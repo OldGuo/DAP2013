@@ -93,7 +93,6 @@ public class SchedulePanel extends JPanel{
 		formatTable(table);
 		
         this.add(scrollPane);
-        //table.getColumnModel().getColumn(0).setPreferredWidth(90);
 	}
 	/**
 	 * @param table
