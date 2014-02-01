@@ -27,16 +27,16 @@ public class ReadFromFile {
 	public static void selectReader(String s){
 		readType = s;
 		if(s.equals("WORKSHOPS")){
-			input = OpenFile.open("src\\Files\\WORKSHOPS.txt"); //desktop
+			input = OpenFile.open("src\\Files\\WORKSHOPS.txt");
 		}
 		if(s.equals("PARTICIPANTS")){ //participants
-			input = OpenFile.open("src\\Files\\PARTICIPANTS.txt"); //desktop
+			input = OpenFile.open("src\\Files\\PARTICIPANTS.txt");
 		}
 		if(s.equals("WKSHP_REGISTRATIONS")){
-			input = OpenFile.open("src\\Files\\WKSHP_REGISTRATIONS.txt"); //desktop
+			input = OpenFile.open("src\\Files\\WKSHP_REGISTRATIONS.txt");
 		}
 		if(s.equals("CONFERENCES")){
-			input = OpenFile.open("src\\Files\\CONFERENCES.txt"); //desktop
+			input = OpenFile.open("src\\Files\\CONFERENCES.txt");
 		}
 	}
 	/**

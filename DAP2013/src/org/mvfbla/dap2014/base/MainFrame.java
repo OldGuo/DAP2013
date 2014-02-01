@@ -24,7 +24,7 @@ public class MainFrame implements ActionListener {
         //Create and set up the window.
 		
 		JFrame frame = new JFrame("DAP2013");
-		frame.setIconImage(new ImageIcon("Files\\fbla_large.png").getImage());
+		frame.setIconImage(new ImageIcon("src\\Files\\fbla_large.png").getImage());
 		
 		frame.setPreferredSize(new Dimension(1080,720));
         

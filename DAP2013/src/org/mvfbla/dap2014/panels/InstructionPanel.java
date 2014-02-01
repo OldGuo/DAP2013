@@ -6,12 +6,19 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+/**
+ * @author Young
+ * Panel showing instructions for a variety of subjects
+ */
 public class InstructionPanel extends JPanel{
 	private int instructionType;
 	public InstructionPanel(int t){
 		instructionType = t;
 		createInstructionImages();
 	}
+	/**
+	 * Creates images depending on the type of instructions to be shown
+	 */
 	public void createInstructionImages(){
 		/*
 		 * type 1 = workshop
