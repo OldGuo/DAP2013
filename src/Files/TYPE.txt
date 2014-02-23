@@ -1,0 +1,3 @@
+[Member],[FBLA club participants eligible to participate in workshops]
+[Adviser],[Chapter Advisers to assist members and guests in their duties]
+[Guest],[Chaperones, Workshop organizers, Keynote Speakers,etc.]
